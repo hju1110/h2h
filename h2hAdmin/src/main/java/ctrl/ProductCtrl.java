@@ -114,7 +114,7 @@ public class ProductCtrl {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();	
 			out.println("<script>");
-			out.println("alert('濡쒓렇�씤�씠 �븘�슂�빀�땲�떎.'); history.back();");
+			out.println("alert('잘못된 경로입니다.'); history.back();");
 			out.println("</script>");
 			out.close();
 		} 
@@ -137,18 +137,19 @@ public class ProductCtrl {
        
       
       //  String uploadPath1 = "C:/lns/spring/h2hFront/src/main/webapp/resources/img";	
-       // String uploadPath2 = "C:/lns/spring/h2hAdmin/src/main/webapp/resources/img";	
-    	String uploadPath1 = "E:/lhj/spring/h2hFront/src/main/webapp/resources/img";	
-        String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";	
+       // String uploadPath2 = "C:/lns/spring/h2hAdmin/src/main/webapp/resources/img";
+        
+    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";	
+        String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";	
     	
     	List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : pi_img) {
-            if (!file.isEmpty()) { // �뙆�씪�씠 �뾽濡쒕뱶�맂 寃쎌슦�뿉留� 泥섎━
+            if (!file.isEmpty()) { 
                 File saveFile1 = new File(uploadPath1, file.getOriginalFilename());	
                 File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); 
                 try {
-                    file.transferTo(saveFile1);	// �봽濡좏듃
-                    file.transferTo(saveFile2);	// �뼱�뱶誘�
+                    file.transferTo(saveFile1);	
+                    file.transferTo(saveFile2);	
                     piImgList.add(file.getOriginalFilename());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -156,15 +157,15 @@ public class ProductCtrl {
             }
         }
 
-        // �몢 踰덉㎏ �뙆�씪 �뾽濡쒕뱶 泥섎━
+        
         List<String> piDescList = new ArrayList<>();
         for (MultipartFile file : pi_desc1) {
-            if (!file.isEmpty()) { // �뙆�씪�씠 �뾽濡쒕뱶�맂 寃쎌슦�뿉留� 泥섎━
-                File saveFile1 = new File(uploadPath1, file.getOriginalFilename());	// �봽濡좏듃
-                File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	// �뼱�뱶誘�
+            if (!file.isEmpty()) { 
+                File saveFile1 = new File(uploadPath1, file.getOriginalFilename());	
+                File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	
                 try {
-                    file.transferTo(saveFile1);	// �봽濡좏듃
-                    file.transferTo(saveFile2);	// �뼱�뱶誘�
+                    file.transferTo(saveFile1);	
+                    file.transferTo(saveFile2);	
                     piDescList.add(file.getOriginalFilename());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -272,6 +273,7 @@ public class ProductCtrl {
 		return "product/product_listx";	
 	
 	}
+	
 	@GetMapping("/productUp")
 	public String productUp(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String pi_id = request.getParameter("piid");
@@ -280,23 +282,24 @@ public class ProductCtrl {
 		
 		return "product/product_up";
     }
+	
 	@PostMapping("/productInfoUp")
     public String productInfoUp(@RequestParam("pi_img") MultipartFile[] pi_img,@RequestParam("pi_desc1") MultipartFile[] pi_desc1,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
        
       
-    	String uploadPath1 = "E:/lhj/spring/h2hFront/src/main/webapp/resources/img";	// �뾽濡쒕뱶 �봽濡좏듃 寃쎈줈 吏��젙
-    	String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";	// �뾽濡쒕뱶 �뼱�뱶誘�  寃쎈줈 吏��젙
+    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";	
+    	String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";	
     	
     	List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : pi_img) {
-            if (!file.isEmpty()) { // �뙆�씪�씠 �뾽濡쒕뱶�맂 寃쎌슦�뿉留� 泥섎━
-                File saveFile1 = new File(uploadPath1, file.getOriginalFilename());	// �봽濡좏듃
-                File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // �뼱�뱶誘�
+            if (!file.isEmpty()) { 
+                File saveFile1 = new File(uploadPath1, file.getOriginalFilename());	
+                File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); 
                 try {
-                    file.transferTo(saveFile1);	// �봽濡좏듃
-                    file.transferTo(saveFile2);	// �뼱�뱶誘�
+                    file.transferTo(saveFile1);	
+                    file.transferTo(saveFile2);	
                     piImgList.add(file.getOriginalFilename());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -304,15 +307,15 @@ public class ProductCtrl {
             }
         }
 
-        // �몢 踰덉㎏ �뙆�씪 �뾽濡쒕뱶 泥섎━
+    
         List<String> piDescList = new ArrayList<>();
         for (MultipartFile file : pi_desc1) {
-            if (!file.isEmpty()) { // �뙆�씪�씠 �뾽濡쒕뱶�맂 寃쎌슦�뿉留� 泥섎━
-                File saveFile1 = new File(uploadPath1, file.getOriginalFilename());	// �봽濡좏듃
-                File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	// �뼱�뱶誘�
+            if (!file.isEmpty()) { 
+                File saveFile1 = new File(uploadPath1, file.getOriginalFilename());	
+                File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	
                 try {
-                    file.transferTo(saveFile1);	// �봽濡좏듃
-                    file.transferTo(saveFile2);	// �뼱�뱶誘�
+                    file.transferTo(saveFile1);	
+                    file.transferTo(saveFile2);	
                     piDescList.add(file.getOriginalFilename());
                 } catch (Exception e) {
                     e.printStackTrace();
