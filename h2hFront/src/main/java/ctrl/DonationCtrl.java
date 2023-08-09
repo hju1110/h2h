@@ -80,11 +80,17 @@ public class DonationCtrl {
       if (mdCtgr != null && dnSponsor != null && ydate != null && mdate != null) {
           if (!mdCtgr.equals("") && !dnSponsor.equals("") && !ydate.equals("") && !mdate.equals("")) {
               // 검색 조건이 선택된 경우 해당 조건을 where 절에 추가
-              if (mdCtgr.equals("a") || mdCtgr.equals("b") || mdCtgr.equals("c")) {
+              if (mdCtgr.equals("a") || mdCtgr.equals("b") || mdCtgr.equals("c")) {           
                   where += " AND b.md_ctgr = '" + mdCtgr + "' ";
-              }
+              } else { 
+            	// 전체 선택이면
+            	  where += " ";  	  
+              }          
               if (dnSponsor.equals("a") || dnSponsor.equals("b") || dnSponsor.equals("c")) {
                   where += " AND b.md_sponsor = '" + dnSponsor + "' ";
+              } else {    
+            	  // 전체 선택이면
+            	  where += " ";  
               }
               if (!ydate.equals("전체")) {
                   where += " AND YEAR(b.md_sdate) = " + ydate + " ";

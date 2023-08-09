@@ -47,11 +47,12 @@ public class DonationDao {
 
 
 	public String getDonaTotalPrice(String where) {
-		String sql = "SELECT SUM(b.md_price) price FROM t_donation_info a, t_member_dona b ";
+		String sql = "SELECT SUM(b.md_price) price FROM t_member_dona b ";
+		
 		if (where != null && !where.trim().isEmpty()) {
 	        sql += where;
 	    }
-		//System.out.println(sql);
+		System.out.println(sql);
 		String total = jdbc.queryForObject(sql, String.class);
 		return total;
 	}

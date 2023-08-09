@@ -155,11 +155,13 @@ function del() {
 <fieldset>	
 <legend>총 후원한 금액</legend>
 <select id="mdCtgr">
+	<option value="d">전체</option>
 	<option value="a">일반후원</option>
 	<option value="b">정기후원</option>
 	<option value="c">정기후원 취소</option>
 </select>
 <select id="dnSponsor">
+	<option value="d">전체</option>
 	<option value="a">행복한 손길</option>
 	<option value="b">서울청소년 지원부</option>
 	<option value="c">즐거운 어린이집</option>
