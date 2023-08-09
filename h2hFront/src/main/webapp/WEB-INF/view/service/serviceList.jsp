@@ -1,0 +1,172 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../menuBar.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ServiceList</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+</head>
+<body>
+<div class="container mt-5">
+<h2>봉사활동 신청</h2>
+<form name= "frmSch">
+<table width="1000">
+<tr>
+<th class="bg-primary text-white text-center">활동 지역</th>
+<td>
+	<input type="text" name="seoul" value="서울 특별시" disabled="disabled" />
+</td>
+<td>
+	<select class="form-control">
+		<option>서울 은평구</option>
+		<option>서울 동작구</option>
+		<option>서울 강남구</option>
+		<option>서울 동구</option>
+		<option>서울 중구 데이케어센터</option>
+	</select>
+</td>
+</tr>
+<tr>
+<th class="bg-primary text-white text-center">활동 일자</th>
+<td colspan="4">
+	<input type="text" name="edusdate" id="edusdate" value="" size="20" class="ipt" />
+</td>
+</tr>
+<tr>
+<th class="bg-primary text-white text-center">활동명</th>
+<td class="text-center">
+	<select class="form-control" name="schtype">
+		<option value="title" <c:if test="${pi.getSchtype() == 'title'}"> selected="selected"</c:if>>활동명</option>
+	</select>
+</td>
+<td>
+<div class="input-group">
+	<input type="text" name="keyword" class="form-control" value="${pi.getKeyword() }"/>&nbsp;&nbsp;
+	<input type="submit" class="btn btn-primary" value="검색" />&nbsp;&nbsp;
+	<input type="button" class="btn btn-secondary" value="전체글" onclick="location.href='service';" />
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<br /><br />
+<table class="table table-bordered table-hover" width="1000" border="0" cellpadding="0" cellspacing="0" id="list" border="1">
+<tr height="30">
+<th class="text-center" width="10px">No</th>
+<th class="text-center" width="30px">등록상태</th>
+<th class="text-center" width="300px">봉사활동명</th>
+<th class="text-center" width="80px">활동일</th>
+<th class="text-center" width="100px">활동장소</th>
+<th class="text-center" width="200px">모집기간</th>
+<th class="text-center" width="80px">등록일</th>  
+</tr>
+<c:if test="${serviceInfo.size() > 0}"><!-- 게시판 정보가 있으면~ else를 쓰고 싶으면 반대조건 주면 됨-->
+	<c:forEach items="${serviceInfo}" var="si" varStatus="status">	<!-- varStatus="status"하고 var 값만큼 돈다! -->
+	<tr height="30">
+	<td align="center">${pi.getNum() - status.index}</td><!-- - status.index 씀으로써 페이지 넘버가 하나씩 줄어듬 -->
+	<td align="center">${si.getSi_view() }</td> 
+	<td><a href="serviceView?siidx=${si.getSi_idx() }${pi.getArgs() }">${si.getSi_title() }</a></td>
+	<td align="center">${si.getSi_acdate() }</td>
+	<td align="center">${si.getSi_place() }</td>
+	<td align="center">${si.getSi_sdate() } ~ ${si.getSi_edate() }</td>
+	<td align="center">${si.getSi_date() }</td>
+	</c:forEach>
+</c:if>	
+<c:if test="${serviceList.size() == 0}">
+	<tr height="50"><td colspan="5" align="center">
+	검색결과가 없습니다.
+	</td></tr>
+</c:if>
+</table>
+<br />
+<table width="700" cellpadding="5">
+<tr>
+<td width="600">
+	<c:if test="${serviceInfo.size() > 0 }">
+		<c:if test="${pi.getCpage() == 1}">
+			[처음]&nbsp;&nbsp;&nbsp;&nbsp;[이전]&nbsp;&nbsp;
+		</c:if>
+		<c:if test="${pi.getCpage() > 1}">
+			<a href="service?cpage=1${pi.getSchargs() }">[처음]</a>&nbsp;&nbsp;&nbsp;
+			<a href="service?cpage=${pi.getCpage() - 1}${pi.getSchargs() }">[이전]</a>&nbsp;&nbsp;
+		</c:if>
+		
+		<c:forEach var="i" begin="${pi.getSpage() }"
+			end="${pi.getSpage() + pi.getBsize() - 1 <= pi.getPcnt() ? pi.getSpage() + pi.getBsize() - 1 : pi.getPcnt() }">
+				<c:if test="${i == pi.getCpage() }">
+					&nbsp;<strong>${i }</strong>&nbsp;
+				</c:if>
+				<c:if test="${i != pi.getCpage() }">
+					&nbsp;<a href="service?cpage=${i }${pi.getSchargs() }">${i }</a>&nbsp;
+				</c:if>
+		</c:forEach>
+		
+		<c:if test="${pi.getCpage() == pi.getPcnt() }">
+			&nbsp;&nbsp;[다음]&nbsp;&nbsp;&nbsp;[마지막]
+		</c:if>
+		<c:if test="${pi.getCpage() < pi.getPcnt()}">
+			&nbsp;&nbsp;<a href="service?cpage=${pi.getCpage() + 1}${pi.getSchargs() }">[다음]</a>
+			&nbsp;&nbsp;&nbsp;<a href="service?cpage=${pi.getPcnt() }${pi.getSchargs() }">[마지막]</a>
+		</c:if>
+	</c:if>
+</td>
+<td width="*">
+</td>
+</tr>
+</table>
+</body>
+<script>
+$(function() {
+	$.datepicker.regional['ko'] = {
+		closeText: '닫기',
+		prevText: '이전달',
+		nextText: '다음달',
+		currentText: '오늘',
+		monthNames: ['1월','2월','3월','4월','5월','6월',
+		'7월','8월','9월','10월','11월','12월'],
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+		'7월','8월','9월','10월','11월','12월'],
+		dayNames: ['일','월','화','수','목','금','토'],
+		dayNamesShort: ['일','월','화','수','목','금','토'],
+		dayNamesMin: ['일','월','화','수','목','금','토'],
+		//buttonImage: "/images/kr/create/btn_calendar.gif",
+		buttonImageOnly: true,
+		// showOn :"both",
+		weekHeader: 'Wk',
+		dateFormat: 'yy-mm-dd',
+		firstDay: 0,
+		isRTL: false,
+		duration:200,
+		showAnim:'show',
+		showMonthAfterYear: false
+		// yearSuffix: '년'
+	};
+	$.datepicker.setDefaults($.datepicker.regional['ko']);
+
+	$( "#edusdate" ).datepicker({
+		//defaultDate: "+1w",
+		changeMonth: true,
+		//numberOfMonths: 3,
+		dateFormat:"yy-mm-dd",
+		onClose: function( selectedDate ) {
+			//$( "#eday" ).datepicker( "option", "minDate", selectedDate );
+		}
+	});
+	$( "#eduedate" ).datepicker({
+		//defaultDate: "+1w",
+		changeMonth: true,
+		//numberOfMonths: 3,
+		dateFormat:"yy-mm-dd",
+		onClose: function( selectedDate ) {
+			//$( "#sday" ).datepicker( "option", "maxDate", selectedDate );
+		}
+	});
+});
+</script>
+</html>
