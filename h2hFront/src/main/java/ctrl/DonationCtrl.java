@@ -154,8 +154,7 @@ public class DonationCtrl {
 		String bnum = request.getParameter("bnum");
 		String gname = request.getParameter("gname");
 		int money = Integer.parseInt(request.getParameter("money").replace(",", ""));
-		String mdSponsor1 = request.getParameter("mdSponsor1");
-		String mdSponsor2 = request.getParameter("mdSponsor2");
+		String mdSponsor = request.getParameter("mdSponsor");
 		String payment = request.getParameter("payment");
 		
 		DonationInfo di = new DonationInfo();
@@ -169,10 +168,8 @@ public class DonationCtrl {
 		System.out.println("단체 이름 : " + gname);
 		di.setMd_price(money);
 		System.out.println("후원 금액 : " + money);
-		di.setMd_sponsor(mdSponsor1);
-		System.out.println("일반 피후원자 : " + mdSponsor1);
-		di.setMd_sponsor(mdSponsor2);
-		System.out.println("정기 피후원자 : " + mdSponsor2);
+		di.setMd_sponsor(mdSponsor);
+		System.out.println("피후원자 : " + mdSponsor);
 		di.setMd_payment(payment);
 		System.out.println("결제 방법 : " + payment);
 		di.setMd_type(memType);
@@ -187,9 +184,9 @@ public class DonationCtrl {
 		}
 		
 		int di_idx = 0;
-		if (mdSponsor1.equals("a") || mdSponsor2.equals("a")) {
+		if (mdSponsor.equals("a")) {
 			di_idx = 1;
-		} else if (mdSponsor1.equals("b") || mdSponsor2.equals("b")) {
+		} else if (mdSponsor.equals("b")) {
 			di_idx = 2;
 		} else {
 			di_idx = 3;
