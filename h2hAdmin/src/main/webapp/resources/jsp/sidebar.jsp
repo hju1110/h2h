@@ -92,10 +92,10 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="noticeList" data-toggle="collapse" data-target="#collapsePages"
+                <a class="nav-link collapsed" href="reviewList" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>후원게시판</span>
+                    <span>후기게시판</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -112,6 +112,18 @@
             </li>
 
             <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="qnaList">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Qna</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="noticeList">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>공지사항</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="donaMemList">
                     <i class="fas fa-fw fa-chart-area"></i>
