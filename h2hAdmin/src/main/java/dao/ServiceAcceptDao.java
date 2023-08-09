@@ -15,14 +15,17 @@ public class ServiceAcceptDao {
 	
 	public int getServiceAcceptInfoCount(String where) {
 		// 검색된(검색어가 있을경우) 게시글의 총 개수를 리턴하는 메소드 여기서 작업
-			String sql = "select count(*) from t_service_info " + where;
+			String sql = "SELECT COUNT(*) FROM t_service_info " + where;
 			int rcnt = jdbc.queryForObject(sql, Integer.class);	// 레코드가 하나일 때 queryForObject 사용
 		return rcnt;
 	}
 
 	public List<ServiceAcceptInfo> getServiceAcceptInfo(String where, int cpage, int psize) {
-		String sql = "select si_idx, si_accept, CASE WHEN si_accept = 'y' THEN '참여승인' WHEN si_accept = 'n' THEN '참여 미승인' ELSE '대기'  END AS si_is_accept, si_title, si_person, si_acdate, si_place , "
-				+ "if(curdate() = date(si_date), right(si_date, 8), mid(si_date, 3 , 8)) wdate from t_service_info " + where + " order by si_idx desc limit " + ((cpage - 1) * psize) + ", " + psize;
+		String sql = "SELECT si_idx, si_accept, " + 
+				" CASE WHEN si_accept = 'y' THEN '참여승인' WHEN si_accept = 'n' THEN '참여 미승인' ELSE '대기' END AS si_is_accept, " + 
+				" si_title, si_person, si_acdate, si_place , " + 
+				" IF(CURDATE() = DATE(si_date), RIGHT(si_date, 8), MID(si_date, 3 , 8)) wdate FROM t_service_info " 
+				+ where + " ORDER BY si_idx DESC LIMIT " + ((cpage - 1) * psize) + ", " + psize;
 		//System.out.println(sql);
 		
 		List<ServiceAcceptInfo> serviceAcceptInfo = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
@@ -48,9 +51,9 @@ public class ServiceAcceptDao {
 	}
 
 		public List<ServiceAcceptInfo> getServiceAccept(int siidx) {
-		String sql = "select a.mi_name, a.mi_birth, b.si_accept, b.si_point " + 
-		" from t_member_info a, t_service_info b where b.si_idx = " + siidx;
-		System.out.println(sql);
+		String sql = "SELECT a.mi_name, a.mi_birth, b.si_accept, b.si_point FROM t_member_info a, t_service_info b " + 
+				" WHERE b.si_idx = " + siidx;
+//		System.out.println(sql);
 	
 		List<ServiceAcceptInfo> scList = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
 			ServiceAcceptInfo sc = new ServiceAcceptInfo();
