@@ -122,7 +122,7 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 	<td width="100" style="border:1px solid black; border-top: none; border-bottom: none; border-left: none; 
 		margin-left:10px;">피후원자</td>
 	<td width="*" style="border:1px solid black; border-top: none; border-bottom: none; border-right: none; 
-		tet"><span id="mdSponsor">-</span></td>
+		tet"><span id="mdSponsor"></span></td>
 </tr>
 </table>
 <hr/>
@@ -194,7 +194,7 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 	<td width="100" style="border:1px solid black; border-top: none; border-bottom: none; border-left: none;"
 		id="mdCtgr2"><span><%=ctgrName %></span></td>
 	<td width="100" style="border:1px solid black; border-top: none; border-bottom: none; border-right: none;"
-		id="price5"><span>-</span></td>
+		id="price5"><span></span></td>
 </tr>
 </table>
 <hr />
