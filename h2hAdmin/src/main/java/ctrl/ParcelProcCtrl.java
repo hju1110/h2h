@@ -24,7 +24,7 @@ public class ParcelProcCtrl {
 		this.parcelProcSvc = parcelProcSvc;
 	}
 
-	// 二쇰Ц �쁽�솴 由ъ뒪�듃 蹂댁뿬二쇰뒗 硫붿냼�뱶
+
 	@GetMapping("/ParcelProc")
 	public String parcelList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
@@ -88,7 +88,7 @@ public class ParcelProcCtrl {
 		return "parcel/parcel_list";
 	}
 	
-	// 二쇰Ц �쁽�솴 �긽�꽭 蹂닿린 酉� 蹂댁뿬二쇰뒗 硫붿냼�뱶 
+
 	@GetMapping("/ParcelView")
 	public String ParcelView(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
@@ -108,9 +108,9 @@ public class ParcelProcCtrl {
 		return "parcel/parcel_view";
 	}
 	
-	// 二쇰Ц �긽�꽭蹂닿린 李쎌뿉�꽌 諛곗넚吏� �젙蹂� �닔�젙
+
 	@PostMapping("/orderProcUp")
-	@ResponseBody	// �옄諛붽컼泥대�� http �쓳�떟�슜 媛앹껜濡� 蹂��솚�븯�뿬 �겢�씪�씠�뼵�듃�뿉 �쟾�넚
+	@ResponseBody	
 	public String orderProcUp(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		String oi_name = request.getParameter("oi_name");
@@ -137,7 +137,7 @@ public class ParcelProcCtrl {
 	}
 	
 	@PostMapping("/orderProcB")
-	@ResponseBody	// �옄諛붽컼泥대�� http �쓳�떟�슜 媛앹껜濡� 蹂��솚�븯�뿬 �겢�씪�씠�뼵�듃�뿉 �쟾�넚
+	@ResponseBody	
 	public String orderProcB(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		String oi_id = request.getParameter("oi_id");
@@ -160,6 +160,7 @@ public class ParcelProcCtrl {
 		return result + "";
 	}
 	
+	
 	@PostMapping("/orderProcD")
 	@ResponseBody	
 	public String orderProcD(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -169,7 +170,7 @@ public class ParcelProcCtrl {
 		String pi_id = request.getParameter("pi_id");
 		int oi_pay = Integer.parseInt(request.getParameter("oi_pay"));
 		HttpSession session = request.getSession();
-		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();

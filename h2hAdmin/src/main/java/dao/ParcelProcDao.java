@@ -93,7 +93,8 @@ public class ParcelProcDao {
 	}
 
 	public int orderProcD(String oi_id, String mi_id, String pi_id, int oi_pay) {
-	String sql = "update t_order_info set oi_status = 'd' where oi_id = '" + oi_id + "' ";	
+	String sql = "update t_order_info set oi_status = 'd' where oi_id = '" + oi_id + "' ";
+	//System.out.println(sql);
 		int result = jdbc.update(sql);		
 		
 		sql = "update t_member_info set mi_point = mi_point + '" + oi_pay + "' where mi_id = '"	+ mi_id	+ "' ";
