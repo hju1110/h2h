@@ -100,7 +100,7 @@ public class ReviewCtrl {
 	        request.setCharacterEncoding("utf-8");
 	        
 	        // ���ε� ���� ��� ����
-	        String uploadPath2 = "E:/lms/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
+	        String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {
@@ -206,7 +206,7 @@ public class ReviewCtrl {
 	                               HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    				request.setCharacterEncoding("utf-8");
 
-	           String uploadPath2 = "E:/lms/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
+	           String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 
 	           List<String> piImgList = new ArrayList<>();
 	            for (MultipartFile file : rl_file) {
@@ -267,7 +267,7 @@ public class ReviewCtrl {
 	    @RequestMapping("/downloadImage")
 	    public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
 	        // �̹��� ������ ��ü ��θ� �����մϴ�.
-	        String imagePath = "E:/lms/spring/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
+	        String imagePath = "E:/lns/spring/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
 
 	        // ���� �ڵ�� ������ �����մϴ�.
 	        File imageFile = new File(imagePath);

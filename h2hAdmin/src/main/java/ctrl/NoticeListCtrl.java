@@ -85,7 +85,7 @@ public class NoticeListCtrl {
     		HttpServletRequest request, HttpServletResponse response) throws Exception {
     	request.setCharacterEncoding("utf-8");
     	
-    	String uploadPath1 = "E:/lms/spring/h2h/h2hFront/src/main/webapp/resources/img";   // �뾽濡쒕뱶 �봽濡좏듃 寃쎈줈 吏��젙
+    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";   // �뾽濡쒕뱶 �봽濡좏듃 寃쎈줈 吏��젙
         
         List<String> piImgList = new ArrayList<>();
         if (nl_file != null) {
@@ -171,7 +171,7 @@ public class NoticeListCtrl {
                                HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
 
-       String uploadPath2 = "E:/lms/h2h/spring/h2hAdmin/src/main/webapp/resources/img";
+       String uploadPath2 = "E:/lns/h2h/spring/h2hAdmin/src/main/webapp/resources/img";
         
         // 湲곗〈 �씠誘몄� �뙆�씪 �궘�젣 �썑 �깉濡쒖슫 �씠誘몄� �뾽濡쒕뱶
         List<String> piImgList = new ArrayList<>();

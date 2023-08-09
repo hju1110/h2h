@@ -19,7 +19,7 @@
 <table class="table table-bordered table-striped" width="600" cellpadding="5">
 <tr>
 <th width="15%">작성자</th>
-<td width="35%"><input type="text" name="rl_writer" class="form-control" value="<%= loginInfo.getMi_name() %>" readonly /></td>
+<td width="35%"><input type="text" name="rl_writer" class="form-control" value="<%=loginInfo.getMi_name() %>" readonly /></td>
 </tr>
 <tr>
 <th width="15%">글제목</th>

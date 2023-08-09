@@ -11,6 +11,7 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,8 +88,20 @@ public class ReviewCtrl {
 			
 			return "review/reviewList";
 	    }
+	    
 	    @GetMapping("/reviewFormIn")
-	    public String reviewInForm() {
+	    public String reviewInForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    	 HttpSession session = request.getSession();
+				MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+				if (loginInfo == null) {
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('로그인이 필요합니다 로그인 창으로 이동합니다.');");
+					out.println("location.href='login';");
+					out.println("</script>");	
+					out.close();
+				}
 	        return "review/review_form";
 	    }
 	    
@@ -98,7 +111,7 @@ public class ReviewCtrl {
 	        request.setCharacterEncoding("utf-8");
 	        
 	        // ���ε� ���� ��� ����
-	        String uploadPath2 = "E:/lms/spring/h2h/h2hFront/src/main/webapp/resources/img";
+	        String uploadPath2 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {
@@ -136,14 +149,23 @@ public class ReviewCtrl {
 	        
 	        return "redirect:/reviewList";       
 	    }
+	    
 	    @GetMapping("/reviewView")
-	    public String reviewView(Model model, @RequestParam("rlidx") int rlidx,
-	                             @RequestParam(value = "cpage", defaultValue = "1") int cpage,
-	                             @RequestParam(value = "schtype", required = false) String schtype,
-	                             @RequestParam(value = "keyword", required = false) String keyword,
-	                             HttpServletRequest request) throws Exception {
+	    public String reviewView(Model model, @RequestParam("rlidx") int rlidx, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
+	     @RequestParam(value = "schtype", required = false) String schtype, @RequestParam(value = "keyword", required = false) String keyword,
+	    HttpServletRequest request, HttpServletResponse response) throws Exception {
 	        request.setCharacterEncoding("utf-8");
-	        
+	        HttpSession session = request.getSession();
+			MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+			if (loginInfo == null) {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인이 필요합니다 로그인 창으로 이동합니다.');");
+				out.println("location.href='login';");
+				out.println("</script>");	
+				out.close();
+			}
 	        // System.out.println("nlidx: " + nlidx);
 	        // System.out.println("cpage: " + cpage);
 	        
@@ -191,7 +213,6 @@ public class ReviewCtrl {
 	    
 	    @GetMapping("/reviewFormUp")
 	    public String reviewUpForm(Model model, @RequestParam("rl_idx") int rl_idx) {
-	        // �Խñ� ���� �������� �̵��ϱ� ���� ��Ʈ�ѷ� �޼���
 	        ReviewList rl = reviewSvc.getReviewInfo(rl_idx);
 	        model.addAttribute("rl", rl);
 
@@ -208,7 +229,7 @@ public class ReviewCtrl {
 	    				request.setCharacterEncoding("utf-8");
 
 	            // ���ε� ���� ��� ����
-	            String uploadPath2 = "E:/lms/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
+	            String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 
 	            // ���� �̹��� ���� ���� �� ���ο� �̹��� ���ε�
 	            List<String> piImgList = new ArrayList<>();
@@ -270,7 +291,7 @@ public class ReviewCtrl {
 	    @RequestMapping("/downloadImage")
 	    public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
 	        // �̹��� ������ ��ü ��θ� �����մϴ�.
-	        String imagePath = "E:/lms/spring/h2h/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
+	        String imagePath = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
 
 	        // ���� �ڵ�� ������ �����մϴ�.
 	        File imageFile = new File(imagePath);

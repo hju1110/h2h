@@ -108,9 +108,7 @@ function confirmDelete(rlIdx) {
     <!-- 댓글 작성일은 자동으로 서버에서 처리하므로 input 요소에서는 입력하지 않습니다. -->
     <input type="submit" value="댓글 등록" />
 </form>
-
 <hr>
-
 <c:if test="${not empty reviewReply}">
     <ul class="comment-list">
         <c:forEach var="reply" items="${reviewReply}">
