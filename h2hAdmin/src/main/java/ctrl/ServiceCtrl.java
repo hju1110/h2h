@@ -78,7 +78,7 @@ public class ServiceCtrl {
 		request.setCharacterEncoding("UTF-8");
 		int siidx = Integer.parseInt(request.getParameter("siidx"));
 		int cpage = Integer.parseInt(request.getParameter("cpage"));
-		String schtype = request.getParameter("schtype");	// 콤부박스니까 trim안함
+		String schtype = request.getParameter("schtype");	// 콤보박스니까 trim안함
 		String keyword = request.getParameter("keyword");
 		String args = "?cpage=" + cpage;	
 		
@@ -94,18 +94,16 @@ public class ServiceCtrl {
 		return "service/serviceView";
 	}
 	
-	@RequestMapping(value="/serviceProcUp", method=RequestMethod.GET, produces="application/text; charset=utf8")
-	@ResponseBody
+	@GetMapping("/serviceProcUp")
 	public String serviceProcUp(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		String accept = request.getParameter("chk");
-		ServiceInfo si = new ServiceInfo();
-		si.setSi_accept(accept);
+		int siidx = Integer.parseInt(request.getParameter("siidx"));
 		
 		PrintWriter out = response.getWriter();
 		
-		int result = serviceSvc.getAccept(si);
+		int result = serviceSvc.getAccept(siidx);
 		if (result != 1) {
+			response.setContentType("text/html; charset=utf-8");
 			out.println("<script>");
 			out.println("alert('등록에 실패했습니다.');");
 			out.println("history.back();");
@@ -113,7 +111,7 @@ public class ServiceCtrl {
 			out.close();
 		}
 		
-		return "service/serviceList";
+		return "redirect:/service";
 	}
 	
 }

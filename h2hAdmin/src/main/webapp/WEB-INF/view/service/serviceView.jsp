@@ -54,8 +54,11 @@ function serChk(){
 <tr><th>글 내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><th>활동상세내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><td colspan="20" align="center">
-	<input type="button" name="chk" id= "chk" value="등 록" onclick="location.href='serviceProcUp';"/>
-	<input type="button" value="수 정" onclick="location.href='serviceView';" />
+	<c:if test="${si.getSi_accept() == 'n' }">
+	<input type="button" value="봉사 등록" onclick="location.href='serviceProcUp?siidx=${si.getSi_idx()}';"/>
+	</c:if>
+	<input type="button" value="수 정" onclick="location.href='serviceView?siidx=${si.getSi_idx()}';" />
+	<input type="button" value="목록 보기" onclick="location.href='service';"/>
 </td></tr>
 </table>
 </div>

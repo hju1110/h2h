@@ -18,14 +18,13 @@
   }
 </style>
 <script>
-function chkAll(all) {
-// '전체선택' 체크박스 클릭시 모든 체크박스에 대한 체크여부를 처리하는 함수
-	var arr = document.frmCart.chk;
-	for (var i = 1 ; i < arr.length ; i++) {	//배열로 만들었기 때문에 한개만 있을 때는 쓸 수 가 없음
-		arr[i].checked = all.checked;
-	} 
-	
-}
+function chkAll(checkbox) {
+    // 전체 선택 체크박스가 체크되었을 때, 각 개별 체크박스의 상태를 변경합니다.
+    var checkboxes = document.getElementsByName("chk1");
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = checkbox.checked;
+    }
+  }
 function chkNo() {
 	// 사용자가 미등록하는 함수
 		var ocidx = getSelectedChk();
@@ -33,31 +32,22 @@ function chkNo() {
 		if (ocidx == "")	alert("미등록 할 회원을 선택하세요.");//체크 안되어있을때 빈문자열로 해주기
 		else 				cartDel(ocidx);
 	}
-
-	function chkOk() {
-	// 사용자가 등록하는 함수
-		var ocidx = getSelectedChk();	// 체크된거 받아오기
-		if (ocidx == "")	alert("등록할을 회원을 선택하세요."); //체크 안되어있을때 
-		else 				document.frmCart.submit();
-	}
-	function chkAll() {
-		// 사용자가 전체 회원을 등록하는 함수
-			var arr = document.frmCart.chk;
-			for (var i = 1 ; i < arr.length ; i++) {	//배열로 만들었기 때문에 한개만 있을 때는 쓸 수 가 없음
-				arr[i].checked = true;
-			} 
-			document.frmCart.submit();
-		}
 </script>
 <body>
 <div class="left">
 <h2>봉사참여 승인현황</h2>
-<label for="all">전체 선택</label>
+<form name="frmAcceptChk">
 <table width="30" cellpadding="5">
+<tr>
+<td colspan="2">
+	<label for="all">전체 선택</label>
+	<input type="checkbox" name="all" id="all" onclick="chkAll(this);" />
+</td>
+</tr>
 <c:forEach items="${scList}" var="sc">
 <tr>
 <td>
-	<input type="checkbox" name="all" id="all" checked="checked" onclick="chkAll(this);" />
+	<input type="checkbox" name="chk1" id="chk1" onclick="" />
 </td>
 <th width="10%">이름</th><td width = "15%">${sc.getMi_name() }</td>
 <th width="10%">생년월일</th><td width = "15%">${sc.getMi_birth() }</td>
@@ -68,10 +58,10 @@ function chkNo() {
 <tr><td colspan="20" align="center">
 	<input type="button" value="등 록" onclick="chkOk();" />
 	<input type="button" value="미 등 록"	onclick="chkNo();" />
-	<input type="button" value="전체 등록" onclick="chkALl();" />
-	<input type="button" value="수 정" onclick="location.href='freeFormIn';" />
+	<input type="button" value="전체 등록" onclick="chkAll(this);" />
 </td></tr>
 </table>
+</form>
 </div>
 </body>
 </html>

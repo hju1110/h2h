@@ -86,8 +86,8 @@ private JdbcTemplate jdbc;
 		return si;
 	}
 
-	public int getAccept(ServiceInfo si) {
-		String sql = "UPDATE t_service_info SET si_accept = 'y', si_view = 'y' WHERE si_idx = " + si.getSi_idx();
+	public int getAccept(int siidx) {
+		String sql = "UPDATE t_service_info SET si_accept = 'y', si_view = 'y' WHERE si_idx = " + siidx;
 		int result = jdbc.update(sql);
 		return result;
 	}
