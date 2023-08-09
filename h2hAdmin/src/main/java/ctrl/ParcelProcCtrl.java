@@ -98,7 +98,15 @@ public class ParcelProcCtrl {
 		
 		HttpSession session = request.getSession();
 		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-	
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.');");
+			out.println("location.href='login';");
+			out.println("</script>");	
+			out.close();
+		}
 		
 		String miid = loginInfo.getAi_id();
 		
