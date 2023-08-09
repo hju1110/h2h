@@ -21,17 +21,19 @@ public class ServiceRequestListDao {
 		return rcnt;
 	}
 
-	public List<ServiceRequestListInfo> getServiceRequestListInfo(String where, int cpage, int psize) {
-		String sql = "SELECT a.si_acname, b.ms_sdate, a.si_acdate FROM t_service_info a, t_member_service b";
-		//System.out.println(sql);
+	public List<ServiceRequestListInfo> getServiceRequestListInfo(String where, String miid, int cpage, int psize) {
+		String sql = "SELECT a.si_acname, b.sj_name, b.sj_birth, b.sj_status FROM t_service_info a " + 
+				" JOIN t_serviece_join b ON a.si_idx = b.si_idx WHERE b.mi_id = '" + miid + "'";
+		System.out.println(sql);
 		
 		List<ServiceRequestListInfo> serviceRequestListInfo = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
-			ServiceRequestListInfo sc = new ServiceRequestListInfo();
-			sc.setSi_acname(rs.getString("si_acname"));
-			sc.setMs_sdate(rs.getString("ms_sdate"));
-			sc.setSi_acdate(rs.getString("si_acdate"));
-		
-			return sc;
+			ServiceRequestListInfo sj = new ServiceRequestListInfo();
+			sj.setSi_acname(rs.getString("si_acname"));
+			sj.setSj_name(rs.getString("sj_name"));
+			sj.setSj_birth(rs.getString("sj_birth"));
+			sj.setSj_status(rs.getString("sj_status"));
+			
+			return sj;
 		});
 		return serviceRequestListInfo;
 		

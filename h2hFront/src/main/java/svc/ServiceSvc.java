@@ -27,4 +27,9 @@ public class ServiceSvc {
 		return si;
 	}
 
+//	public int setFinish(int siidx) {
+//		int result = serviceDao.setFinish(siidx);
+//		return result;
+//	}
+
 }

@@ -25,7 +25,7 @@ a:hover { text-decoration:underline; color:red; }
 <th width="*">봉사활동명</th>
 <th width="15%">신청일</th>
 <th width="10%">봉사일자</th>  
-<th width="10%"></th>  
+<th width="10%">봉사취소</th>  
 </tr>
 <c:if test="${serviceRequestListInfo.size() > 0}"><!-- 게시판 정보가 있으면~ else를 쓰고 싶으면 반대조건 주면 됨-->
 	<c:forEach items="${serviceRequestListInfo}" var="sc" varStatus="status">

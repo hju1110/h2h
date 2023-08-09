@@ -16,8 +16,8 @@ public class ServiceRequestListSvc {
 			return rcnt;
 		}
 
-		public List<ServiceRequestListInfo> getServiceRequestListInfo(String where, int cpage, int psize) {
-			List<ServiceRequestListInfo> serviceRequestListInfo = serviceRequestListDao.getServiceRequestListInfo(where,cpage, psize);
+		public List<ServiceRequestListInfo> getServiceRequestListInfo(String where, String miid,int cpage, int psize) {
+			List<ServiceRequestListInfo> serviceRequestListInfo = serviceRequestListDao.getServiceRequestListInfo(where, miid, cpage, psize);
 			return serviceRequestListInfo;
 		}
 	}

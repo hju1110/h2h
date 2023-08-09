@@ -99,11 +99,7 @@ public class ServiceCtrl {
 	
 	@GetMapping("/serviceFinish")
 	public String serviceFinish() {
-		
 		return "service/serviceFinish";
 	}
-	
-	
 
-	
 }

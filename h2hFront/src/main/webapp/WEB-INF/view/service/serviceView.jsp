@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../menuBar.jsp" %>
+<%@ page import="vo.*" %>
 <%
-String memType = loginInfo.getMi_type();
+if (loginInfo == null) {
+    response.setContentType("text/html; charset=utf-8");
+    out.println("<script>");
+    out.println("alert('로그인이 필요합니다.');");
+    out.println("location.href='login';");
+    out.println("</script>");   
+    out.close();
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +22,9 @@ String memType = loginInfo.getMi_type();
         text-align: center;
         }
 </style>
+  <script>
+        alert("모든 칸을 정상적으로 입력해주세요.");
+    </script>
 </head>
 <script>
 function serChk(){
@@ -26,7 +37,7 @@ function serChk(){
 </script>
 <body>
 <div class="container mt-5">
-<form name="frmSView" action="serviceFinish"  method="post">
+<form name="frmSView" action="serviceView"  method="post">
 <h2>봉사활동 글보기</h2>
 
 <br />
@@ -50,23 +61,7 @@ function serChk(){
 <h5>신청자정보</h5>
 <h6>연락처 번호 변경은 오른쪽 연락처 수정버튼을 클릭하여 변경해주시기 바라겠습니다.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary" id= "chk" value="회원정보 수정" onclick="location.href='http://localhost:8088/h2hFront/myInfoChk';" /></h6>
-<hr />
-<h6>핸드폰 번호 : <input type="text" name="e1" id="e1" size="10" class="textp"> - <input type="text" name="e1" id="e1" size="10" class="textp">  - <input type="text" name="e1" id="e1" size="10" class="textp"> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>	
-<div id="center" class="center">
-<h6>E-mail :
-		<form name="frm" action="memberForm" method="post" onsubmit="return chkAcc();">
-			<input type="text" name="e1" id="e1" size="10" class="textp"> @ <input type="text" name="e2" id="e2" size="10" class="textp">
-			<select name="e3" id="e3" class="textp">
-				<option value="">도메인 선택</option>
-				<option value="naver.com">naver.com</option>
-				<option value="hanmail.net">hanmail.net</option>
-				<option value="gmail.com">gmail.com</option>
-				<option value="nate.com">nate.com</option>
-				<option value="direct">직접 입력</option>
-			</select>
-		</form>
-	</h6>
+
 </div>
 <br />
 <div style="border:1px solid; padding:10px;">

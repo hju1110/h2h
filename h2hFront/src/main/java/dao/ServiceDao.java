@@ -90,4 +90,10 @@ private JdbcTemplate jdbc;
 		return si;
 	}
 
+//	public int setFinish(int siidx) {
+//		String sql = "INSERT INTO t_serviece_join VALUES (?, ?, ?, ?, ?, ?) ";
+//		int result = jdbc.update(sql, );
+//		return 0;
+//	}
+
 }
