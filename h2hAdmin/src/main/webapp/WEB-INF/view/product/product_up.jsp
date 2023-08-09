@@ -9,7 +9,7 @@ ProductInfo pi = (ProductInfo)request.getAttribute("pi");
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>상품등록</title>
+    <title>상품수정</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -70,7 +70,7 @@ ProductInfo pi = (ProductInfo)request.getAttribute("pi");
 <body>
 <div class="left">
     <form name="frmPd" action="productInfoUp" method="post" enctype="multipart/form-data">
-        <h2 class="center">상품등록</h2>
+        <h2 class="center">상품수정</h2>
         <table border="1">
             <tr>
                 <td>상품 ID</td>
