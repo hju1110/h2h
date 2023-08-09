@@ -97,52 +97,7 @@ public class ServiceCtrl {
 		return "service/serviceView";
 	}
 	
-	@GetMapping("/serviceList")
-	public String DonaMemList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		int cpage = 1, pcnt = 0, spage = 0,  rcnt = 0, psize = 10, bsize = 10;
-		
-		if (request.getParameter("cpage")!= null) {
-			cpage = Integer.parseInt(request.getParameter("cpage"));	
-		}
-	    
-		HttpSession session = request.getSession();
-	    MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
-	      
-	    if (loginInfo == null) {
-	         response.setContentType("text/html; charset=utf-8");
-	         PrintWriter out = response.getWriter();
-	         out.println("<script>");
-	         out.println("alert('로그인이 필요합니다.');");
-	         out.println("location.href='/h2hFront/login_form';");
-	         out.println("</script>");
-	         out.close();
-	    }
-	      
-	    String miid = loginInfo.getMi_id();
-        
-		rcnt = serviceSvc.getServiceInfoCount(miid);
-		List<ServiceInfo>serviceInfo = serviceSvc.getServiceMeList(miid);
-
-		//System.out.println(dl);
-		
-		pcnt = rcnt / psize;
-		if (rcnt % psize > 0) {
-			pcnt++;
-		}
-		spage = (cpage - 1) / bsize * bsize + 1;
-		
-		PageInfo pi = new PageInfo();
-		pi.setBsize(bsize);
-		pi.setCpage(cpage);
-		pi.setPcnt(pcnt);
-		pi.setPsize(psize);
-		pi.setRcnt(rcnt);
-		pi.setSpage(spage);
-		request.setAttribute("pi",pi);
-		request.setAttribute("dl",dl);
-			
-		return "donation/donaTotalList";
-	}
+	
 
 	
 }

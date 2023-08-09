@@ -36,7 +36,7 @@ public class ServiceChartCtrl {
 		} else if (!schtype.equals("") && !keyword.trim().equals("")) {	//schtype 이 null 아니고, keyword도 null이 아니면~
 			URLEncoder.encode(keyword, "UTF-8");
 			keyword = keyword.trim();
-			where += " where si_" + schtype + " like '%" + keyword + "%'";
+			where += " AND si_" + schtype + " like '%" + keyword + "%'";
 			schargs = "&schtype=" + schtype + "&keyword=" + keyword;
 		}
 		args = "&cpage=" + cpage + schargs;	// 앞에 &가 있다는 것은 얘 앞에 뭔가가 또 올거라는 이야기 , 처음에 작성할 때 잘 생각해서 만들기

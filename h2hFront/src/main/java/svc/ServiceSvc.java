@@ -27,8 +27,4 @@ public class ServiceSvc {
 		return si;
 	}
 
-	public int getServiceMeCount(String miid) {
-		int rcnt = serviceDao.getServiceInfoCount(miid);
-		return rcnt;
-	}
 }

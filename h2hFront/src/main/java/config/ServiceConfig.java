@@ -19,6 +19,9 @@ public class ServiceConfig {
 	@Autowired
 	private ServiceAcceptSvc serviceAcceptSvc;
 	
+	@Autowired
+	private ServiceRequestListSvc serviceRequestListSvc;
+	
 	@Bean
 	   public ServiceCtrl serviceCtrl() {
 	      ServiceCtrl serviceCtrl = new ServiceCtrl();
@@ -41,6 +44,14 @@ public class ServiceConfig {
 	}
 
 	@Bean
+	public ServiceRequestListCtrl serviceRequestListCtrl() {
+	ServiceRequestListCtrl serviceRequestListCtrl = new ServiceRequestListCtrl();
+	serviceRequestListCtrl.setServiceRequestListSvc(serviceRequestListSvc);
+	return serviceRequestListCtrl;
+	}
+
+	
+	@Bean
 	public ServiceDao serviceDao() {
 		return new ServiceDao(DbConfig.dataSource());
 	}
@@ -54,6 +65,12 @@ public class ServiceConfig {
 	public ServiceAcceptDao serviceAcceptDao() {
 		return new ServiceAcceptDao(DbConfig.dataSource());
 	}
+	
+	@Bean
+	public ServiceRequestListDao serviceRequestListDao() {
+		return new ServiceRequestListDao(DbConfig.dataSource());
+	}
+	
 	
 	
 	@Bean
@@ -75,5 +92,12 @@ public class ServiceConfig {
 		ServiceAcceptSvc serviceAcceptSvc = new ServiceAcceptSvc();
 		serviceAcceptSvc.setServiceAcceptDao(serviceAcceptDao());
 		return serviceAcceptSvc;
+	}
+	
+	@Bean
+	public ServiceRequestListSvc serviceRequestListSvc() {
+		ServiceRequestListSvc serviceRequestListSvc = new ServiceRequestListSvc();
+		serviceRequestListSvc.setServiceRequestListDao(serviceRequestListDao());
+		return serviceRequestListSvc;
 	}
 }
