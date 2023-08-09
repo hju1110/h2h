@@ -8,14 +8,6 @@
 <title>Insert title here</title>
 </head>
 <style>
-  table {
-    width: 800px;
-    border: 1px solid #444444;
-    border-collapse: collapse;
-  }
-  th, td {
-    border: 1px solid #444444;
-  }
 </style>
 <script>
 //전체 선택 체크박스 클릭 시 모든 체크박스에 대한 체크 여부를 처리하는 함수
@@ -95,34 +87,42 @@ function chkOk() {
 
 </script>
 <body>
-<div class="left">
+<div align="center">
+<div class="left container">
 <h2>봉사참여 승인현황</h2>
 <form name="frmAcceptChk">
 <input type="hidden" name="chk"><!-- chk 체크박스를 배열로 처리하기 위해 인위적으로 지정해 놓은 컨트롤 -->
-<table width="30" cellpadding="5">
+<table class="table table-bordered table-striped" width="800" cellpadding="5">
+<thead class="thead-dark">
 <tr>
-<td colspan="2">
+<td width="60px">
+	<input type="checkbox" name="all" id="all" checked="checked" onclick="chkAll(this);" />&nbsp;&nbsp;
 	<label for="all">전체 선택</label>
-	<input type="checkbox" name="all" id="all" checked="checked" onclick="chkAll(this);" />
 </td>
+	<th scope="col" class="text-center" width="100px">이름</th>
+	<th scope="col" class="text-center" width="100px">생년월일</th>
+	<th scope="col" class="text-center" width="100px">승인여부</th>
+	<th scope="col" class="text-center" width="100px">포인트</th>
 </tr>
 <c:forEach items="${scList}" var="sc">
 <tr>
-<td>
+<td class="text-center">
 	<input type="checkbox" name="chk" value="${sc.getSi_idx() }" checked="checked" onclick="chkOne(this);" />
 </td>
-<th width="10%">이름</th><td width = "15%">${sc.getMi_name() }</td>
-<th width="10%">생년월일</th><td width = "15%">${sc.getMi_birth() }</td>
-<th width="10%">승인여부</th><td width = "15%">${sc.getSi_accept() }</td>
-<th width="10%">포인트</th><td width = "15%">${sc.getSi_point() }</td>
+	<td width="100px" class="text-center">${sc.getMi_name() }</td>
+	<td width="100px" class="text-center">${sc.getMi_birth() }</td>
+	<td width="100px" class="text-center"><c:if test="${sc.getSi_accept() == null }">대기 중</c:if></td>
+	<td width="100px" class="text-center">${sc.getSi_point() }</td>
 </tr>
 </c:forEach>
-<tr><td colspan="20" align="center">
-	<input type="button" value="참여 등록" onclick="chkOk();" />
-	<input type="button" value="참여 미등록"	onclick="chkNo();" />
-</td></tr>
+</thead>
 </table>
+<div class="text-center mt-3">
+	<input type="button" class="btn btn-primary" value="참여 등록" onclick="chkOk();" />
+	<input type="button" class="btn btn-danger ml-2" value="참여 미등록"	onclick="chkNo();" />
+</div><br />
 </form>
+</div>
 </div>
 </body>
 </html>

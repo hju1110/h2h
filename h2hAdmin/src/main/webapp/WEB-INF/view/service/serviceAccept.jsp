@@ -52,7 +52,7 @@ a:hover { text-decoration:underline; color:red; }
 	<c:forEach items="${serviceAcceptInfo}" var="sc" varStatus="status">	<!-- varStatus="status"하고 var 값만큼 돈다! -->
 	<tr height="30">
 	<td align="center">${pi.getNum() - status.index}</td><!-- - status.index 씀으로써 페이지 넘버가 하나씩 줄어듬 -->
-	<td align="center">${sc.getSi_accept() }</td> 
+	<td align="center"><c:if test="${sc.getSi_accept() == null }">대기 중</c:if></td> 
 	<td><a href="serviceCheckForm?siidx=${sc.getSi_idx() }${pi.getArgs() }">${sc.getSi_title() }</a></td>
 	<td align="center">${sc.getSi_place() }</td>
 	<td align="center">${sc.getSi_acdate() }</td>

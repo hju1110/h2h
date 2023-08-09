@@ -73,8 +73,21 @@ public class ServiceAcceptCtrl {
 	}
 
 	@GetMapping("/serviceCheckForm")	// 봉사참여현황
-	public String serviceCheckForm(Model model, HttpServletRequest request) throws Exception {
+	public String serviceCheckForm(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 세션이 만료됐습니다.\\n다시 로그인 해주세요.');");
+			out.println("location.href='login?url=serviceCheckForm';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		int siidx = Integer.parseInt(request.getParameter("siidx"));
 		int cpage = Integer.parseInt(request.getParameter("cpage"));
 		String schtype = request.getParameter("schtype");	// 콤보박스니까 trim안함
@@ -91,5 +104,27 @@ public class ServiceAcceptCtrl {
 		model.addAttribute("args", args);
 		
 		return "service/serviceCheckForm";
+	}
+	
+	@PostMapping("/chkProcDel")
+	public String chkProcDel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 세션이 만료됐습니다.\\n다시 로그인 해주세요.');");
+			out.println("location.href='login?url=serviceCheckForm';");
+			out.println("</script>");
+			out.close();
+		}
+
+		int siidx = Integer.parseInt(request.getParameter("siidx"));
+		
+		
+		return "redirect:service/serviceCheckForm";
 	}
 }
