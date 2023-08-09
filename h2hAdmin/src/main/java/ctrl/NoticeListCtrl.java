@@ -22,8 +22,21 @@ public class NoticeListCtrl {
     }
 
     @GetMapping("/noticeList")
-    public String noticelist(Model model, HttpServletRequest request) throws Exception {
+    public String noticelist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용가능합니다.');");
+			out.println("location.href='login?url=noticeList';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
 		// 현재 페이지 번호, 페이지 수, 시작페이지, 게시글 수, 페이지 크기
 		// 블록크기, 번호 등을 저장할 변수

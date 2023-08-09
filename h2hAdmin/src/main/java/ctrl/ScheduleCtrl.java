@@ -18,45 +18,55 @@ public class ScheduleCtrl {	// 일정관리 관련 모든 기능을 매핑시키
 	}
 	
 	@GetMapping("/schedule")
-	public String schedule(HttpServletRequest request) throws Exception {
+	public String schedule(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		
-	      int curYear, curMonth, curDay, schYear, schMonth, schDay, schLast;
-	      LocalDate today = LocalDate.now();	// 오늘 날짜를 가진 인스턴스 생성
-	      curYear = today.getYear();
-	      curMonth = today.getMonthValue();
-	      curDay = today.getDayOfMonth();
-	      
-	      if (request.getParameter("schYear") == null) {	// 검색한 년월이 없을 경우 오늘 날짜의 달력으로 검색
-	    	  schYear = curYear;
-	    	  schMonth = curMonth;
-	    	  schDay = curDay;
-	      } else {
-	    	  schYear = Integer.parseInt(request.getParameter("schYear"));
-	    	  schMonth = Integer.parseInt(request.getParameter("schMonth"));
-	    	  schDay = 1;
-	      }
-	      
-	      CalendarInfo ci = new CalendarInfo();
-	      ci.setCurYear(curYear);
-	      ci.setCurMonth(curMonth);
-	      ci.setCurDay(curDay);
-	      
-	      ci.setSchYear(schYear);
-	      ci.setSchMonth(schMonth);
-	      ci.setSchDay(schDay);
-	      
-	      LocalDate edate = LocalDate.of(schYear, schMonth, 1);
-	      ci.setSchLast(edate.lengthOfMonth());	// 말일
-	      ci.setsWeek(edate.getDayOfWeek().getValue());	// 1일의 요일번호
-	      
-	      HttpSession session = request.getSession();
-	      AdminInfo ai = (AdminInfo)session.getAttribute("loginInfo");
-	      List<ScheduleInfo> scheduleList = scheduleSvc.getScheduleList(ai.getAi_id(), schYear, schMonth);
-	      
-	      request.setAttribute("ci", ci);
-	      request.setAttribute("scheduleList", scheduleList);
-	      
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용가능합니다.');");
+			out.println("location.href='login?url=schedule';");
+			out.println("</script>");
+			out.close();
+		}
+	
+		int curYear, curMonth, curDay, schYear, schMonth, schDay, schLast;
+		LocalDate today = LocalDate.now(); // 오늘 날짜를 가진 인스턴스 생성
+		curYear = today.getYear();
+		curMonth = today.getMonthValue();
+		curDay = today.getDayOfMonth();
+	
+		if (request.getParameter("schYear") == null) { // 검색한 년월이 없을 경우 오늘 날짜의 달력으로 검색
+			schYear = curYear;
+			schMonth = curMonth;
+			schDay = curDay;
+		} else {
+			schYear = Integer.parseInt(request.getParameter("schYear"));
+			schMonth = Integer.parseInt(request.getParameter("schMonth"));
+			schDay = 1;
+		}
+	
+		CalendarInfo ci = new CalendarInfo();
+		ci.setCurYear(curYear);
+		ci.setCurMonth(curMonth);
+		ci.setCurDay(curDay);
+	
+		ci.setSchYear(schYear);
+		ci.setSchMonth(schMonth);
+		ci.setSchDay(schDay);
+	
+		LocalDate edate = LocalDate.of(schYear, schMonth, 1);
+		ci.setSchLast(edate.lengthOfMonth()); // 말일
+		ci.setsWeek(edate.getDayOfWeek().getValue()); // 1일의 요일번호
+		
+		List<ScheduleInfo> scheduleList = scheduleSvc.getScheduleList(loginInfo.getAi_id(), schYear, schMonth);
+	
+		request.setAttribute("ci", ci);
+		request.setAttribute("scheduleList", scheduleList);
+	
 		return "schedule/schedule";
 	}
 	
@@ -66,34 +76,34 @@ public class ScheduleCtrl {	// 일정관리 관련 모든 기능을 매핑시키
 		int y = Integer.parseInt(request.getParameter("y"));
 		int m = Integer.parseInt(request.getParameter("m"));
 		int d = Integer.parseInt(request.getParameter("d"));
-		
+	
 		CalendarInfo ci = new CalendarInfo();
 		ci.setSchYear(y);
 		ci.setSchMonth(m);
 		ci.setSchDay(d);
-		
+	
 		LocalDate schDate = LocalDate.of(y, m, d);
 		ci.setSchLast(schDate.lengthOfMonth());
-		
+	
 		LocalDate today = LocalDate.now();
 		ci.setCurYear(today.getYear());
-		
+	
 		request.setAttribute("ci", ci);
-		
+	
 		return "schedule/scheduleInForm";
 	}
 	
 	@PostMapping("/scheduleInProc")
 	public String scheduleInProc(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		
+	
 		String si_date = request.getParameter("si_date");
 		String si_time = request.getParameter("si_time");
 		String content = request.getParameter("content").trim();
-		
+	
 		HttpSession session = request.getSession();
-		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-		
+		AdminInfo loginInfo = (AdminInfo) session.getAttribute("loginInfo");
+	
 		ScheduleInfo si = new ScheduleInfo(0, loginInfo.getAi_id(), si_date, si_time, content, null);
 		int result = scheduleSvc.scheduleInsert(si);
 		if (result != 1) {
@@ -105,9 +115,9 @@ public class ScheduleCtrl {	// 일정관리 관련 모든 기능을 매핑시키
 			out.println("</script>");
 			out.close();
 		}
-		
+	
 		// 2023-07-21
-		String args = "?schYear=" + si_date.substring(0,4) + "&schMonth=" + si_date.substring(5, 7);
+		String args = "?schYear=" + si_date.substring(0, 4) + "&schMonth=" + si_date.substring(5, 7);
 		return "redirect:/schedule" + args;
 	}
 }

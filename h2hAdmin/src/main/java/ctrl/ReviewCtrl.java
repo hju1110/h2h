@@ -1,26 +1,15 @@
 package ctrl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 import svc.*;
 import vo.*;
 
@@ -34,8 +23,21 @@ public class ReviewCtrl {
 	    }
 
 	    @GetMapping("/reviewList")
-	    public String reviewlist(Model model, HttpServletRequest request) throws Exception {
+	    public String reviewlist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 			request.setCharacterEncoding("utf-8");
+			
+			HttpSession session = request.getSession();
+			AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+			if (loginInfo == null) {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 후 이용가능합니다.');");
+				out.println("location.href='login?url=reviewList';");
+				out.println("</script>");
+				out.close();
+			}
+			
 			int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
 			// ���� ������ ��ȣ, ������ ��, ����������, �Խñ� ��, ������ ũ��
 			// ���ũ��, ��ȣ ���� ������ ����

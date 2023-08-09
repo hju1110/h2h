@@ -27,8 +27,20 @@ public class ProductCtrl {
 	
 	@GetMapping("/productList")
 	public String productList(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
 		request.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용가능합니다.');");
+			out.println("location.href='login?url=productList';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		int cpage = 1, spage = 0, psize = 6, bsize = 10, rcnt = 0, pcnt = 0;
 		
 		if (request.getParameter("cpage") != null) 

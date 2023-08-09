@@ -1,18 +1,16 @@
 package ctrl;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import svc.MemberInfoSvc;
-import vo.MemberManagementInfo;
-import vo.PageInfo;
+import javax.servlet.http.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
+import svc.*;
+import vo.*;
 
 @Controller
 public class MemberInfoCtrl {
@@ -23,8 +21,21 @@ public class MemberInfoCtrl {
 	}
 	
 	@GetMapping("/memberInfo")
-	public String MemberInfo(Model model, HttpServletRequest request) throws IOException {
+	public String MemberInfo(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용가능합니다.');");
+			out.println("location.href='login?url=memberInfo';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 5, num = 0;
 		// 현재 페이지 번호, 페이지 수, 시작페이지, 게시글 수, 페이지 크기, 블록 크기, 번호, 블록 크기 번호
 		if (request.getParameter("cpage") != null)

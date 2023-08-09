@@ -21,8 +21,21 @@ public class ServiceCtrl {
 	}
 	
 	@GetMapping("/service")
-	public String serviceList(Model model, HttpServletRequest request) throws Exception {
-		request.setCharacterEncoding("UTF-8");	
+	public String serviceList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용가능합니다.');");
+			out.println("location.href='login?url=service';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		int cpage = 1, pcnt = 0, spage = 0, rcnt = 0;
 		int psize = 5, bsize = 4, num = 0;
 		if(request.getParameter("cpage") != null)	//	request.getParameter("?") -> 받으면 무조건 String 안받으면 null

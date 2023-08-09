@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/resources/jsp/sidebar.jsp" %>
-
+<%
+request.setCharacterEncoding("utf-8");
+String url = request.getParameter("url");
+if (url == null)	url = "";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,6 +16,7 @@
 <div class="login-wrapper">
 	<h2>로그인</h2>
 	<form action="login" id="loginform" name="frmLogin" method="post">
+	<input type="hidden" name="url" value="<%=url %>" />
 	<div class="form-group">
 		<input type="text" name="uid" placeholder="아이디" value="admin">
 	</div>

@@ -24,6 +24,7 @@ public class LoginCtrl {
 	@PostMapping
 	public String loginProc(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
+		String url = request.getParameter("url");
 		String uid = request.getParameter("uid").trim().toLowerCase();
 		String pwd = request.getParameter("pwd").trim();
 		AdminInfo loginInfo = loginSvc.getLoginInfo(uid, pwd);
@@ -42,6 +43,6 @@ public class LoginCtrl {
 			session.setAttribute("loginInfo", loginInfo);
 		}
 		
-		return "redirect:/";
+		return "redirect:/" + url;
 	}
 }

@@ -3,7 +3,6 @@ package ctrl;
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.*;
-
 import javax.servlet.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -20,7 +19,20 @@ public class DonationCtrl {
 	}
 	
 	@GetMapping("/donaMemList")
-	public String DonaMemList(Model model, HttpServletRequest request) throws Exception {
+	public String DonaMemList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용가능합니다.');");
+			out.println("location.href='login?url=donaMemList';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		int cpage = 1, pcnt = 0, spage = 0,  rcnt = 0, psize = 20, bsize = 10;
 		
 		if (request.getParameter("cpage")!= null) {
@@ -63,10 +75,8 @@ public class DonationCtrl {
 	            }
 	            schargs = "&dnSponso=" + dnSponsor + "&mdCtgr=" +  mdCtgr + "&ydate=" + ydate + "&mdate=" + mdate + "&keyword=" + keyword;
 	        }
-	        
 	    }
 	    
-
 		rcnt = donationSvc.getDonaMemListCount(where);
 		List<DonationInfo> dl = donationSvc.getDonaMemList(where, cpage, psize);
 		DonationInfo di = donationSvc.getDonaTotal();
@@ -95,8 +105,7 @@ public class DonationCtrl {
 		request.setAttribute("pi",pi);
 		request.setAttribute("dl",dl);
 		request.setAttribute("di",di);
-		
-			
+					
 		return "donation/donaTotalList";
 	}
 	

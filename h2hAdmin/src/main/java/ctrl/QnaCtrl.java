@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,14 +31,27 @@ public class QnaCtrl {
 
 
     @GetMapping("/qnaList")
-    public String qnalist(Model model, HttpServletRequest request) throws Exception {
+    public String qnalist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession();
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('ë¡œê·¸ì¸ í›„ ì´ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤.');");
+			out.println("location.href='login?url=qnaList';");
+			out.println("</script>");
+			out.close();
+		}
+		
 		int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
-		// ÇöÀç ÆäÀÌÁö ¹øÈ£, ÆäÀÌÁö ¼ö, ½ÃÀÛÆäÀÌÁö, °Ô½Ã±Û ¼ö, ÆäÀÌÁö Å©±â
-		// ºí·ÏÅ©±â, ¹øÈ£ µîÀ» ÀúÀåÇÒ º¯¼ö
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ô½Ã±ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½
+		// ï¿½ï¿½ï¿½Å©ï¿½ï¿½, ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (request.getParameter("cpage") != null)
 			cpage = Integer.parseInt(request.getParameter("cpage"));
-		// º¸¾È»óÀÇ ÀÌÀ¯¿Í »ê¼ú¿¬»êÀ» À§ÇØ intÇüÀ¸·Î Çüº¯È¯ÇÔ
+		// ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ intï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¯ï¿½ï¿½
 		
 		String schtype = request.getParameter("schtype");
 		String keyword = request.getParameter("keyword");
@@ -48,7 +63,7 @@ public class QnaCtrl {
 		} else if (!schtype.equals("") && !keyword.trim().equals("")) {
 			URLEncoder.encode(keyword, "UTF-8");
 			keyword = keyword.trim();
-			if (schtype.equals("tc")) {	// °Ë»öÁ¶°ÇÀÌ 'Á¦¸ñ + ³»¿ë' ÀÏ °æ
+			if (schtype.equals("tc")) {	// ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 'ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ ï¿½ï¿½
 				where += " and (ql_title like '%" + keyword + "%' or rl_content like '%" + keyword + "%') ";
 			} else {
 				where += " and ql_" + schtype + " like '%" + keyword + "%' ";
@@ -75,7 +90,7 @@ public class QnaCtrl {
 		pi.setKeyword(keyword);
 		pi.setArgs(args);
 		pi.setSchargs(schargs);
-		// ÆäÀÌÂ¡¿¡ ÇÊ¿äÇÑ Á¤º¸µé°ú °Ë»öÁ¶°ÇÀ» pageInfo¿¡ ÀÎ½ºÅÏ½º¿¡ ÀúÀå
+		// ï¿½ï¿½ï¿½ï¿½Â¡ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pageInfoï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("pi", pi);
@@ -92,16 +107,16 @@ public class QnaCtrl {
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
         
-        // ¾÷·Îµå ¾îµå¹Î °æ·Î ÁöÁ¤
+        // ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         String uploadPath2 = "E:/lms/spring/h2hAdmin/src/main/webapp/resources/img";
         
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : ql_file) {
             if (!file.isEmpty()) {
-            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 // ¾îµå¹Î
+            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 // ï¿½ï¿½ï¿½ï¿½
                 try {
-                    file.transferTo(saveFile2); // ¾îµå¹Î
-                    piImgList.add(file.getOriginalFilename()); // ÆÄÀÏ¸í Ãß°¡
+                    file.transferTo(saveFile2); // ï¿½ï¿½ï¿½ï¿½
+                    piImgList.add(file.getOriginalFilename()); // ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ß°ï¿½
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -124,7 +139,7 @@ public class QnaCtrl {
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = response.getWriter();   
             out.println("<script>");
-            out.println("alert('°øÁö»çÇ× µî·Ï¿¡ ½ÇÆĞ .'); history.back();");
+            out.println("alert('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ .'); history.back();");
             out.println("</script>");
             out.close();
          } 
@@ -146,7 +161,7 @@ public class QnaCtrl {
         
         if (schtype != null && !schtype.equals("") &&
             keyword != null && !keyword.equals("")) {
-            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoderÀÇ °á°ú¸¦ º¯¼ö¿¡ ÇÒ´çÇØÁà¾ß ÇÕ´Ï´Ù.
+            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoderï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.
             args += "&schtype=" + schtype + "&keyword=" + keyword;
         }
         
