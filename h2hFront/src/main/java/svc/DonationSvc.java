@@ -22,8 +22,8 @@ public class DonationSvc {
 		return rcnt;
 	}
 
-	public List<DonationInfo> getDonaMemList(String miid) {
-		List<DonationInfo> dl = donationDao.getDonaMemList(miid);
+	public List<DonationInfo> getDonaMemList(String miid, int cpage, int psize) {
+		List<DonationInfo> dl = donationDao.getDonaMemList(miid, cpage, psize);
 		return dl;
 	}
 

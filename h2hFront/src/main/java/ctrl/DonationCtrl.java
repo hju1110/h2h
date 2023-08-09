@@ -33,7 +33,7 @@ public class DonationCtrl {
 	         PrintWriter out = response.getWriter();
 	         out.println("<script>");
 	         out.println("alert('로그인이 필요합니다.');");
-	         out.println("location.href='/h2hFront/login_form';");
+	         out.println("location.href='/h2hFront/login';");
 	         out.println("</script>");
 	         out.close();
 	    }
@@ -41,7 +41,7 @@ public class DonationCtrl {
 	    String miid = loginInfo.getMi_id();
         
 		rcnt = donationSvc.getDonaMemListCount(miid);
-		List<DonationInfo> dl = donationSvc.getDonaMemList(miid);
+		List<DonationInfo> dl = donationSvc.getDonaMemList(miid, cpage, psize);
 		//System.out.println(dl);
 		
 		pcnt = rcnt / psize;

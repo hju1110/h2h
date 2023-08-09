@@ -160,9 +160,9 @@ function del() {
 	<option value="c">정기후원 취소</option>
 </select>
 <select id="dnSponsor">
-	<option value="a">사랑의 밥차</option>
-	<option value="b">청소년지킴이</option>
-	<option value="c">아이사랑보육원</option>
+	<option value="a">행복한 손길</option>
+	<option value="b">서울청소년 지원부</option>
+	<option value="c">즐거운 어린이집</option>
 </select>
 <select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);">
 		<option>전체</option>
@@ -208,12 +208,12 @@ function del() {
 			ctgr = "정기후원 취소";
 		}
 		
-		if (dn.getDi_sponsor().equals("a")) {
-			sponsor = "사랑의 밥차";
-		} else if (dn.getDi_sponsor().equals("b")) {
-			sponsor = "청소년지킴이";
+		if (dn.getMd_sponsor().equals("a")) {
+			sponsor = "행복한 손길";
+		} else if (dn.getMd_sponsor().equals("b")) {
+			sponsor = "서울청소년 지원부";
 		}  else {
-			sponsor = "아이사랑보육원";
+			sponsor = "즐거운 어린이집";
 		}
 		
 		if (dn.getMd_payment().equals("a")) {
@@ -249,6 +249,7 @@ out.println("<p align='center'>");
 
 String qs = pageInfo.getSchargs();
 //페이징 영역 링크에서 사용할 쿼리 스트링의 공통 부분 (검색조건들)
+if (qs == null)	qs = "";
 
 //이전 버튼 
 if (pageInfo.getCpage() == 1) {
