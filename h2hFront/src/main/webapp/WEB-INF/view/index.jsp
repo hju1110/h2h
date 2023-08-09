@@ -49,7 +49,7 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
         <% if (loginInfo == null) { %>
-          <li class="nav-item"><a href="service" class="nav-link">참여</a></li>
+          <li class="nav-item"><a href="service" class="nav-link">참여zz</a></li>
           <li class="nav-item"><a href="reviewList" class="nav-link">후기게시판</a></li>
           <li class="nav-item"><a href="donationMain" class="nav-link">후원</a></li>
           <li class="nav-item"><a href="ProductProc" class="nav-link">쇼핑몰</a></li>
