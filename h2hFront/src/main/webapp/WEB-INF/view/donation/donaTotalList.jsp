@@ -31,7 +31,7 @@ String payment = "";
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
+      
         }
 
         h1 {
@@ -150,6 +150,7 @@ function del() {
 </head>
 <body>
 <dnv>
+<br />
 <h1>내가 신청한 후원</h1>
 <hr />
 <fieldset>	
