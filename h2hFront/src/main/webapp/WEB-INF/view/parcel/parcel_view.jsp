@@ -114,7 +114,7 @@ if (ss.equals("a")) {
         <tr>
             <th width="15%">주소명</th>
             <td width="35%">
-                <input type="text" name="ma_name" value="<%=pi.getOi_name() %>" readonly="readonly" onfocus="this.blur();" disabled="disabled"/>
+                <input type="text" name="ma_name" value="기본주소" readonly="readonly" onfocus="this.blur();" disabled="disabled"/>
             </td>
             <th width="15%">수취인 명</th>
             <td width="35%">

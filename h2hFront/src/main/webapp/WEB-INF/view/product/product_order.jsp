@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../menuBar.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
@@ -10,23 +10,52 @@ List<MemberAddr> addrList = (List<MemberAddr>)request.getAttribute("addrList");
 String pi_id = (String)request.getAttribute("pi_id");
 
 if (pdtList.size() == 0) {
-	out.println("<script>");
-	out.println("alert('잘못된 경로로 들어오셨습니다.');");
-	out.println("history.back();");
-	out.println("</script>");	
-	out.close();
+    out.println("<script>");
+    out.println("alert('잘못된 경로로 들어오셨습니다.');");
+    out.println("history.back();");
+    out.println("</script>");    
+    out.close();
 } 
 %>
 <script>
 function chAddr(val) {
-	var frm = document.frmOrder;
-	var arr = val.split("|");
-	var phone = arr[2].split("-");
-	
-	frm.ma_name.value = arr[0];	frm.oi_rname.value = arr[1];
-	frm.p2.value = phone[1];	frm.p3.value = phone[2];	
-	frm.oi_zip.value = arr[3];	frm.oi_addr1.value = arr[4];
-	frm.oi_addr2.value = arr[5];
+    var frm = document.frmOrder;
+    var arr = val.split("|");
+    var phone = arr[2].split("-");
+    
+    frm.ma_name.value = arr[0];
+    frm.oi_name.value = arr[1];
+    frm.p2.value = phone[1];
+    frm.p3.value = phone[2];
+    frm.oi_zip.value = arr[3];
+    frm.oi_addr1.value = arr[4];
+    frm.oi_addr2.value = arr[5];
+    
+    // 배송지 정보를 선택할 때마다 기본 정보 삭제 체크박스 초기화
+    frm.deleteDefaultAddress.checked = false;
+}
+
+function toggleDefaultAddress() {
+    var frm = document.frmOrder;
+    var isDefaultChecked = frm.deleteDefaultAddress.checked;
+    var selectAddress = document.getElementById("selectAddress");
+    
+    if (isDefaultChecked) {
+        // 기본 정보 삭제 체크박스가 선택된 경우, 배송지 정보 초기화
+        frm.ma_name.value = "";
+        frm.oi_name.value = "";
+        frm.p2.value = "";
+        frm.p3.value = "";
+        frm.oi_zip.value = "";
+        frm.oi_addr1.value = "";
+        frm.oi_addr2.value = "";
+        selectAddress.style.display = "none"; // 배송지 선택 셀렉트 박스 숨기기
+    } else {
+        // 기본 정보 삭제 체크박스가 선택 해제된 경우, 배송지 정보와 셀렉트 박스를 복원
+        var selectedAddr = frm.selectAddress.value;
+        chAddr(selectedAddr);
+        selectAddress.style.display = "inline"; // 배송지 선택 셀렉트 박스 나타내기
+    }
 }
 </script>
 <!DOCTYPE html>
@@ -45,7 +74,7 @@ function chAddr(val) {
         font-weight: bold;
     }
     h3 {
-    	text-align: center;
+        text-align: center;
         font-size: 18px;
         font-weight: bold;
     }
@@ -78,32 +107,16 @@ function chAddr(val) {
         border: 1px solid #ddd;
         margin: 20px 0;
     }
-	textarea {
-	width: 100%;
-	}
+    textarea {
+        width: 100%;
+    }
 </style>
-<script>
-function chAddr(val) {
-    var frm = document.frmOrder;
-    var arr = val.split("|");
-    var phone = arr[2].split("-");
-    
-    frm.ma_name.value = arr[0];
-    frm.oi_rname.value = arr[1];
-    frm.p2.value = phone[1];
-    frm.p3.value = phone[2];
-    frm.oi_zip.value = arr[3];
-    frm.oi_addr1.value = arr[4];
-    frm.oi_addr2.value = arr[5];
-}
-</script>
 </head>
 <body>
-    <h2>주문</h2>
-    <h3>주문자 정보</h3>
+    <h2>주문자 정보</h2>
     <form name="frmOrder" action="orderProcIn" method="post">
         <input type="hidden" name="pi_id" value="<%=pi_id %>" />
-        <table width="800" cellpadding="5" border="1">
+        <table width="800" cellpadding="5" border="0">
             <tr>
                 <th width="25%">이름</th>
                 <td width="*">
@@ -124,17 +137,18 @@ function chAddr(val) {
             </tr>
         </table>
         <h3>배송지 정보</h3>
-        <table width="800" cellpadding="5" border="1">
+        <table width="800" cellpadding="5" border="0">
             <tr>
                 <th>배송지 선택</th>
                 <td colspan="3">
-                    <select style="width:500px; height:25px;" onchange="chAddr(this.value);">
+                    <select style="width:400px; height:25px;" id="selectAddress" onchange="chAddr(this.value);">
                         <% 
                         String maname = "", marname = "", maphone = "", mazip = "", maaddr1 = "", maaddr2 = "";
-                        // 처음 페이지 로딩시 보여줄 기본주소의 값들을 저장할 변수 
-                        
+                        boolean isDefault = false;
+
                         for (MemberAddr ma : addrList) { 
-                            if (ma.getMa_basic().equals("y")) {        // 기본주소 이면
+                            if (ma.getMa_basic().equals("y")) {        
+                                isDefault = true;
                                 maname = ma.getMa_name();
                                 marname = ma.getMa_rname();
                                 maphone = ma.getMa_phone();
@@ -150,6 +164,7 @@ function chAddr(val) {
                         }
                         %>
                     </select>
+                    <label><input type="checkbox" name="deleteDefaultAddress" value="true" onchange="toggleDefaultAddress();" /> 기본 정보 삭제</label>
                 </td>
             </tr>
             <tr>
@@ -167,7 +182,7 @@ function chAddr(val) {
                 <td>
                     <% String[] arr = maphone.split("-"); %>
                     010 - <input type="text"  name="p2" value="<%=arr[1] %>" size="4" maxlength="4"  style="width:50px"/> -
-                    <input type="text" id="p2" name="p3" value="<%=arr[2] %>" size="4" maxlength="4" style="width:50px"/>
+                    <input type="text"  name="p3" value="<%=arr[2] %>" size="4" maxlength="4" style="width:50px"/>
                 </td>
                 <th>우편번호</th>
                 <td>
