@@ -13,7 +13,7 @@ AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HAND2HAND Admin 2 - Dashboard</title>
+    <title>HAND2HAND Admin 22 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
