@@ -76,7 +76,7 @@ public class DonationCtrl {
       String mdate = request.getParameter("mdate");
       
 		
-      String where = " where a.di_idx = b.di_idx and b.md_id = '" +  miid + "' ";
+      String where = " where b.md_id = '" +  miid + "' ";
       if (mdCtgr != null && dnSponsor != null && ydate != null && mdate != null) {
           if (!mdCtgr.equals("") && !dnSponsor.equals("") && !ydate.equals("") && !mdate.equals("")) {
               // 검색 조건이 선택된 경우 해당 조건을 where 절에 추가
@@ -84,7 +84,7 @@ public class DonationCtrl {
                   where += " AND b.md_ctgr = '" + mdCtgr + "' ";
               }
               if (dnSponsor.equals("a") || dnSponsor.equals("b") || dnSponsor.equals("c")) {
-                  where += " AND a.di_sponsor = '" + dnSponsor + "' ";
+                  where += " AND b.md_sponsor = '" + dnSponsor + "' ";
               }
               if (!ydate.equals("전체")) {
                   where += " AND YEAR(b.md_sdate) = " + ydate + " ";
@@ -124,12 +124,12 @@ public class DonationCtrl {
 		return "donation/donaRequest";
 	}
 	
-	@GetMapping("/donaFinish")
-	public String donaFinish() {
-		
-		return "donation/donaFinish";
-	}
-	
+//	@GetMapping("/donaFinish")
+//	public String donaFinish() {
+//		
+//		return "donation/donaFinish";
+//	}
+//	
 	
 	@PostMapping("/donaFinish")
 	public String donaFinishs(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -153,9 +153,14 @@ public class DonationCtrl {
 		String ctgr = request.getParameter("chkType");
 		String bnum = request.getParameter("bnum");
 		String gname = request.getParameter("gname");
-		int money = Integer.parseInt(request.getParameter("money").replace(",", ""));
-		String mdSponsor1 = request.getParameter("mdSponsor1");
-		String mdSponsor2 = request.getParameter("mdSponsor2");
+		int money = Integer.parseInt(request.getParameter("money").replace(",", "").trim());
+		String mdSponsor1 = "";
+	    String mdSponsor2 = "";
+	      if (!request.getParameter("mdSponsor1").equals("")) {
+	         mdSponsor1 = request.getParameter("mdSponsor1").substring(0,1);
+	      } else if (!request.getParameter("mdSponsor2").equals("")) {
+	         mdSponsor2 = request.getParameter("mdSponsor2").substring(0,1);
+	      }
 		String payment = request.getParameter("payment");
 		
 		DonationInfo di = new DonationInfo();
@@ -169,10 +174,16 @@ public class DonationCtrl {
 		System.out.println("단체 이름 : " + gname);
 		di.setMd_price(money);
 		System.out.println("후원 금액 : " + money);
-		di.setMd_sponsor(mdSponsor1);
+		
+		if (ctgr.equals("a")) {
+			di.setMd_sponsor(mdSponsor1);
+		} else {
+			di.setMd_sponsor(mdSponsor2);
+		}
+		
 		System.out.println("일반 피후원자 : " + mdSponsor1);
-		di.setMd_sponsor(mdSponsor2);
 		System.out.println("정기 피후원자 : " + mdSponsor2);
+		
 		di.setMd_payment(payment);
 		System.out.println("결제 방법 : " + payment);
 		di.setMd_type(memType);
@@ -194,6 +205,7 @@ public class DonationCtrl {
 		} else {
 			di_idx = 3;
 		}
+		
 		di.setDi_idx(di_idx);
 		System.out.println("후원정보 번호 : " + di_idx);
 		

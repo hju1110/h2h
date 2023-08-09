@@ -194,7 +194,7 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 	<td width="100" style="border:1px solid black; border-top: none; border-bottom: none; border-left: none;"
 		id="mdCtgr2"><span><%=ctgrName %></span></td>
 	<td width="100" style="border:1px solid black; border-top: none; border-bottom: none; border-right: none;"
-		id="price5"><span>-</span></td>
+		id="price5"><span></span></td>
 </tr>
 </table>
 <hr />

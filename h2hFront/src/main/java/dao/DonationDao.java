@@ -20,12 +20,12 @@ public class DonationDao {
 		return rcnt;
 	}
 	
-	public List<DonationInfo> getDonaMemList(String miid) {
-		String sql = "SELECT  a.di_sponsor, b.* FROM t_donation_info a, t_member_dona b where b.md_id = '" + miid + "'  and a.di_idx = b.di_idx  ORDER BY b.md_sdate DESC";
-		//System.out.println(sql);
+	public List<DonationInfo> getDonaMemList(String miid, int cpage, int psize) {
+		String sql = "SELECT * FROM t_member_dona where md_id = '" + miid 
+				+ "' ORDER BY md_sdate DESC limit " + ((cpage - 1) * psize) + ", " + psize;
+		// System.out.println(sql);
 		List<DonationInfo> results = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
 			DonationInfo dl = new DonationInfo();
-			dl.setDi_sponsor(rs.getString("di_sponsor"));
 			dl.setMd_idx(rs.getInt("md_idx"));
 			dl.setDi_idx(rs.getInt("di_idx"));
 			dl.setMd_id(rs.getString("md_id"));
@@ -39,6 +39,7 @@ public class DonationDao {
 			dl.setMd_edate(rs.getString("md_edate"));
 			dl.setMd_bnum(rs.getString("mi_bnum"));
 			dl.setMd_gname(rs.getString("md_gname"));
+			dl.setMd_sponsor(rs.getString("md_sponsor"));
 			return dl;
 		});
 		return results;
@@ -76,7 +77,7 @@ public class DonationDao {
 		String sql = "INSERT INTO t_member_dona (di_idx, md_id, md_name, md_type, md_ctgr, md_sponsor, md_price " + 
 				" , md_payment, mi_bnum, md_gname) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = jdbc.update(sql, di.getDi_idx(),mi.getMi_id(), di.getMd_name(), di.getMd_type(), di.getMd_ctgr(), 
-				di.getMd_sponsor().substring(0,1), di.getMd_price(), di.getMd_payment(), mi.getMi_bnum(), mi.getMi_gname());
+				di.getMd_sponsor(), di.getMd_price(), di.getMd_payment(), mi.getMi_bnum(), mi.getMi_gname());
 		System.out.println(sql);
 		
 		sql = "UPDATE t_member_dona SET mi_bnum = (SELECT mi_bnum FROM t_member_info WHERE mi_id = '" + mi.getMi_id() + "'), " + 
@@ -87,9 +88,9 @@ public class DonationDao {
 		
 		String sql2 = "";
 		if (di.getMd_ctgr().equals("a")) {
-			sql2 = "UPDATE t_donation_info SET di_gprice = di_gprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor().substring(0,1) + "' ";
+			sql2 = "UPDATE t_donation_info SET di_gprice = di_gprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor() + "' ";
 		} else {
-			sql2 = "UPDATE t_donation_info SET di_rprice = di_rprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor().substring(0,1) + "' ";
+			sql2 = "UPDATE t_donation_info SET di_rprice = di_rprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor() + "' ";
 		}
 		
 		System.out.println(sql2);
