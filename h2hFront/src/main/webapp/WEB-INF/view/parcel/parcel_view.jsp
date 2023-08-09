@@ -160,7 +160,7 @@ if (ss.equals("a")) {
     </table>
     <hr />
     <p>
-        <a href="ParcelProc">목록</a><br />
+    <input type="button" value="목록" onclick="location.href='ParcelProc';">
     </p>
 </form>
 </body>

@@ -183,7 +183,7 @@ function showTab(chk) {
 </div>
 <hr />
 <p style="width:1400px; text-align:center;">
-<a href="ProductProc">상품 목록</a>
+<input type="button" value="상품 목록" onclick="location.href='ProductProc';">
 </p>
 </body>
 </html>

@@ -15,7 +15,8 @@ public class ParcelProcDao {
 	}
 
 	public List<OrderProcInCtrl> getParcelList(String miid) {
-		String sql = "select * from t_order_info where mi_id = '" + miid + "' ";
+		String sql = "select * from t_order_info where mi_id = '" + miid + "' ORDER BY oi_date DESC ";
+		//System.out.println(sql);
 		List<OrderProcInCtrl> parcelList = jdbc.query(sql, 
 			(ResultSet rs, int rowNum) -> {
 				OrderProcInCtrl op = new OrderProcInCtrl(
