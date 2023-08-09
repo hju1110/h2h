@@ -26,7 +26,7 @@ function serChk(){
 </script>
 <body>
 <div class="container mt-5">
-<form name="frmSView" action="serviceView">
+<form name="frmSView" action="serviceFinish"  method="post">
 <h2>봉사활동 글보기</h2>
 
 <br />
@@ -79,7 +79,7 @@ function serChk(){
 </div>
 <br />
 <div class="line">
-<input type="button" class="btn btn-primary" id= "chk" value="봉사활동 신청" onclick="location.href='';" />
+<input type="button" class="btn btn-primary" id= "chk" value="봉사활동 신청" onclick="location.href='serviceFinish';" />
 </div>
 </body>
 </html>

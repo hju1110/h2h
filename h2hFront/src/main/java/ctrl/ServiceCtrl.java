@@ -97,6 +97,12 @@ public class ServiceCtrl {
 		return "service/serviceView";
 	}
 	
+	@GetMapping("/serviceFinish")
+	public String serviceFinish() {
+		
+		return "service/serviceFinish";
+	}
+	
 	
 
 	
