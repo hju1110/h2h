@@ -12,7 +12,7 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
+       
         }
 
         h2 {
@@ -50,6 +50,7 @@
     </style>
 </head>
 <body>
+<br/>
 <h2>주문확인/배송조회</h2>
 <hr />
 <% 

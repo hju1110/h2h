@@ -89,6 +89,10 @@ function showTab(chk) {
 #cnt { width:20px; text-align:right; }
 .smt { width:150px; height:30px; }
 #review { display:none; }
+h2,h3 {
+       margin-bottom: 20px;
+       text-align: center;
+   }
 </style>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -97,6 +101,7 @@ function showTab(chk) {
 <title>Insert title here</title>
 </head>
 <body>
+<br />
 <h2>상품 상세 화면</h2>
 <table width="800" cellpading="5" align="center">
 <tr align="center">

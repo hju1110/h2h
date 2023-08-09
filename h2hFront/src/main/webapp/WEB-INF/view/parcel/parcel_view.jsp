@@ -27,7 +27,6 @@ if (ss.equals("a")) {
    body {
        font-family: Arial, sans-serif;
        line-height: 1.6;
-       margin: 20px;
    }
 
    h2,h3 {
@@ -82,6 +81,7 @@ if (ss.equals("a")) {
 </style>
 </head>
 <body>
+<br/>
 <h2>주문</h2>
 <h3>주문자 정보</h3>
 <form name="frmOrder" action="orderProcIn" method="post">

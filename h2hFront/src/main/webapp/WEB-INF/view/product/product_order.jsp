@@ -66,7 +66,7 @@ function toggleDefaultAddress() {
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+       
     }
     h2 {
         text-align: center;
@@ -113,6 +113,7 @@ function toggleDefaultAddress() {
 </style>
 </head>
 <body>
+<br />
     <h2>주문자 정보</h2>
     <form name="frmOrder" action="orderProcIn" method="post">
         <input type="hidden" name="pi_id" value="<%=pi_id %>" />
