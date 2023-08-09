@@ -148,7 +148,7 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
             <div class="media block-6 d-flex services p-3 py-4 d-block">
               <div class="icon d-flex mb-3"><span class="flaticon-donation"></span></div>
               <div class="media-body pl-4">
-                <h3 class="heading">후원하기</h3>
+                <h3 class="heading">후원2하기</h3>
                 <p>02-2353-3525</p>
               </div>
             </div>    
