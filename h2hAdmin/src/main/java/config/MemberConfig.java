@@ -7,7 +7,6 @@ import svc.*;
 
 @Configuration
 public class MemberConfig {
-// ȸ�� ���� �۾� ���� Ŭ����
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
 		DataSource ds = new DataSource();

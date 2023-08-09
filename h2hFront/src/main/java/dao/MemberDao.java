@@ -18,12 +18,15 @@ public class MemberDao {
 		
 		if (mi.getMi_type().equals("a")) {
 			sql = "INSERT INTO t_member_info (mi_id, mi_pw, mi_name, mi_gender, mi_birth, mi_phone, mi_email, mi_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			// System.out.println("a : " + sql);
 			result = jdbc.update(sql, mi.getMi_id(), mi.getMi_pw(), mi.getMi_name(), mi.getMi_gender(), mi.getMi_birth(), mi.getMi_phone(), mi.getMi_email(), mi.getMi_type());
-		} else if (mi.getMi_type().equals("b")) {
-			sql = "INSERT INTO t_member_info (mi_id, mi_bnum, mi_pw, mi_name, mi_phone, mi_email, mi_type, mi_gname) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			result = jdbc.update(sql, mi.getMi_id(), mi.getMi_bnum(), mi.getMi_pw(), mi.getMi_name(), mi.getMi_phone(), mi.getMi_email(), mi.getMi_type(), mi.getMi_gname());
 		} else if (mi.getMi_type().equals("c")) {
+			sql = "INSERT INTO t_member_info (mi_id, mi_bnum, mi_pw, mi_name, mi_phone, mi_email, mi_type, mi_gname) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			// System.out.println("c : " + sql);
+			result = jdbc.update(sql, mi.getMi_id(), mi.getMi_bnum(), mi.getMi_pw(), mi.getMi_name(), mi.getMi_phone(), mi.getMi_email(), mi.getMi_type(), mi.getMi_gname());
+		} else if (mi.getMi_type().equals("b")) {
 			sql = "INSERT INTO t_member_info (mi_id, mi_pw, mi_name, mi_phone, mi_email, mi_type, mi_gname) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			// System.out.println("b : " + sql);
 			result = jdbc.update(sql, mi.getMi_id(), mi.getMi_pw(), mi.getMi_name(), mi.getMi_phone(), mi.getMi_email(), mi.getMi_type(), mi.getMi_gname());
 		}
 		

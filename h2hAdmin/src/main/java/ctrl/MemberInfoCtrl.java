@@ -42,16 +42,19 @@ public class MemberInfoCtrl {
 				where += " WHERE mi_type = 'a' ";
 			} else if (type.equals("gb")) {
 				where += " WHERE (mi_type = 'b' OR mi_type = 'c') ";
+			} else if (type.equals("al") && schtype != null && schtype != "") {
+				where += " WHERE ";
 			}
 			
-			if (schtype != null)
-				where += " AND ";
+			if (where.contains("WHERE") && !type.equals("al") && schtype != null && schtype != "") {
+				where += "AND";
+			}
 		}
 		
 		if (schtype == null || keyword == "") {
 			schtype = "";
 			keyword = "";
-		} else if (!schtype.equals("") && !keyword.trim().equals("")) {
+		} else if (!schtype.equals("") && !keyword.equals("")) {
 			URLEncoder.encode(keyword, "UTF-8");
 			keyword = keyword.trim();
 			if (type == "")
@@ -60,16 +63,24 @@ public class MemberInfoCtrl {
 			if (schtype.equals("tc")) {	// 검색조건이 '제목 + 내용'이면
 				where += " (mi_name LIKE '%" + keyword + "%' OR mi_gname LIKE '%" + keyword + "%') ";
 			} else if (schtype.equals("all")) {
-				where += " mi_name LIKE '%" + keyword + "%' OR mi_gname LIKE '%" + keyword + "%' OR mi_id LIKE '%" + keyword + "%' ";
+				where += " (mi_name LIKE '%" + keyword + "%' OR mi_gname LIKE '%" + keyword + "%' OR mi_id LIKE '%" + keyword + "%') ";
 			} else {
 				where += " mi_id LIKE '%" + keyword + "%' ";
 			}
-			schargs = "&schargs=" + schtype + "&keyword=" + keyword;
+			
+			schargs = "&schtype=" + schtype + "&keyword=" + keyword;
 		}
+		
+		if (!type.equals("")) {
+			 schargs += "&sv=" + type;
+		}
+		
 		args = "&cpage=" + cpage + schargs;
 		
-		rcnt = memberInfoSvc.getMemberListCount(where);
+		System.out.println(where);
 		
+		rcnt = memberInfoSvc.getMemberListCount(where);
+
 		List<MemberManagementInfo> memberManagementInfo = memberInfoSvc.getMemberManagementInfo(where, cpage, psize);
 		
 		pcnt = rcnt / psize;
@@ -83,7 +94,7 @@ public class MemberInfoCtrl {
 		pi.setRcnt(rcnt);		pi.setSpage(spage);
 		pi.setSchargs(schargs); pi.setNum(num);
 		pi.setKeyword(keyword); pi.setArgs(args);
-		pi.setSchtype(schtype);
+		pi.setSchtype(schtype); pi.setType(type);
 		// 페이징에 필요한 정보들과 검색 조건을 PageInfo형 인스턴스에 저장
 		
 		model.addAttribute("pi", pi);

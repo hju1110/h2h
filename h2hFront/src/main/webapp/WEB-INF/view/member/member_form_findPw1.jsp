@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,8 +35,14 @@ fieldset {
 	background-color: #B3B1B1;
 	color: white;
 }
+
+#e1, #e2, #e3 {
+	height: 40px;
+	width: 100px;
+}
 </style>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/email_address.js"></script>
 <script>
 $(document).ready(function() {
 	$('#join').click(function() {
@@ -55,7 +60,15 @@ $(document).ready(function() {
 <form id="frm" method="post" action="findPw">
 	<input type="text" name="id" id="id" class="tsize" placeholder="아이디"><br><br>
 	<input type="text" name="name" id="name" class="tsize" placeholder="이름"><br><br>
-	<input type="text" name="email" id="email" class="tsize" placeholder="이메일"><br><br>
+	<input type="text" name="e1" id="e1" size="5" class="tsize" placeholder="이메일" style="width: 90px;"> @ <input type="text" name="e2" id="e2" size="10" class="tsize" style="width: 70px;"> 
+	<select name="e3" id="e3" class="tsize" >
+		<option value="">도메인 선택</option>
+		<option value="naver.com">naver.com</option>
+		<option value="hanmail.net">hanmail.net</option>
+		<option value="gmail.com">gmail.com</option>
+		<option value="nate.com">nate.com</option>
+		<option value="direct">직접 입력</option>
+	</select>
 	<input type="submit" id="join" class="btn" value="확인"><br>
 </form>
 </fieldset>

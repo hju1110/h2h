@@ -43,8 +43,8 @@ public class MemberCtrl {
 	@PostMapping("/insertMemberJoin")
 	public String joinProc(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		String type = request.getParameter("type");	// �쉶�썝 醫낅쪟(�씪諛�, 湲곗뾽, �떒泥�)
-		String phone = "010-" + request.getParameter("p1") + "-" + request.getParameter("p2");	// �빖�뱶�룿 踰덊샇 
+		String type = request.getParameter("type");	// 회원 종류(일반, 기업, 단체)
+		String phone = "010-" + request.getParameter("p1") + "-" + request.getParameter("p2");	// 핸드폰 번호
 		
 		MemberInfo mi = new MemberInfo();
 		MemberAddr2 ma = new MemberAddr2();
@@ -52,46 +52,56 @@ public class MemberCtrl {
 		mi.setMi_pw(request.getParameter("pw"));
 		mi.setMi_name(request.getParameter("name"));
 		mi.setMi_phone(phone);
-		mi.setMi_email(request.getParameter("email"));
 		mi.setMi_type(type);
 		
-		if (type.equals("a")) {	// �씪諛섑쉶�썝
+		if (type.equals("a")) {	// 일반회원
 			String aphone = "010-" + request.getParameter("adp1") + "-" +request.getParameter("adp2");
-			String gender = request.getParameter("birth2");	// �꽦蹂�
+			String birth = "19" + request.getParameter("birth").substring(0, 2) + "-" + request.getParameter("birth").substring(2, 4) + "-" + request.getParameter("birth").substring(4);
+			String gender = request.getParameter("birth2");	// 성별
 			if (gender.equals("1") || gender.equals("3"))
-				gender = "�궓";
+				gender = "남";
 			else
-				gender = "�뿬";
+				gender = "여";
+			
 			mi.setMi_gender(gender);
-			mi.setMi_birth(request.getParameter("birth"));
+			mi.setMi_birth(birth);
 			ma.setMi_id(request.getParameter("id"));
 			ma.setMa_name(request.getParameter("name"));
 			ma.setMa_rname(request.getParameter("rname"));
+			mi.setMi_email(request.getParameter("email"));
 			ma.setMa_phone(aphone);
 			ma.setMa_zip(request.getParameter("zip"));
 			ma.setMa_addr1(request.getParameter("addr1"));
 			ma.setMa_addr2(request.getParameter("addr2"));
-		} else if (type.equals("b")) { // 湲곗뾽 �쉶�썝
+		} else if (type.equals("c")) { // 기업 회원
+			String email =  request.getParameter("e1").trim() + "@" + request.getParameter("e2").trim();
+			mi.setMi_email(email);
 			mi.setMi_bnum(request.getParameter("bnum"));
 			mi.setMi_gname(request.getParameter("gname"));
-		} else {	// �떒泥� �쉶�썝
+		} else {	// 단체 회원
+			String email =  request.getParameter("e1").trim() + "@" + request.getParameter("e2").trim();
+			mi.setMi_email(email);
 			mi.setMi_gname(request.getParameter("gname"));
 		}
 
 		int result = memberSvc.memberInsert(mi);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
 		if (result != 1) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('�쉶�썝媛��엯�뿉 �떎�뙣�뻽�뒿�땲�떎.');");
+			out.println("alert('회원가입에 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}
 		
-		if (type.equals("a")) { // �씪諛섑쉶�썝�씪 寃쎌슦 二쇱냼�룄 異붽�
+		if (type.equals("a")) { // 일반회원일 경우 주소도 추가
 			result = memberSvc.memberAddrInsert(ma);
 		}
+		
+		out.println("<script>");
+		out.println("('회원가입에 성공했습니다.');");
+		out.println("</script>");
 
 		return "member/login_form";
 	}
@@ -122,14 +132,14 @@ public class MemberCtrl {
 	public String findId(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		String name = request.getParameter("name");
-		String email = request.getParameter("email");
+		String email =  request.getParameter("e1").trim() + "@" + request.getParameter("e2").trim();
 		String result = memberSvc.findId(name, email);
 		
 		if (result == null) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('�궗�슜�옄 �젙蹂닿� �뾾�뒿�땲�떎.');");
+			out.println("alert('사용자 정보가 없습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
@@ -150,14 +160,14 @@ public class MemberCtrl {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
-		String email = request.getParameter("email");
+		String email =  request.getParameter("e1").trim() + "@" + request.getParameter("e2").trim();
 		int result = memberSvc.findPw(id, name, email);
 		
 		if (result != 1) {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('�궗�슜�옄 �젙蹂닿� �뾾�뒿�땲�떎.');");
+			out.println("alert('사용자 정보가 없습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
@@ -179,14 +189,14 @@ public class MemberCtrl {
 		PrintWriter out = response.getWriter();
 		if (result != 1) {
 			out.println("<script>");
-			out.println("alert('鍮꾨�踰덊샇 蹂�寃쎌뿉 �떎�뙣�뻽�뒿�땲�떎.');");
+			out.println("alert('비밀번호 변경에 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}
 
 		out.println("<script>");
-		out.println("alert('鍮꾨�踰덊샇瑜� 蹂�寃쏀뻽�뒿�땲�떎.');");
+		out.println("alert('비밀번호를 변경했습니다.');");
 		out.println("</script>");
 
 		return "member/login_form";
@@ -215,7 +225,7 @@ public class MemberCtrl {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.');");
+			out.println("alert('비밀번호가 일치하지 않습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
@@ -251,7 +261,7 @@ public class MemberCtrl {
 		int result = memberSvc.chkPw(id, pw);
 		if (result != 1) {
 			out.println("<script>");
-			out.println("alert('鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.');");
+			out.println("alert('비밀번호가 일치하지 않습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
@@ -260,14 +270,14 @@ public class MemberCtrl {
 		result = memberSvc.chgPw(id, npw);
 		if (result != 1) {
 			out.println("<script>");
-			out.println("alert('鍮꾨�踰덊샇 蹂�寃쎌뿉 �떎�뙣�뻽�뒿�땲�떎.');");
+			out.println("alert('비밀번호 변경에 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}
 
 		out.println("<script>");
-		out.println("alert('鍮꾨�踰덊샇瑜� 蹂�寃쏀뻽�뒿�땲�떎.');");
+		out.println("alert('비밀번호를 변경했습니다.');");
 		out.println("</script>");
 
 		return "member/my_info";
@@ -297,18 +307,18 @@ public class MemberCtrl {
 		PrintWriter out = response.getWriter();
 		if (result != 1) {
 			out.println("<script>");
-			out.println("alert('�쉶�썝�젙蹂� 蹂�寃쎌뿉 �떎�뙣�뻽�뒿�땲�떎.');");
+			out.println("alert('회원정보 변경에 실패했습니다.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}
 		
 		out.println("<script>");
-		out.println("alert('�젙蹂대�� �닔�젙�뻽�뒿�땲�떎.');");
+		out.println("alert('정보를 수정했습니다.');");
 		out.println("</script>");
 		
 		if (!type.equals("a")) {
-			request.setAttribute("name", request.getParameter("name").trim());
+			
 		}
 		request.setAttribute("phone", phone);
 		request.setAttribute("email", email);

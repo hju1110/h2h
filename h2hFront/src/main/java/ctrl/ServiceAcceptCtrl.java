@@ -50,7 +50,7 @@ public class ServiceAcceptCtrl {
 		PageInfo pi = new PageInfo();
 		 pi.setBsize(bsize);		 pi.setCpage(cpage);		 pi.setPcnt(pcnt);
 		 pi.setPsize(psize);		 pi.setRcnt(rcnt);			 pi.setSpage(spage);
-		 pi.setNum(num);		 pi.setArgs(args);			 pi.setSchargs(schargs);
+		 pi.setNum(num);			 pi.setArgs(args);			 pi.setSchargs(schargs);
 		 pi.setKeyword(keyword);	 pi.setSchtype(schtype);	
 		
 		 model.addAttribute("serviceAcceptInfo", serviceAcceptInfo);	// model에 담아 보내기

@@ -10,9 +10,9 @@ public class LoginSvc {
 		this.loginDao = loginDao;
 	}
 
-	public MemberInfo getLoginInfo(String uid, String pwd) {
-		MemberInfo mi = loginDao.getLoginInfo(uid, pwd);
-		return mi;
+	public AdminInfo getLoginInfo(String uid, String pwd) {
+		AdminInfo ai = loginDao.getLoginInfo(uid, pwd);
+		return ai;
 	}
 	
 }

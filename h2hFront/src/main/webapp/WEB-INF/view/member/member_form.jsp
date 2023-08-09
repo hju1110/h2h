@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
 String email = (String)request.getAttribute("email");
@@ -57,7 +56,7 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td width="130"><p>생년월일</p></td>
-			<td><input type="text" name="birth"> - <input type="text" name="birth2" size="1" maxlength="1">******</td>
+			<td><input type="text" name="birth" maxlength="6" placeholder="주민등록번호 앞 6자리"> - <input type="text" name="birth2" size="1" maxlength="1">******</td>
 		</tr>
 		<tr>
 			<td width="130"><p>아이디</p></td>
@@ -73,7 +72,7 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td width="130"><p>휴대폰번호</p></td>
-			<td>010 - <input type="text" name="p1" size="5"> - <input type="text" name="p2" size="5"></td>
+			<td>010 - <input type="text" name="p1" size="5" maxlength="4"> - <input type="text" name="p2" size="5" maxlength="4"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>이메일</p></td>
@@ -88,11 +87,11 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td width="130"><p>휴대폰번호</p></td>
-			<td>010 - <input type="text" name="adp1" size="5"> - <input type="text" name="adp2" size="5"></td>
+			<td>010 - <input type="text" name="adp1" size="5" maxlength="4"> - <input type="text" name="adp2" size="5" maxlength="4"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>우편번호</p></td>
-			<td><input type="text" name="zip"></td>
+			<td><input type="text" name="zip" maxlength="5"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>주소</p></td>

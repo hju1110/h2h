@@ -26,4 +26,9 @@ public class ServiceSvc {
 		ServiceInfo si = serviceDao.getServiceList(siidx);
 		return si;
 	}
+
+	public int getAccept(ServiceInfo si) {
+		int result = serviceDao.getAccept(si);
+		return result;
+	}
 }

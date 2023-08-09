@@ -11,6 +11,7 @@ PageInfo pageInfo = (PageInfo)request.getAttribute("pi");
 LocalDate today = LocalDate.now();
 int cYear = today.getYear();
 int cMonth = today.getMonthValue();
+
 String ctgr = "";
 String sponsor = "";
 String payment = "";
@@ -113,9 +114,9 @@ function total() {
       <option value="c">정기후원 취소</option>
     </select>
     <select id="dnSponsor">
-      <option value="a">사랑의 밥차</option>
-      <option value="b">청소년지킴이</option>
-      <option value="c">아이사랑보육원</option>
+      <option value="a">행복한 손길</option>
+      <option value="b">서울청소년 지원부</option>
+      <option value="c">즐거운 어린이집</option>
     </select>
     <select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);">
       <option>전체</option>
@@ -139,9 +140,9 @@ function total() {
       <legend>후원자 검색</legend>
       <div>
         <select name="dnSponsor">
-          <option value="a" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("a")) { %> selected="selected"<% } %>>사랑의 밥차</option>
-          <option value="b" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("b")) { %> selected="selected"<% } %>>청소년지킴이</option>
-          <option value="c" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("c")) { %> selected="selected"<% } %>>아이사랑보육원</option>
+          <option value="a" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("a")) { %> selected="selected"<% } %>>행복한 손길</option>
+          <option value="b" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("b")) { %> selected="selected"<% } %>>서울청소년 지원부</option>
+          <option value="c" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("c")) { %> selected="selected"<% } %>>즐거운 어린이집</option>
         </select>
         <select name="mdCtgr">
           <option value="a" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("a")) { %> selected="selected"<% } %>>일반후원</option>
@@ -193,11 +194,11 @@ function total() {
         }
         
         if (dn.getDi_sponsor().equals("a")) {
-          sponsor = "사랑의 밥차";
+          sponsor = "행복한 손길";
         } else if (dn.getDi_sponsor().equals("b")) {
-          sponsor = "청소년지킴이";
+          sponsor = "서울청소년 지원부";
         }  else {
-          sponsor = "아이사랑보육원";
+          sponsor = "즐거운 어린이집";
         }
         
         if (dn.getMd_payment().equals("a")) {

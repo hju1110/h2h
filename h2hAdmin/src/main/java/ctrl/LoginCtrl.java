@@ -4,8 +4,8 @@ import java.io.*;
 import javax.servlet.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import svc.LoginSvc;
-import vo.MemberInfo;
+import svc.*;
+import vo.*;
 
 @Controller
 @RequestMapping("/login")
@@ -26,7 +26,7 @@ public class LoginCtrl {
 		request.setCharacterEncoding("UTF-8");
 		String uid = request.getParameter("uid").trim().toLowerCase();
 		String pwd = request.getParameter("pwd").trim();
-		MemberInfo loginInfo = loginSvc.getLoginInfo(uid, pwd);
+		AdminInfo loginInfo = loginSvc.getLoginInfo(uid, pwd);
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();

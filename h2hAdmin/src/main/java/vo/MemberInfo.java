@@ -1,44 +1,130 @@
 package vo;
 
 public class MemberInfo {
-	private int ai_idx;
-	private String ai_id, ai_pw, ai_name, ai_use, ai_date;
-	public int getAi_idx() {
-		return ai_idx;
-	}
-	public void setAi_idx(int ai_idx) {
-		this.ai_idx = ai_idx;
-	}
-	public String getAi_id() {
-		return ai_id;
-	}
-	public void setAi_id(String ai_id) {
-		this.ai_id = ai_id;
-	}
-	public String getAi_pw() {
-		return ai_pw;
-	}
-	public void setAi_pw(String ai_pw) {
-		this.ai_pw = ai_pw;
-	}
-	public String getAi_name() {
-		return ai_name;
-	}
-	public void setAi_name(String ai_name) {
-		this.ai_name = ai_name;
-	}
-	public String getAi_use() {
-		return ai_use;
-	}
-	public void setAi_use(String ai_use) {
-		this.ai_use = ai_use;
-	}
-	public String getAi_date() {
-		return ai_date;
-	}
-	public void setAi_date(String ai_date) {
-		this.ai_date = ai_date;
-	}
-	
-	
+   private String mi_id;
+   private String mi_pw;
+   private String mi_name;
+   private String mi_gender;
+   private String mi_birth;
+   private String mi_phone;
+   private String mi_email;
+   private String mi_type;
+   private int mi_point;
+   private String mi_status;
+   private String mi_date;
+   private String mi_lastlogin;
+   private String mi_bnum, mi_gname;
+
+   public String getMi_type() {
+      return mi_type;
+   }
+
+   public void setMi_type(String mi_type) {
+      this.mi_type = mi_type;
+   }
+
+   public String getMi_bnum() {
+      return mi_bnum;
+   }
+
+   public void setMi_bnum(String mi_bnum) {
+      this.mi_bnum = mi_bnum;
+   }
+
+   public String getMi_gname() {
+      return mi_gname;
+   }
+
+   public void setMi_gname(String mi_gname) {
+      this.mi_gname = mi_gname;
+   }
+
+   public String getMi_id() {
+      return mi_id;
+   }
+
+   public void setMi_id(String mi_id) {
+      this.mi_id = mi_id;
+   }
+
+   public String getMi_pw() {
+      return mi_pw;
+   }
+
+   public void setMi_pw(String mi_pw) {
+      this.mi_pw = mi_pw;
+   }
+
+   public String getMi_name() {
+      return mi_name;
+   }
+
+   public void setMi_name(String mi_name) {
+      this.mi_name = mi_name;
+   }
+
+   public String getMi_gender() {
+      return mi_gender;
+   }
+
+   public void setMi_gender(String mi_gender) {
+      this.mi_gender = mi_gender;
+   }
+
+   public String getMi_birth() {
+      return mi_birth;
+   }
+
+   public void setMi_birth(String mi_birth) {
+      this.mi_birth = mi_birth;
+   }
+
+   public String getMi_phone() {
+      return mi_phone;
+   }
+
+   public void setMi_phone(String mi_phone) {
+      this.mi_phone = mi_phone;
+   }
+
+   public String getMi_email() {
+      return mi_email;
+   }
+
+   public void setMi_email(String mi_email) {
+      this.mi_email = mi_email;
+   }
+
+   public int getMi_point() {
+      return mi_point;
+   }
+
+   public void setMi_point(int mi_point) {
+      this.mi_point = mi_point;
+   }
+
+   public String getMi_status() {
+      return mi_status;
+   }
+
+   public void setMi_status(String mi_status) {
+      this.mi_status = mi_status;
+   }
+
+   public String getMi_date() {
+      return mi_date;
+   }
+
+   public void setMi_date(String mi_date) {
+      this.mi_date = mi_date;
+   }
+
+   public String getMi_lastlogin() {
+      return mi_lastlogin;
+   }
+
+   public void setMi_lastlogin(String mi_lastlogin) {
+      this.mi_lastlogin = mi_lastlogin;
+   }
+
 }

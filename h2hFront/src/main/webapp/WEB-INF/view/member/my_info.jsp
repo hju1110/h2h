@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
 <%@ page import="vo.MemberInfo" %>
 <%
-request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 MemberInfo mi = (MemberInfo)session.getAttribute("loginInfo");
 String name = mi.getMi_name();
 String p = mi.getMi_phone();
@@ -46,7 +45,7 @@ $(document).ready(function() {
 	<input type="hidden" name="pw" value="<%=mi.getMi_pw() %>">
 	<% if (type.equals("a")) { %>
 	<span>성명</span><%=mi.getMi_name() %><br>
-	<% } else if (type.equals("b")) { %>
+	<% } else if (type.equals("c")) { %>
 	<span>기업/단체명</span><%=mi.getMi_gname() %><br>
 	<span>사업자번호</span><%=mi.getMi_bnum() %><br>
 	<% } else { %>

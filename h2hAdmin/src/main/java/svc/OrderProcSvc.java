@@ -19,8 +19,8 @@ public class OrderProcSvc {
 		return pdtList;
 	}
 
-	public List<MemberAddr> getAddrList(String miid) {
-		List<MemberAddr> addrList = orderProcDao.getAddrList(miid);
+	public List<MemberAddr> getAddrList(String aiid) {
+		List<MemberAddr> addrList = orderProcDao.getAddrList(aiid);
 		return addrList;
 	}
 

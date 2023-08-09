@@ -1,14 +1,10 @@
 package ctrl;
 
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
+import java.io.*;
+import java.util.*;
 import javax.servlet.http.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
 import svc.*;
 import vo.*;
 
@@ -27,7 +23,7 @@ public class OrderCtrl {
 		request.setCharacterEncoding("utf-8");	
 		
 		HttpSession session = request.getSession();
-		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 		
 		if (loginInfo == null) {
 			response.setContentType("text/html; charset=utf-8");
@@ -38,7 +34,7 @@ public class OrderCtrl {
 			out.println("</script>");	
 			out.close();
 		}
-		String miid = loginInfo.getAi_id();
+		String aiid = loginInfo.getAi_id();
 		
 		String piid = request.getParameter("piid");
 		String tmp = request.getParameter("size");
@@ -53,7 +49,7 @@ public class OrderCtrl {
 		select += cnt + " cnt ";			
 		
 		List<OrderCart> pdtList = orderProcSvc.getBuyList(select + from + where);
-		List<MemberAddr> addrList = orderProcSvc.getAddrList(miid);
+		List<MemberAddr> addrList = orderProcSvc.getAddrList(aiid);
 		
 		
 		request.setAttribute("addrList", addrList);
@@ -68,7 +64,7 @@ public class OrderCtrl {
 		request.setCharacterEncoding("utf-8");	
 		
 		HttpSession session = request.getSession();
-		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 		
 		if (loginInfo == null) {
 			response.setContentType("text/html; charset=utf-8");

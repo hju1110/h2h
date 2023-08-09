@@ -30,9 +30,9 @@ public class OrderProcDao {
 		return pdtList;
 	}
 
-	public List<MemberAddr> getAddrList(String miid) {
+	public List<MemberAddr> getAddrList(String aiid) {
 		String sql = "select a.mi_name, a.mi_email, a.mi_phone, b.* from t_member_info a, t_member_addr b " + 
-				" where a.mi_id = b.mi_id and b.mi_id = '" + miid + "' order by ma_basic desc";
+				" where a.mi_id = b.mi_id and b.mi_id = '" + aiid + "' order by ma_basic desc";
 		//System.out.println(sql);
 		List<MemberAddr> addrList = jdbc.query(sql, 
 			(ResultSet rs, int rowNum) -> {

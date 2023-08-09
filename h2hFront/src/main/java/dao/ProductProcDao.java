@@ -25,7 +25,7 @@ public class ProductProcDao {
 	public List<ProductInfo> getProductList(int cpage, int psize, String orderBy) {
 	    String sql = "select * from t_product_info where pi_isview = 'y' and pi_stock > 0"
 	    		 + orderBy + " limit " + ((cpage - 1) * psize) + ", " + psize;	
-	  //System.out.println(sql);
+	    //System.out.println(sql);
 	    List<ProductInfo> productList = (List<ProductInfo>) jdbc.query(sql, 
 	        (ResultSet rs, int rowNum) -> {
 	            ProductInfo pi = new ProductInfo(

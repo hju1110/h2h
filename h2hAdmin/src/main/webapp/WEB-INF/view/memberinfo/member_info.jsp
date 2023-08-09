@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>\
 <%@include file="/resources/jsp/sidebar.jsp" %>
 <% 
 %>
@@ -101,13 +101,19 @@ function modalClose(status) {
 function selectView(val) {
 	var currentUrl = window.location.href;
 	
-	if (currentUrl.includes( '?' ) && val == "al") {
+	if (currentUrl.includes( '?' ) && val == "al" && !currentUrl.includes('schtype') && !currentUrl.includes( 'cpage=' )) {
 		currentUrl = currentUrl.substring(0, (currentUrl.length)-6);
 		location.href = currentUrl;
+	} else if (currentUrl.includes( 'cpage=' )) {
+		currentUrl = currentUrl.replace('cpage=', '');
 	}
 	
-	if (currentUrl.includes( '&sv' ) || currentUrl.includes( '?sv' )) {
+	if (currentUrl.includes( '&sv=nm' ) || currentUrl.includes( '&sv=gb' ) || currentUrl.includes( '?sv=nm' ) || currentUrl.includes( '?sv=gb' ) || currentUrl.includes( '&sv=al' ) || currentUrl.includes( '?sv=al' )) {
 		currentUrl = currentUrl.substring(0, (currentUrl.length)-6);
+	}
+	
+	if (currentUrl.includes( '&sv=' ) || currentUrl.includes( '&sv=' )) {
+		currentUrl = currentUrl.substring(0, (currentUrl.length)-4);
 	}
 	
 	if (currentUrl.includes( '?' )) {
@@ -121,18 +127,16 @@ function selectView(val) {
 </script>
 </head>
 <body>
-<div class="left">
 <div class="center">
 <h2>회원 목록</h2>
-
 <table width="800" border="0" cellpadding="0">
 <tr>
 	<td align="right">
 		<select onchange="selectView(this.value)">
 			<option value="">옵션 선택</option>
-			<option value="al">전체 보기</option>
-			<option value="nm">일반회원 보기</option>
-			<option value="gb">기업,단체회원 보기</option>			
+			<option value="al" <c:if test="${ pi.getType() == 'al' }">selected="selected"</c:if>>전체 보기</option>
+			<option value="nm" <c:if test="${ pi.getType() == 'nm' }">selected="selected"</c:if>>일반회원 보기</option>
+			<option value="gb" <c:if test="${ pi.getType() == 'gb' }">selected="selected"</c:if>>기업,단체회원 보기</option>
 		</select>
 	</td>
 </tr>
@@ -169,12 +173,12 @@ function selectView(val) {
 			                <span class="attribute">성명</span><span>${ mi.getMi_name() }</span><br>
 			                <span class="attribute">생년월일</span><span>${ mi.getMi_birth() }</span><br>
 		                </c:if>
-		                <c:if test="${ mi.getMi_type() == 'b' }">
+		                <c:if test="${ mi.getMi_type() == 'c' }">
 		          			<span class="attribute">기업/단체명</span><span>${ mi.getMi_gname() }</span><br>
 			                <span class="attribute">담당자명</span><span>${ mi.getMi_name() }</span><br>
 			                <span class="attribute">사업자 번호</span><span>${ mi.getMi_bnum() }</span><br>
 		                </c:if>
-		                <c:if test="${ mi.getMi_type() == 'c' }">
+		                <c:if test="${ mi.getMi_type() == 'b' }">
 							<span class="attribute">기업/단체명</span><span>${ mi.getMi_gname() }</span><br>
 			                <span class="attribute">담당자명</span><span>${ mi.getMi_name() }</span><br>
 		                </c:if>
@@ -236,7 +240,6 @@ function selectView(val) {
 		<input type="button" value="전체글 보기" onclick="location.href='memberInfo';">
 	</form>
 </fieldset>
-</div>
 </div>
 </div>
 </body>

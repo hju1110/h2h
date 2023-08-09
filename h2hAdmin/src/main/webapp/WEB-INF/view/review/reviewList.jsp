@@ -113,11 +113,16 @@ input[type="button"]:hover {
   padding: 10px;
   border: 1px solid #ccc;
 }
+#content-wrapper {
+  width: 700px;
+  margin: 0 auto;
+}
 
 </style>
 </head>
 <body>
 <div class="left">
+<div id="content-wrapper">
 <h2>후기게시판</h2>
 <table id="list">
 <tr height="30">

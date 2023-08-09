@@ -13,16 +13,17 @@ public class DonationDao {
 		this.jdbc = new JdbcTemplate(dataSource);
 	}
 	
-	public int getDonaMemListCount() {
-		String sql = "SELECT COUNT(*) FROM t_donation_info a, t_member_dona b WHERE a.di_idx = b.di_idx";
+	public int getDonaMemListCount(String where) {
+		String sql = "SELECT COUNT(*) FROM t_donation_info a, t_member_dona b " + where;
 		//System.out.println(sql);
 		int rcnt = jdbc.queryForObject(sql, Integer.class);
 		return rcnt;
 	}
 	
-	public List<DonationInfo> getDonaMemList(String where) {
-		String sql = "SELECT  a.di_sponsor, b.* FROM t_donation_info a, t_member_dona b " + where + " ORDER BY b.md_sdate DESC";
-		//System.out.println(sql);
+	public List<DonationInfo> getDonaMemList(String where, int cpage, int psize) {
+		String sql = "SELECT  a.di_sponsor, b.* FROM t_donation_info a, t_member_dona b " + where + 
+			" ORDER BY b.md_sdate DESC limit " + ((cpage - 1) * psize) + ", " + psize;
+		System.out.println(sql);
 		List<DonationInfo> results = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
 			DonationInfo dl = new DonationInfo();
 			dl.setDi_sponsor(rs.getString("di_sponsor"));

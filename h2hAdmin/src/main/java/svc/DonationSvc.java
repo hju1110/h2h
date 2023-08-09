@@ -11,13 +11,13 @@ public class DonationSvc {
 		this.donationDao = donationDao;
 	}
 
-	public int getDonaMemListCount() {
-		int rcnt = donationDao.getDonaMemListCount();
+	public int getDonaMemListCount(String where) {
+		int rcnt = donationDao.getDonaMemListCount(where);
 		return rcnt;
 	}
 
-	public List<DonationInfo> getDonaMemList(String where) {
-		List<DonationInfo> dl = donationDao.getDonaMemList(where);
+	public List<DonationInfo> getDonaMemList(String where, int cpage, int psize) {
+		List<DonationInfo> dl = donationDao.getDonaMemList(where, cpage, psize);
 		return dl;
 	}
 	

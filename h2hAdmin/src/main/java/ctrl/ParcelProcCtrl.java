@@ -55,7 +55,7 @@ public class ParcelProcCtrl {
 		
 		
 		HttpSession session = request.getSession();
-		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 		
 		if (loginInfo == null) {
 			response.setContentType("text/html; charset=utf-8");
@@ -98,7 +98,7 @@ public class ParcelProcCtrl {
 		String oi_id = request.getParameter("oi_id");
 		
 		HttpSession session = request.getSession();
-		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 	
 		
 		String miid = loginInfo.getAi_id();

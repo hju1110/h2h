@@ -9,20 +9,21 @@
 <body>
 <div class="left">
 <h2>후기 작성</h2>
-<form name="frm" action="reviewProcIn" method="post" enctype="multipart/form-data">
+<form name="frm" action="noticeProcIn" method="post" enctype="multipart/form-data">
 <table width="600" cellpadding="5">
 <tr>
-<th width="15%">작성자</th>
-<td width="35%"><input type="text" name="rl_writer" /></td>
+<tr>
+	<th width="15%">작성자</th>
+	<td width="35%"><input type="text" name="nl_writer" class="form-control" value="관리자" readonly/></td>
 </tr>
 <tr>
 <th width="15%">글제목</th>
-<td colspan="3"><input type="text" name="rl_title" size="60" /></td>
-<td><p><input type="file" name="rl_file" multiple="multiple" /></p></td>
+<td colspan="3"><input type="text" name="nl_title" size="60" /></td>
+<td><p><input type="file" name="nl_file" multiple="multiple" /></p></td>
 </tr>
 <tr>
 <th>글내용</th>
-<td colspan="3"><textarea name="rl_content" rows="10" cols="65" /></textarea></td>
+<td colspan="3"><textarea name="nl_content" rows="10" cols="65" /></textarea></td>
 </tr>
 <tr><td colspan="4" align="center">
 	<input type="submit" value="글등록" />

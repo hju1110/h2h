@@ -12,8 +12,9 @@
 <form name="frm" action="noticeProcIn" method="post" enctype="multipart/form-data">
 <table width="600" cellpadding="5">
 <tr>
-<th width="15%">작성자</th>
-<td width="35%"><input type="text" name="nl_writer" /></td>
+<tr>
+	<th width="15%">작성자</th>
+	<td width="35%"><input type="text" name="nl_writer" class="form-control" value="관리자" readonly/></td>
 </tr>
 <tr>
 <th width="15%">글제목</th>

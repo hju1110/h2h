@@ -4,7 +4,7 @@
 <%@ page import="vo.*"%>
 <%@include file="/resources/jsp/sidebar.jsp" %>
 <%
-MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 ParcelInfo pi = (ParcelInfo)request.getAttribute("parcelInfo");
 
 String ss = pi.getOi_status();

@@ -149,9 +149,8 @@ function del() {
 </script>
 </head>
 <body>
-<div class="container" style="margin-top: 50px;">
+<dnv>
 <h1>내가 신청한 후원</h1>
-</div>
 <hr />
 <fieldset>	
 <legend>총 후원한 금액</legend>

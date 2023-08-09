@@ -22,7 +22,7 @@ public class DonationCtrl {
 		int cpage = 1, pcnt = 0, spage = 0,  rcnt = 0, psize = 10, bsize = 10;
 		
 		if (request.getParameter("cpage")!= null) {
-			cpage = Integer.parseInt(request.getParameter("cpage"));
+			cpage = Integer.parseInt(request.getParameter("cpage"));	
 		}
 	    
 		HttpSession session = request.getSession();
@@ -33,7 +33,7 @@ public class DonationCtrl {
 	         PrintWriter out = response.getWriter();
 	         out.println("<script>");
 	         out.println("alert('로그인이 필요합니다.');");
-	         out.println("location.href='/h2hFront/login';");
+	         out.println("location.href='/h2hFront/login_form';");
 	         out.println("</script>");
 	         out.close();
 	    }
@@ -124,11 +124,11 @@ public class DonationCtrl {
 		return "donation/donaRequest";
 	}
 	
-//	@GetMapping("/donaFinish")
-//	public String donaFinish() {
-//		
-//		return "donation/donaFinish";
-//	}
+	@GetMapping("/donaFinish")
+	public String donaFinish() {
+		
+		return "donation/donaFinish";
+	}
 	
 	
 	@PostMapping("/donaFinish")
@@ -147,7 +147,6 @@ public class DonationCtrl {
 		String e1 = request.getParameter("e1");
 		String e3 = request.getParameter("e3");
 		mi.setMi_email(e1 + "@" + e3);
-		
 		
 		String uname = request.getParameter("uname");
 		String memType = request.getParameter("memType");

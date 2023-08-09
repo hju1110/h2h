@@ -68,6 +68,9 @@ if (sch != null && !sch.equals("")) {
         text-align: center;
     }
 </style>
+<script>
+// ... (이하 스크립트 부분은 생략)
+</script>
 </head>
 <body>
 <h2>상품 목록</h2>

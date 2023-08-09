@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="vo.*"%>
 <%
-MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +67,7 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">

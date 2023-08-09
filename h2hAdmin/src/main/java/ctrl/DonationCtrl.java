@@ -21,7 +21,7 @@ public class DonationCtrl {
 	
 	@GetMapping("/donaMemList")
 	public String DonaMemList(Model model, HttpServletRequest request) throws Exception {
-		int cpage = 1, pcnt = 0, spage = 0,  rcnt = 0, psize = 10, bsize = 10;
+		int cpage = 1, pcnt = 0, spage = 0,  rcnt = 0, psize = 20, bsize = 10;
 		
 		if (request.getParameter("cpage")!= null) {
 			cpage = Integer.parseInt(request.getParameter("cpage"));	
@@ -67,9 +67,8 @@ public class DonationCtrl {
 	    }
 	    
 
-		rcnt = donationSvc.getDonaMemListCount();
-		
-		List<DonationInfo> dl = donationSvc.getDonaMemList(where);
+		rcnt = donationSvc.getDonaMemListCount(where);
+		List<DonationInfo> dl = donationSvc.getDonaMemList(where, cpage, psize);
 		DonationInfo di = donationSvc.getDonaTotal();
 		//System.out.println(dl);
 		
@@ -115,7 +114,7 @@ public class DonationCtrl {
       String where = " where a.di_idx = b.di_idx ";
       if (mdCtgr != null && dnSponsor != null && ydate != null && mdate != null) {
           if (!mdCtgr.equals("") && !dnSponsor.equals("") && !ydate.equals("") && !mdate.equals("")) {
-              // 검색 조건이 선택된 경우 해당 조건을 where 절에 추가
+        	// 검색 조건이 선택된 경우 해당 조건을 where 절에 추가
               if (mdCtgr.equals("a") || mdCtgr.equals("b") || mdCtgr.equals("c")) {
                   where += " AND b.md_ctgr = '" + mdCtgr + "' ";
               }

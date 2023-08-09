@@ -85,7 +85,7 @@ public class NoticeListCtrl {
        request.setCharacterEncoding("utf-8");
        
        //String uploadPath1 = "E:/lms/spring/h2hFront/src/main/webapp/resources/img";   // 업로드 프론트 경로 지정
-        String uploadPath2 = "C:/Users/lhj/Desktop/lhj/spring/h2hAdmin/src/main/webapp/resources/img";   // 업로드 어드민  경로 지정
+        String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";   // 업로드 어드민  경로 지정
        
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : nl_file) {

@@ -12,7 +12,7 @@
 <hr>
 <div class="btn-group-vertical" role="group" aria-label="My Page Navigation">
 <a class="btn btn-primary" href="myInfoChk">나의 회원정보</a>
-<a class="btn btn-primary" href="#">주문내역</a>
+<a class="btn btn-primary" href="ParcelProc">주문내역</a>
 <a class="btn btn-primary" href="donaMemList">내가 신청한 후원</a>
 <a class="btn btn-primary" href="service">봉사현황</a>
 </div>

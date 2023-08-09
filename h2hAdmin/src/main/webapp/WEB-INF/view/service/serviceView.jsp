@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/resources/jsp/sidebar.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="vo.*" %>
+<%
+ServiceInfo si = new ServiceInfo();
+String accept = si.getSi_accept();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,12 +27,13 @@ function serChk(){
 	var button = document.getElementById("chk");
 	
 	if(button != null) {
-		alert("등록되었습니다.")
+		alert("등록되었습니다.");
 	}
 }
 </script>
 <body>
 <div class="left">
+<div align="center">
 <h2>봉사활동 글보기</h2>
 <table width="600" cellpadding="5">
 <tr>
@@ -45,11 +51,11 @@ function serChk(){
 <tr><th>글 내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><th>활동상세내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><td colspan="20" align="center">
-	<input type="button" id= "chk" value="등 록" onclick="location.href='service';" />
-	<input type="button" value="미 등 록" />
-	<input type="button" value="수 정" onclick="location.href='freeFormIn';" />
+	<input type="submit" name="chk" id= "chk" value="등 록" onclick="location.href='serviceProcUp';"/>
+	<input type="button" value="수 정" onclick="location.href='serviceView';" />
 </td></tr>
 </table>
+</div>
 </div>
 </body>
 </html>

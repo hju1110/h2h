@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/resources/jsp/sidebar.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,6 @@ a:hover { text-decoration:underline; color:red; }
 </style>
 </head>
 <body>
-<div class="left">
 <table>
 <tr><td colspan="2" align="center">
 	<form name= "frmSch">
@@ -53,7 +53,7 @@ a:hover { text-decoration:underline; color:red; }
 	<tr height="30">
 	<td align="center">${pi.getNum() - status.index}</td><!-- - status.index 씀으로써 페이지 넘버가 하나씩 줄어듬 -->
 	<td align="center">${sc.getSi_is_accept() }</td> 
-	<td><a href="serviceCheckForm?siidx=${sc.getSi_idx() }${pi.getArgs() }">${sc.getSi_title() }</a></td>
+	<td><a href="serviceAcceptList?siidx=${sc.getSi_idx() }${pi.getArgs() }">${sc.getSi_title() }</a></td>
 	<td align="center">${sc.getSi_place() }</td>
 	<td align="center">${sc.getSi_acdate() }</td>
 	<td align="center">${sc.getSi_date() }</td>	
@@ -101,6 +101,5 @@ a:hover { text-decoration:underline; color:red; }
 </td>
 </tr>
 </table>
-</div>
 </body>
 </html>

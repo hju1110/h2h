@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/resources/jsp/sidebar.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +16,18 @@ a:hover { text-decoration:underline; color:red; }
 #list th { border-bottom:double black 3px; }
 #list td { border-bottom:dotted black 1px; }
 </style>
+<script>
+function serChk(){
+	var button = document.getElementById("chk");
+	
+	if(button != null) {
+		alert("모집마감 하시겠습니까?")
+	}
+	
+}
+</script>
 </head>
 <body>
-<div class="left">
 <table>
 <tr><td colspan="2" align="center">
 	<form name= "frmSch">
@@ -32,7 +42,7 @@ a:hover { text-decoration:underline; color:red; }
 			</select>
 			<input type="text" name="keyword" value="${pi.getKeyword() }"/>
 			<input type="submit" value="검색" />
-			<input type="button" value="전체글" onclick="location.href='serviceChart';" />
+
 	</fieldset>
 	</form>
 </td>
@@ -58,7 +68,7 @@ a:hover { text-decoration:underline; color:red; }
     </td>
     <td align="center">${sci.getSi_person() }</td>
     <td align="center">${sci.getSi_acdate() }</td>
-    <td align="center">${sci.getSi_date() }</td>
+    <td align="center">${sci.getSi_date() }<input type="button" id ="chk" value="모집마감" onclick="serChk();" /></td>
     <td align="center">
       <c:if test="${sci.getSi_is_recruit() eq '마감'}">
         <button disabled>마감</button>
@@ -109,6 +119,5 @@ a:hover { text-decoration:underline; color:red; }
 </td>
 </tr>
 </table>
-</div>
 </body>
 </html>

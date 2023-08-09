@@ -1,15 +1,10 @@
 package dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
-import vo.MemberInfo;
+import java.sql.*;
+import java.util.*;
+import javax.sql.*;
+import org.springframework.jdbc.core.*;
+import vo.*;
 
 public class LoginDao {
 	private JdbcTemplate jdbcTemplate;
@@ -18,20 +13,20 @@ public class LoginDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	public MemberInfo getLoginInfo(String uid, String pwd) {
+	public AdminInfo getLoginInfo(String uid, String pwd) {
 		String sql = "SELECT * FROM t_admin_info WHERE ai_id = ? AND ai_pw = ? ";
 		
-		List<MemberInfo> results = jdbcTemplate.query(sql, new RowMapper<MemberInfo>() {
-			public MemberInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-				MemberInfo mi = new MemberInfo();
-				mi = new MemberInfo();
-				mi.setAi_idx(rs.getInt("ai_idx"));
-				mi.setAi_id(rs.getString("ai_id"));
-				mi.setAi_pw(rs.getString("ai_pw"));
-				mi.setAi_name(rs.getString("ai_name"));
-				mi.setAi_use(rs.getString("ai_use"));
-				mi.setAi_date(rs.getString("ai_date"));
-				return mi;
+		List<AdminInfo> results = jdbcTemplate.query(sql, new RowMapper<AdminInfo>() {
+			public AdminInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				AdminInfo ai = new AdminInfo();
+				ai = new AdminInfo();
+				ai.setAi_idx(rs.getInt("ai_idx"));
+				ai.setAi_id(rs.getString("ai_id"));
+				ai.setAi_pw(rs.getString("ai_pw"));
+				ai.setAi_name(rs.getString("ai_name"));
+				ai.setAi_use(rs.getString("ai_use"));
+				ai.setAi_date(rs.getString("ai_date"));
+				return ai;
 			}
 		}, uid, pwd);
 		

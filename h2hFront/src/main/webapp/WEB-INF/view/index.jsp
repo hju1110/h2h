@@ -54,7 +54,6 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
           <li class="nav-item"><a href="donationMain" class="nav-link">후원</a></li>
           <li class="nav-item"><a href="ProductProc" class="nav-link">쇼핑몰</a></li>
           <li class="nav-item"><a href="ParcelProc" class="nav-link">현황</a></li>
-          <li class="nav-item"><a href="ProductView" class="nav-link">상품</a></li>
           <li class="nav-item"><a href="noticeList" class="nav-link">공지사항</a></li>
           <li class="nav-item"><a href="myPage" class="nav-link">마이페이지</a></li>
           <li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
@@ -64,7 +63,6 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
           <li class="nav-item"><a href="donationMain" class="nav-link">후원</a></li>
           <li class="nav-item"><a href="ProductProc" class="nav-link">쇼핑몰</a></li>
           <li class="nav-item"><a href="ParcelProc" class="nav-link">현황</a></li>
-          <li class="nav-item"><a href="ProductView" class="nav-link">상품</a></li>
           <li class="nav-item"><a href="noticeList" class="nav-link">공지사항</a></li>
           <li class="nav-item"><a href="myPage" class="nav-link">마이페이지</a></li>
           <li class="nav-item"><a href="logout" class="nav-link">로그아웃</a></li>
@@ -148,7 +146,7 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
             <div class="media block-6 d-flex services p-3 py-4 d-block">
               <div class="icon d-flex mb-3"><span class="flaticon-donation"></span></div>
               <div class="media-body pl-4">
-                <h3 class="heading">후원2하기</h3>
+                <h3 class="heading">후원하기</h3>
                 <p>02-2353-3525</p>
               </div>
             </div>    

@@ -52,7 +52,7 @@ public class ScheduleCtrl {	// 일정관리 관련 모든 기능을 매핑시키
 	      
 	      HttpSession session = request.getSession();
 	      MemberInfo ai = (MemberInfo)session.getAttribute("loginInfo");
-	      List<ScheduleInfo> scheduleList = scheduleSvc.getScheduleList(ai.getAi_id(), schYear, schMonth);
+	      List<ScheduleInfo> scheduleList = scheduleSvc.getScheduleList(ai.getMi_id(), schYear, schMonth);
 	      
 	      request.setAttribute("ci", ci);
 	      request.setAttribute("scheduleList", scheduleList);
@@ -92,7 +92,7 @@ public class ScheduleCtrl {	// 일정관리 관련 모든 기능을 매핑시키
 		String content = request.getParameter("content").trim();
 		
 		HttpSession session = request.getSession();
-		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 		
 		ScheduleInfo si = new ScheduleInfo(0, loginInfo.getAi_id(), si_date, si_time, content, null);
 		int result = scheduleSvc.scheduleInsert(si);

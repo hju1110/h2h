@@ -76,9 +76,9 @@ public class DonationDao {
 		String sql = "INSERT INTO t_member_dona (di_idx, md_id, md_name, md_type, md_ctgr, md_sponsor, md_price " + 
 				" , md_payment, mi_bnum, md_gname) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = jdbc.update(sql, di.getDi_idx(),mi.getMi_id(), di.getMd_name(), di.getMd_type(), di.getMd_ctgr(), 
-				di.getMd_sponsor().substring(0, 1), di.getMd_price(), di.getMd_payment(), mi.getMi_bnum(), mi.getMi_gname());
-	//	System.out.println(di.getMd_sponsor().substring(0, 1));
-	//	System.out.println(sql + result);
+				di.getMd_sponsor().substring(0,1), di.getMd_price(), di.getMd_payment(), mi.getMi_bnum(), mi.getMi_gname());
+		System.out.println(sql);
+		
 		sql = "UPDATE t_member_dona SET mi_bnum = (SELECT mi_bnum FROM t_member_info WHERE mi_id = '" + mi.getMi_id() + "'), " + 
 				" md_gname = (SELECT mi_gname FROM t_member_info WHERE mi_id = '" + mi.getMi_id() + "') " + 
 				" WHERE md_type = '" + di.getMd_type() + "' ";
@@ -87,9 +87,9 @@ public class DonationDao {
 		
 		String sql2 = "";
 		if (di.getMd_ctgr().equals("a")) {
-			sql2 = "UPDATE t_donation_info SET di_gprice = di_gprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor().substring(0, 1) + "' ";
+			sql2 = "UPDATE t_donation_info SET di_gprice = di_gprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor().substring(0,1) + "' ";
 		} else {
-			sql2 = "UPDATE t_donation_info SET di_rprice = di_rprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor().substring(0, 1) + "' ";
+			sql2 = "UPDATE t_donation_info SET di_rprice = di_rprice + " + di.getMd_price() + " WHERE di_sponsor = '" + di.getMd_sponsor().substring(0,1) + "' ";
 		}
 		
 		System.out.println(sql2);

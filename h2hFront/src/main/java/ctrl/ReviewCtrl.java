@@ -98,7 +98,7 @@ public class ReviewCtrl {
 	        request.setCharacterEncoding("utf-8");
 	        
 	        // ���ε� ���� ��� ����
-	        String uploadPath2 = "C:/Users/lhj/Desktop/lhj/spring/h2hAdmin/src/main/webapp/resources/img";
+	        String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {

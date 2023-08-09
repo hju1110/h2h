@@ -29,7 +29,7 @@ public class NoticeDao {
                 "if(curdate() = date(nl_date), right(nl_date, 8), " + 
                 "mid(nl_date, 3, 8)) wdate from t_notice_list " + where + 
                 " order by nl_idx desc limit " + ((cpage - 1) * psize) + ", " + psize;
-//          System.out.println(sql);
+          System.out.println(sql);
           List<NoticeList> noticeList = jdbc.query(sql,  (ResultSet rs, int rowNum) -> {
              NoticeList nl = new NoticeList();
              nl.setNl_idx(rs.getInt("nl_idx"));

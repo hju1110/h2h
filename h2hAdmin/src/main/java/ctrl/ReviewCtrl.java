@@ -37,11 +37,11 @@ public class ReviewCtrl {
 	    public String reviewlist(Model model, HttpServletRequest request) throws Exception {
 			request.setCharacterEncoding("utf-8");
 			int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
-			// ÇöÀç ÆäÀÌÁö ¹øÈ£, ÆäÀÌÁö ¼ö, ½ÃÀÛÆäÀÌÁö, °Ô½Ã±Û ¼ö, ÆäÀÌÁö Å©±â
-			// ºí·ÏÅ©±â, ¹øÈ£ µîÀ» ÀúÀåÇÒ º¯¼ö
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ô½Ã±ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½
+			// ï¿½ï¿½ï¿½Å©ï¿½ï¿½, ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if (request.getParameter("cpage") != null)
 				cpage = Integer.parseInt(request.getParameter("cpage"));
-			// º¸¾È»óÀÇ ÀÌÀ¯¿Í »ê¼ú¿¬»êÀ» À§ÇØ intÇüÀ¸·Î Çüº¯È¯ÇÔ
+			// ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ intï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¯ï¿½ï¿½
 			
 			String schtype = request.getParameter("schtype");
 			String keyword = request.getParameter("keyword");
@@ -53,7 +53,7 @@ public class ReviewCtrl {
 			} else if (!schtype.equals("") && !keyword.trim().equals("")) {
 				URLEncoder.encode(keyword, "UTF-8");
 				keyword = keyword.trim();
-				if (schtype.equals("tc")) {	// °Ë»öÁ¶°ÇÀÌ 'Á¦¸ñ + ³»¿ë' ÀÏ °æ
+				if (schtype.equals("tc")) {	// ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 'ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ ï¿½ï¿½
 					where += " and (rl_title like '%" + keyword + "%' or rl_content like '%" + keyword + "%') ";
 				} else {
 					where += " and rl_" + schtype + " like '%" + keyword + "%' ";
@@ -80,7 +80,7 @@ public class ReviewCtrl {
 			pi.setKeyword(keyword);
 			pi.setArgs(args);
 			pi.setSchargs(schargs);
-			// ÆäÀÌÂ¡¿¡ ÇÊ¿äÇÑ Á¤º¸µé°ú °Ë»öÁ¶°ÇÀ» pageInfo¿¡ ÀÎ½ºÅÏ½º¿¡ ÀúÀå
+			// ï¿½ï¿½ï¿½ï¿½Â¡ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pageInfoï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	        
 			model.addAttribute("reviewList", reviewList);
 			model.addAttribute("pi", pi);
@@ -97,16 +97,16 @@ public class ReviewCtrl {
 	            HttpServletRequest request, HttpServletResponse response) throws Exception {
 	        request.setCharacterEncoding("utf-8");
 	        
-	        // ¾÷·Îµå ¾îµå¹Î °æ·Î ÁöÁ¤
-	        String uploadPath2 = "E:/lms/spring/h2hAdmin/src/main/webapp/resources/img";
+	        // ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	        String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {
 	            if (!file.isEmpty()) {
-	            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 // ¾îµå¹Î
+	            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 // ï¿½ï¿½ï¿½ï¿½
 	                try {
-	                    file.transferTo(saveFile2); // ¾îµå¹Î
-	                    piImgList.add(file.getOriginalFilename()); // ÆÄÀÏ¸í Ãß°¡
+	                    file.transferTo(saveFile2);
+	                    piImgList.add(file.getOriginalFilename()); // ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ß°ï¿½
 	                } catch (Exception e) {
 	                    e.printStackTrace();
 	                }
@@ -129,7 +129,7 @@ public class ReviewCtrl {
 	            response.setContentType("text/html; charset=utf-8");
 	            PrintWriter out = response.getWriter();   
 	            out.println("<script>");
-	            out.println("alert('°øÁö»çÇ× µî·Ï¿¡ ½ÇÆÐ .'); history.back();");
+	            out.println("alert('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ .'); history.back();");
 	            out.println("</script>");
 	            out.close();
 	         } 
@@ -151,7 +151,7 @@ public class ReviewCtrl {
 	        
 	        if (schtype != null && !schtype.equals("") &&
 	            keyword != null && !keyword.equals("")) {
-	            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoderÀÇ °á°ú¸¦ º¯¼ö¿¡ ÇÒ´çÇØÁà¾ß ÇÕ´Ï´Ù.
+	            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoderï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.
 	            args += "&schtype=" + schtype + "&keyword=" + keyword;
 	        }
 	        
@@ -168,7 +168,7 @@ public class ReviewCtrl {
 	    
 	    @PostMapping("/addReviewReply")
 	    public String addReviewReply(HttpServletRequest request) {
-	        // ´ñ±Û µî·Ï Ã³¸®
+	        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	        int rl_idx = Integer.parseInt(request.getParameter("rl_idx"));
 	        String rr_writer = request.getParameter("rr_writer");
 	        String rr_content = request.getParameter("rr_content");
@@ -183,15 +183,12 @@ public class ReviewCtrl {
 	        
 	        reviewSvc.addReviewReply(rr);
 
-	        // ÀÌÈÄ ·ÎÁ÷¿¡¼­ rl_idx, rr_writer, rr_content Á¤º¸¸¦ È°¿ëÇÏ¿© ´ñ±ÛÀ» µî·ÏÇÏ´Â ÄÚµå¸¦ ÀÛ¼ºÇÕ´Ï´Ù.
-
-	        // ¸®´ÙÀÌ·ºÆ®ÇÏ¿© ´ñ±Û ¸ñ·ÏÀ» º¸¿©ÁÝ´Ï´Ù.
 	        return "redirect:/reviewView?rlidx=" + rl_idx;
 	    }
 	    
 	    @GetMapping("/reviewFormUp")
 	    public String reviewUpForm(Model model, @RequestParam("rl_idx") int rl_idx) {
-	        // °Ô½Ã±Û ¼öÁ¤ ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇÑ ÄÁÆ®·Ñ·¯ ¸Þ¼­µå
+	        // ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	        ReviewList rl = reviewSvc.getReviewInfo(rl_idx);
 	        model.addAttribute("rl", rl);
 
@@ -207,17 +204,15 @@ public class ReviewCtrl {
 	                               HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    				request.setCharacterEncoding("utf-8");
 
-	            // ¾÷·Îµå ¾îµå¹Î °æ·Î ÁöÁ¤
-	            String uploadPath2 = "E:/lms/spring/h2hAdmin/src/main/webapp/resources/img";
+	           String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";
 
-	            // ±âÁ¸ ÀÌ¹ÌÁö ÆÄÀÏ »èÁ¦ ÈÄ »õ·Î¿î ÀÌ¹ÌÁö ¾÷·Îµå
-	            List<String> piImgList = new ArrayList<>();
+	           List<String> piImgList = new ArrayList<>();
 	            for (MultipartFile file : rl_file) {
 	                if (!file.isEmpty()) {
-	                    File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // ¾îµå¹Î
+	                    File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // ï¿½ï¿½ï¿½ï¿½
 	                    try {
-	                        file.transferTo(saveFile2); // ¾îµå¹Î
-	                        piImgList.add(file.getOriginalFilename()); // ÆÄÀÏ¸í Ãß°¡
+	                        file.transferTo(saveFile2); // ï¿½ï¿½ï¿½ï¿½
+	                        piImgList.add(file.getOriginalFilename()); // ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ß°ï¿½
 	                    } catch (Exception e) {
 	                        e.printStackTrace();
 	                    }
@@ -229,14 +224,14 @@ public class ReviewCtrl {
 	            String rl_content = request.getParameter("rl_content");
 	            String new_rl_name = piImgList.get(0);
 
-	            // ±âÁ¸ ÀÌ¹ÌÁö ÆÄÀÏ »èÁ¦
+	            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	            String imagePath = uploadPath2 + "/" + rl_name;
 	            File imageFile = new File(imagePath);
 	            if (imageFile.exists()) {
 	                imageFile.delete();
 	            }
 
-	            // »õ·Î¿î ÀÌ¹ÌÁö ÆÄÀÏ¸íÀ¸·Î ¾÷µ¥ÀÌÆ®
+	            // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	            ReviewList rl = new ReviewList();
 	            rl.setRl_idx(rl_idx);
 	            rl.setRl_writer(rl_writer);
@@ -249,7 +244,7 @@ public class ReviewCtrl {
 	                response.setContentType("text/html; charset=utf-8");
 	                PrintWriter out = response.getWriter();
 	                out.println("<script>");
-	                out.println("alert('°Ô½Ã±Û ¼öÁ¤¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.'); history.back();");
+	                out.println("alert('ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.'); history.back();");
 	                out.println("</script>");
 	                out.close();
 	            }
@@ -269,15 +264,15 @@ public class ReviewCtrl {
 	    
 	    @RequestMapping("/downloadImage")
 	    public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
-	        // ÀÌ¹ÌÁö ÆÄÀÏÀÇ ÀüÃ¼ °æ·Î¸¦ »ý¼ºÇÕ´Ï´Ù.
+	        // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 	        String imagePath = "E:/lms/spring/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
 
-	        // ÀÌÇÏ ÄÚµå´Â ÀÌÀü°ú µ¿ÀÏÇÕ´Ï´Ù.
+	        // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 	        File imageFile = new File(imagePath);
 	        if (imageFile.exists()) {
 	            try {
 	                response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-	                response.setContentType("image/jpeg"); // ÀÌ¹ÌÁö ÆÄÀÏ Å¸ÀÔ¿¡ ¸Â°Ô ¼³Á¤
+	                response.setContentType("image/jpeg"); // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ô¿ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	                FileInputStream fis = new FileInputStream(imageFile);
 	                ServletOutputStream os = response.getOutputStream();

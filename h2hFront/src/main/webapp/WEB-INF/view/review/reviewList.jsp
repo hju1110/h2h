@@ -117,6 +117,7 @@ input[type="button"]:hover {
 </style>
 </head>
 <body>
+<div align="center">
 <h2>후기게시판</h2>
 <table id="list">
 <tr height="30">
@@ -196,5 +197,6 @@ input[type="button"]:hover {
 	</fieldset>
 	</form>
 </table>
+</div>
 </body>
 </html>

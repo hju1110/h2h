@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +31,7 @@ a, label {
 <fieldset>
 	<h2>로그인</h2>
 	<form action="login" id="loginform" name="frmLogin" method="post">
-		<input type="text" name="uid" class="tsize" placeholder="아이디" value="happy33"><br>
+		<input type="text" name="uid" class="tsize" placeholder="아이디" value="ucheri72"><br>
 		<input type="password" name="pwd" class="tsize" placeholder="비밀번호" value="1234"><br><br>
 		<input type="submit" class="tsize" id="login" value="로그인"><br>
 		<div class="fontsize">

@@ -1,9 +1,6 @@
 package config;
 
-import org.apache.tomcat.jdbc.pool.*;
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
-import org.springframework.web.servlet.config.annotation.*;
 import ctrl.*;
 import dao.*;
 import svc.*;

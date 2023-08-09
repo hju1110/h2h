@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="/resources/jsp/sidebar.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
-<%@include file="/resources/jsp/sidebar.jsp" %>
 <%
 request.setCharacterEncoding("UTF-8");
 
@@ -33,7 +33,6 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="left">
 <h2>일정 등록 폼</h2>
 <form name="frm" action="scheduleInProc" method="post">
 <input type="hidden" name="si_date" id="si_date" value="" />
@@ -92,6 +91,5 @@ $(document).ready(function() {
 </tr>
 </table>
 </form>
-</div>
 </body>
 </html>

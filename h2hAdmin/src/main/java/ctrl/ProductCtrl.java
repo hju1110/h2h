@@ -126,8 +126,8 @@ public class ProductCtrl {
       
       //  String uploadPath1 = "C:/lns/spring/h2hFront/src/main/webapp/resources/img";	
        // String uploadPath2 = "C:/lns/spring/h2hAdmin/src/main/webapp/resources/img";	
-    	String uploadPath1 = "E:/lns/spring/h2hFront/src/main/webapp/resources/img";	
-        String uploadPath2 = "E:/lns/spring/h2hAdmin/src/main/webapp/resources/img";	
+    	String uploadPath1 = "E:/lhj/spring/h2hFront/src/main/webapp/resources/img";	
+        String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";	
     	
     	List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : pi_img) {
@@ -268,15 +268,14 @@ public class ProductCtrl {
 		
 		return "product/product_up";
     }
-	
 	@PostMapping("/productInfoUp")
     public String productInfoUp(@RequestParam("pi_img") MultipartFile[] pi_img,@RequestParam("pi_desc1") MultipartFile[] pi_desc1,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
        
       
-    	String uploadPath1 = "E:/lns/spring/h2hFront/src/main/webapp/resources/img";	// �뾽濡쒕뱶 �봽濡좏듃 寃쎈줈 吏��젙
-    	String uploadPath2 = "E:/lns/spring/h2hAdmin/src/main/webapp/resources/img";	// �뾽濡쒕뱶 �뼱�뱶誘�  寃쎈줈 吏��젙
+    	String uploadPath1 = "E:/lhj/spring/h2hFront/src/main/webapp/resources/img";	// �뾽濡쒕뱶 �봽濡좏듃 寃쎈줈 吏��젙
+    	String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";	// �뾽濡쒕뱶 �뼱�뱶誘�  寃쎈줈 吏��젙
     	
     	List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : pi_img) {

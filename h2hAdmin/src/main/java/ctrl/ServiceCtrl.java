@@ -1,10 +1,11 @@
 package ctrl;
 
-import java.net.URLEncoder;
+import java.io.*;
+import java.net.*;
 import java.util.*;
 import javax.servlet.http.*;
 import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 import svc.*;
@@ -78,6 +79,27 @@ public class ServiceCtrl {
 		model.addAttribute("args", args);
 		
 		return "service/serviceView";
+	}
+	
+	@GetMapping("/serviceProcUp")
+	public String serviceProcUp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		String accept = request.getParameter("chk");
+		ServiceInfo si = new ServiceInfo();
+		si.setSi_accept(accept);
+		
+		PrintWriter out = response.getWriter();
+		
+		int result = serviceSvc.getAccept(si);
+		if (result == 0) {
+			out.println("<script>");
+			out.println("alert('등록에 실패했습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
+		
+		return "service/serviceList";
 	}
 	
 }
