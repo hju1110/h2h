@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
+<%@include file="/resources/jsp/sidebar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,29 +36,20 @@
         background-color: #0056b3;
     }
 </style>
-<script>
-function confirmDelete(nlIdx) {
-    if (confirm("정말로 이 글을 삭제하시겠습니까?")) {
-        // 확인을 눌렀을 때
-        location.href = "noticedeleteform?nlidx=" + nlIdx;
-    } else {
-        // 취소를 눌렀을 때
-        // 아무 작업도 수행하지 않음
-    }
-}
-</script>
 </head>
 <body>
+<div class="left">
 <h2>글 삭제 확인</h2>
 <div class="content">
     <p>정말로 글을 삭제하시겠습니까?</p>
     <form action="delete" method="post">
-        <input type="hidden" name="noticeIdx" value="${nl.getNl_idx()}" />
+        <input type="hidden" name="reviewIdx" value="${rl.getRl_idx()}" />
         <div class="buttons">
             <input type="submit" value="확인" />
             <input type="button" value="취소" onclick="history.back();" />
         </div>
     </form>
+</div>
 </div>
 </body>
 </html>

@@ -15,13 +15,13 @@ public class ReviewDao {
 	        this.jdbc = new JdbcTemplate(dataSource);
 	    }
 	    public int getReviewListCount(String where) {
-	    	// °Ë»öµÈ(°Ë»ö¾î°¡ ÀÖÀ» °æ¿ì) °Ô½Ã±ÛÀÇ ÃÑ °³¼ö¸¦ ¸®ÅÏÇÏ´Â ¸Þ¼Òµå
+	    	// ï¿½Ë»ï¿½ï¿½ï¿½(ï¿½Ë»ï¿½ï¿½î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½) ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	    		String sql = "select count(*) from t_review_list " + where;
 	    		int rcnt = jdbc.queryForObject(sql, Integer.class);
 	    		return rcnt;
 	    	}
 	    public List<ReviewList> getReviewList(String where, int cpage, int psize) {
-	    	// °Ô½Ã±ÛÀÇ ¸ñ·ÏÀ»  FreeListÇü ÀÎ½ºÅÏ½º·Î ÀúÀåÇÑ List·Î ¸®ÅÏÇÏ´Â ¸Þ¼Òµå
+	    	// ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½  FreeListï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Listï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	    		
 	    		String sql = "select rl_idx, rl_title, rl_writer, rl_read, " + 
 	    				"if(curdate() = date(rl_date), right(rl_date, 8), " + 
@@ -52,7 +52,7 @@ public class ReviewDao {
 	    		return reviewList;
 	    	}
 	    public int readUpdate(int rlidx) {
-			// ÁöÁ¤ÇÑ °Ô½Ã±ÛÀÇ Á¶È¸¼ö¸¦ 1Áõ°¡ ½ÃÅ°´Â ¸Å¼Òµå
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Å¼Òµï¿½
 			String sql = "update t_review_list set rl_read = rl_read + 1 where rl_idx = " + rlidx;
 		
 			int result = jdbc.update(sql);
@@ -60,7 +60,7 @@ public class ReviewDao {
 		}
 	    
 	    public ReviewList getReviewInfo(int rlidx) {
-	    	readUpdate(rlidx);	// Á¶È¸¼ö Áõ°£
+	    	readUpdate(rlidx);	// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	    	String sql = "select * from t_review_list " + " where rl_isview = 'y' and rl_idx = " + rlidx;
 			ReviewList rl = jdbc.queryForObject(sql, 
@@ -94,7 +94,7 @@ public class ReviewDao {
 
 		}
 	    public int addReviewReply(ReviewReply rr) {
-	        // ´ñ±ÛÀ» µ¥ÀÌÅÍº£ÀÌ½º¿¡ µî·ÏÇÏ´Â Äõ¸®¸¦ ÀÛ¼ºÇÏ°í ½ÇÇàÇÏ´Â ¸Þ¼­µå
+	        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	        String sql = "INSERT INTO t_review_reply (rl_idx, rr_writer, rr_content) VALUES (?, ?, ?)";
 	        System.out.println(sql);
 	        int result = jdbc.update(sql, rr.getRl_idx(), rr.getRr_writer(), rr.getRr_content());
@@ -128,6 +128,10 @@ public class ReviewDao {
 
 	    	    return result;
 		}
+		public void unpublishReview(int rl_idx) {
+		     String sql = "UPDATE t_review_list SET rl_isview = 'n' WHERE rl_idx = ?";
+		        jdbc.update(sql, rl_idx);
+		    }
 	    
 	    
 }

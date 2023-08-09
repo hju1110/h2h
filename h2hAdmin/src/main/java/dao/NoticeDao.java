@@ -106,12 +106,10 @@ public class NoticeDao {
 
 	    	    return result;
 		}
-	  /*
-	  public int noticedelete(int nl_idx) {
-		    String sql = "DELETE FROM t_notice_list WHERE nl_idx = " + nl_idx;
-		    System.out.println("Delete SQL: " + sql);
+	  	public void unpublishNotice(int nl_idx) {
+	        String sql = "UPDATE t_notice_list SET nl_isview = 'n' WHERE nl_idx = ?";
+	        jdbc.update(sql, nl_idx);
+	    }
 
-		    int result = jdbc.update(sql);
-		    return result;
-		}*/
+
 }

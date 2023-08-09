@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../menuBar.jsp" %>
+<%@ page import="java.io.PrintWriter" %>
+<%
+    MemberInfo isLogin = (MemberInfo) session.getAttribute("isLogin");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +19,7 @@
 <table class="table table-bordered table-striped" width="600" cellpadding="5">
 <tr>
 <th width="15%">작성자</th>
-<td width="35%"><input type="text" name="rl_writer" class="form-control" />${rl.getRl_writer()}</td>
+<td width="35%"><input type="text" name="rl_writer" class="form-control" value="<%= loginInfo.getMi_name() %>" readonly /></td>
 </tr>
 <tr>
 <th width="15%">글제목</th>
@@ -26,13 +30,28 @@
 <th>글내용</th>
 <td colspan="4"><textarea name="rl_content" rows="10" cols="65" class="form-control" />${rl.getRl_content()}</textarea></td>
 </tr>
-<tr><td colspan="5" align="center">
-   <input type="submit" value="글등록" class="btn btn-primary" />
+<tr>
+<td colspan="5" align="center">
+   <input type="submit" value="글등록" class="btn btn-primary" 
+          onclick="return checkFileUpload();" />
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    <input type="reset" value="다시 입력" class="btn btn-secondary" />
-</td></tr>
+</td>
+</tr>
 </table>
 </form>
 </div>
+
+<script>
+function checkFileUpload() {
+    var fileInput = document.querySelector('input[type="file"]');
+    if (fileInput && fileInput.files.length === 0) {
+        alert("파일을 등록해주세요.");
+        return false;
+    }
+    return true;
+}
+</script>
+
 </body>
 </html>

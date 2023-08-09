@@ -32,13 +32,13 @@ public class ReviewSvc {
 	}
 	
 	 /*public String getImagePath(String filename) {
-	        // ÀÌ¹ÌÁö ÆÄÀÏÀÌ ÀúÀåµÈ µð·ºÅä¸® °æ·Î¸¦ ±âÁØÀ¸·Î ÀÌ¹ÌÁö ÆÄÀÏÀÇ ÀüÃ¼ °æ·Î¸¦ »ý¼ºÇÕ´Ï´Ù.
+	        // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 	        String imagePath = uploadPath2 + "/" + filename;
-	        // »ý¼ºµÈ ÀÌ¹ÌÁö ÆÄÀÏ °æ·Î¸¦ ¹ÝÈ¯ÇÕ´Ï´Ù.
+	        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
 	        return imagePath;
 	    }*/
 	 public int addReviewReply(ReviewReply rr) {
-	        // ´ñ±Û µî·Ï Ã³¸®¸¦ ¼öÇàÇÏ´Â ¸Þ¼­µå
+	        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	        int result = reviewDao.addReviewReply(rr);
 	        return result;
 	    }
@@ -48,16 +48,10 @@ public class ReviewSvc {
 	   public int reviewUpdate(ReviewList rl) {
 			int result = reviewDao.reviewUpdate(rl);
 			return result;
-		
-	   /* } 
-	   public List<ReviewReply> getReviewCommentCount() {
-	        List<ReviewReply> reviewList = reviewDao.getReviewList();
-	        for (ReviewReply review : reviewList) {
-	            int commentCount = reviewDao.getReviewCommentCount(review.getRl_idx());
-	            review.setCount(commentCount);
-	        }
-	        return reviewList;
-	        */
+	
 	    }
+	   public void unpublishReview(int rl_idx) {
+			reviewDao.unpublishReview(rl_idx);
+		}
 	
 }

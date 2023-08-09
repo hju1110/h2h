@@ -100,7 +100,7 @@ public class ReviewCtrl {
 	        request.setCharacterEncoding("utf-8");
 	        
 	        // ���ε� ���� ��� ����
-	        String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";
+	        String uploadPath2 = "E:/lms/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {
@@ -206,7 +206,7 @@ public class ReviewCtrl {
 	                               HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    				request.setCharacterEncoding("utf-8");
 
-	           String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";
+	           String uploadPath2 = "E:/lms/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 
 	           List<String> piImgList = new ArrayList<>();
 	            for (MultipartFile file : rl_file) {
@@ -289,6 +289,13 @@ public class ReviewCtrl {
 	                e.printStackTrace();
 	            }
 	        }
+	    }
+	    @GetMapping("/reviewdeleteform")
+	    public String reviewdeleteform(@RequestParam("rlidx") int rlidx) {
+	        // 여기에서 해당 게시글의 nl_isview를 'n'으로 업데이트하거나 삭제 작업 수행
+	        reviewSvc.unpublishReview(rlidx);
+
+	        return "redirect:/reviewList"; // 게시글 목록 페이지로 리다이렉트
 	    }
 	}
 

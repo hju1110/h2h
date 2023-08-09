@@ -57,9 +57,17 @@ MemberInfo isLogin = (MemberInfo)session.getAttribute("isLogin");
         margin-top: 5px;
     }
 </style>
+<script>
+function confirmDelete(rlIdx) {
+    if (confirm("정말로 이 글을 삭제하시겠습니까?")) {
+        // 확인을 눌렀을 때
+        location.href = "reviewdeleteform?rlidx=" + rlIdx;
+    }
+}
+</script>
 </head>
 <body>
-<div align="center">
+<div class="left">
 <h2>후기게시판</h2>
 <table>
     <tr>
@@ -76,7 +84,8 @@ MemberInfo isLogin = (MemberInfo)session.getAttribute("isLogin");
     </tr>
     <tr>
        <td colspan="6" class="center">
-           <input type="button" value="리스트" onclick="location.href='reviewList';" />
+           <input type="button" value="글목록" onclick="location.href='reviewList';" />
+           <input type="button" value="글삭제" onclick="confirmDelete(${rl.getRl_idx()});" />
            <input type="button" value="글수정" onclick="location.href='reviewFormUp?rl_idx=${rl.getRl_idx()}';" />
            <!-- 이미지 다운로드 버튼 -->
            <a href="downloadImage?filename=${rl.getRl_name()}" download>

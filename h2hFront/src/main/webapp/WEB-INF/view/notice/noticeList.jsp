@@ -176,9 +176,7 @@ input[type="button"]:hover {
 	</c:if>
 </c:if>
 </td>
-<td width="*">
-	<input type="button" value="글 등록" onclick="location.href='noticeFormIn';" />
-</td>
+
 </tr>
 <tr><td colspan="2" align="center">
 	<form name="frmSch">

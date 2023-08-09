@@ -84,17 +84,17 @@ public class NoticeListCtrl {
           HttpServletRequest request, HttpServletResponse response) throws Exception {
        request.setCharacterEncoding("utf-8");
        
-       //String uploadPath1 = "E:/lms/spring/h2hFront/src/main/webapp/resources/img";   // 업로드 프론트 경로 지정
-        String uploadPath2 = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img";   // 업로드 어드민  경로 지정
+       String uploadPath1 = "E:/lms/spring/h2h/h2hFront/src/main/webapp/resources/img";   // 업로드 프론트 경로 지정
+        
        
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : nl_file) {
             if (!file.isEmpty()) {
-               // File saveFile1 = new File(uploadPath1, file.getOriginalFilename()); // 프론트
-                File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // 어드민
+                File saveFile1 = new File(uploadPath1, file.getOriginalFilename()); // 프론트
+                // File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // 어드민
                 try {
-                   // file.transferTo(saveFile1); // 프론트
-                    file.transferTo(saveFile2); // 어드민
+                   file.transferTo(saveFile1); // 프론트
+                   // file.transferTo(saveFile2); // 어드민
                     piImgList.add(file.getOriginalFilename()); // 파일명 추가
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -172,8 +172,8 @@ public class NoticeListCtrl {
         request.setCharacterEncoding("utf-8");
 
         // 업로드 어드민 경로 지정
-        String uploadPath2 = "E:/lms/spring/h2hAdmin/src/main/webapp/resources/img";
-
+        String uploadPath2 = "E:/lms/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
+  
         // 기존 이미지 파일 삭제 후 새로운 이미지 업로드
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : nl_file) {
@@ -221,18 +221,5 @@ public class NoticeListCtrl {
 
         return "redirect:/noticeList";
     }
-    /*
-    @GetMapping("/delete")
-    public String noticeDelete(@RequestParam("noticeIdx") int noticeIdx) {
-        System.out.println("Delete Request Received for Notice Index: " + noticeIdx);
-
-        // noticeIdx를 이용하여 공지사항 등록글을 삭제합니다.
-        int result = noticeSvc.noticedelete(noticeIdx);
-        if (result == 0) {
-            // 삭제에 실패한 경우 처리 (예: 에러 페이지로 이동)
-            return "error";
-        }
-        return "redirect:/noticeList"; // 공지사항 리스트 페이지로 리다이렉트
-    }*/
 
 }

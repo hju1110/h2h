@@ -84,11 +84,9 @@
     </tr>
     <tr>
         <td colspan="8" class="buttons">
-            <input type="button" value="글삭제" onclick="location.href='noticedeleteform?nlidx=${nl.getNl_idx()}';" />
-
-            <input type="button" value="리스트" onclick="location.href='noticeList';" />
-            <input type="button" value="글수정" onclick="location.href='noticeFormUp?nl_idx=${nl.getNl_idx()}';" />
-        </td>
+            
+            <input type="button" value="글목록" onclick="location.href='noticeList';" />
+            </td>
     </tr>
 </table>
 </body>

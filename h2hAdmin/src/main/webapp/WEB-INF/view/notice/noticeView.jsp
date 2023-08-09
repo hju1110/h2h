@@ -57,6 +57,14 @@
         background-color: #0056b3;
     }
 </style>
+<script>
+function confirmDelete(nlIdx) {
+    if (confirm("정말로 이 글을 삭제하시겠습니까?")) {
+        // 확인을 눌렀을 때
+        location.href = "noticedeleteform?nlidx=" + nlIdx;
+    }
+}
+</script>
 </head>
 <body>
 <div class="left">
@@ -84,9 +92,9 @@
     </tr>
     <tr>
         <td colspan="8" class="buttons">
-            <input type="button" value="글삭제" onclick="location.href='noticedeleteform?nlidx=${nl.getNl_idx()}';" />
+            <input type="button" value="글삭제" onclick="confirmDelete(${nl.getNl_idx()});" />
 
-            <input type="button" value="리스트" onclick="location.href='noticeList';" />
+            <input type="button" value="글목록" onclick="location.href='noticeList';" />
             <input type="button" value="글수정" onclick="location.href='noticeFormUp?nl_idx=${nl.getNl_idx()}';" />
         </td>
     </tr>
