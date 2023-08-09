@@ -71,7 +71,7 @@ public class ServiceCtrl {
 		
 		if (schtype != null && !schtype.equals("") && keyword != null && !keyword.equals("")) {
 			URLEncoder.encode(keyword, "UTF-8");
-			args += "&scjtype=" + schtype + "&keyword=" + keyword;
+			args += "&schtype=" + schtype + "&keyword=" + keyword;
 		}
 
 		ServiceInfo si = serviceSvc.getServiceInfo(siidx);
@@ -81,7 +81,8 @@ public class ServiceCtrl {
 		return "service/serviceView";
 	}
 	
-	@GetMapping("/serviceProcUp")
+	@RequestMapping(value="/serviceProcUp", method=RequestMethod.GET, produces="application/text; charset=utf8")
+	@ResponseBody
 	public String serviceProcUp(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		String accept = request.getParameter("chk");
@@ -91,7 +92,7 @@ public class ServiceCtrl {
 		PrintWriter out = response.getWriter();
 		
 		int result = serviceSvc.getAccept(si);
-		if (result == 0) {
+		if (result != 1) {
 			out.println("<script>");
 			out.println("alert('등록에 실패했습니다.');");
 			out.println("history.back();");

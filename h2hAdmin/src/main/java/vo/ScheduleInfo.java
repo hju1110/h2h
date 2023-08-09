@@ -2,11 +2,11 @@ package vo;
 
 public class ScheduleInfo {
 	private int si_idx;
-	private String mi_id, si_date, si_time, si_content, si_regdate;
+	private String ai_id, si_date, si_time, si_content, si_regdate;
 	
-	public ScheduleInfo(int si_idx, String mi_id, String si_date, String si_time, String si_content, String si_regdate) {
+	public ScheduleInfo(int si_idx, String ai_id, String si_date, String si_time, String si_content, String si_regdate) {
 		this.si_idx = si_idx;
-		this.mi_id = mi_id;
+		this.ai_id = ai_id;
 		this.si_date = si_date;
 		this.si_time = si_time;
 		this.si_content = si_content;
@@ -19,11 +19,11 @@ public class ScheduleInfo {
 	public void setSi_idx(int si_idx) {
 		this.si_idx = si_idx;
 	}
-	public String getMi_id() {
-		return mi_id;
+	public String getAi_id() {
+		return ai_id;
 	}
-	public void setMi_id(String mi_id) {
-		this.mi_id = mi_id;
+	public void setAi_id(String ai_id) {
+		this.ai_id = ai_id;
 	}
 	public String getSi_date() {
 		return si_date;

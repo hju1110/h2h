@@ -32,8 +32,8 @@ function serChk(){
 }
 </script>
 <body>
-<div class="left">
 <div align="center">
+<div class="left">
 <h2>봉사활동 글보기</h2>
 <table width="600" cellpadding="5">
 <tr>
@@ -43,7 +43,10 @@ function serChk(){
 </tr>
 <tr>
 <th width="10%">모집인원</th><td width = "25%">${si.getSi_person() }명</td>
-<th width="10%">봉사자유형</th><td width = "25%">${si.getSi_type() }</td>
+<th width="10%">봉사자유형</th><td width = "25%">
+	<c:if test="${si.getSi_type() == 'a'}">청소년</c:if>
+	<c:if test="${si.getSi_type() == 'b'}">성인</c:if>
+</td>
 <th width="10%">봉사마감일자</th><td width = "25%">${si.getSi_edate() }</td>
 </tr>
 
@@ -51,7 +54,7 @@ function serChk(){
 <tr><th>글 내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><th>활동상세내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><td colspan="20" align="center">
-	<input type="submit" name="chk" id= "chk" value="등 록" onclick="location.href='serviceProcUp';"/>
+	<input type="button" name="chk" id= "chk" value="등 록" onclick="location.href='serviceProcUp';"/>
 	<input type="button" value="수 정" onclick="location.href='serviceView';" />
 </td></tr>
 </table>

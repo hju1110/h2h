@@ -51,8 +51,8 @@ public class ScheduleCtrl {	// 일정관리 관련 모든 기능을 매핑시키
 	      ci.setsWeek(edate.getDayOfWeek().getValue());	// 1일의 요일번호
 	      
 	      HttpSession session = request.getSession();
-	      MemberInfo ai = (MemberInfo)session.getAttribute("loginInfo");
-	      List<ScheduleInfo> scheduleList = scheduleSvc.getScheduleList(ai.getMi_id(), schYear, schMonth);
+	      AdminInfo ai = (AdminInfo)session.getAttribute("loginInfo");
+	      List<ScheduleInfo> scheduleList = scheduleSvc.getScheduleList(ai.getAi_id(), schYear, schMonth);
 	      
 	      request.setAttribute("ci", ci);
 	      request.setAttribute("scheduleList", scheduleList);

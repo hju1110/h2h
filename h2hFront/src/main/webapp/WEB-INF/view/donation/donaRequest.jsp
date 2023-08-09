@@ -64,13 +64,13 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 			<option value="direct">직접입력</option>
 		</select>
 		<input type="text" name="cmoney" id="price2" size="10" style="font-size:20px; text-align:right;"
-		<% if(kind.equals("b")) { %>disabled="disabled"<% } %>/> 원
+		<% if(kind.equals("b")) { %>disabled="disabled"<% } %> onkeyup="showPrice(this.value);" /> 원
 	</td>
 </tr>
 <tr class="sponsor1">
 	<th>- 피후원자 선택</th>
 	<td>
-		<select name="mdSponsor" id="spon1" style="font-size:20px;">
+		<select name="mdSponsor1" id="spon1" style="font-size:20px;">
 			<option value="">선택</option>
 			<option value="a행복한 손길">행복한 손길</option>
 			<option value="b서울청소년 지원부">서울청소년 지원부</option>
@@ -93,13 +93,13 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 			<option value="direct">직접입력</option>
 		</select>
 		<input type="text" name="cmoney" id="price4" size="10" style="font-size:20px; text-align:right;" 
-			<% if(kind.equals("a")) { %>disabled="disabled"<% } %> /> 원
+			<% if(kind.equals("a")) { %>disabled="disabled"<% } %> onkeyup="showPrice(this.value);" /> 원
 	</td>
 </tr>
 <tr class="sponsor2">
 	<th>- 피후원자 선택</th>
 	<td>
-		<select name="mdSponsor" id="spon3" style="font-size:20px;" >
+		<select name="mdSponsor2" id="spon3" style="font-size:20px;" >
 			<option value="">선택</option>
 			<option value="a행복한 손길">행복한 손길</option>
 			<option value="b서울청소년 지원부">서울청소년 지원부</option>
@@ -224,6 +224,11 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 </div>
 </body>
 <script>
+function showPrice(val) {
+	$("#price").text(val);
+	$("#price5").text(val);
+}
+
 $(document).ready(function() {
 	$("#price1").change(function() {
 		if ($(this).val() == "") {
@@ -266,10 +271,6 @@ $(document).ready(function() {
 		if ($(this).val() == "") {
 			$("#spon2").val("");
 			$("#mdSponsor").text("");
-		} else if ($(this).val() == "direct") {
-			$("#mdSponsor").text("");
-			$("#spon2").val("");
-			$("#spon2").focus();
 		} else {
 			$("#spon2").val($(this).val());
 			$("#mdSponsor").text($(this).val().substring(1));
@@ -278,14 +279,8 @@ $(document).ready(function() {
 	
 	$("#spon3").change(function() {
 		if ($(this).val() == "") {
-			$("#spon4").val("");
 			$("#mdSponsor").text("");
-		} else if ($(this).val() == "direct") {
-			$("#mdSponsor").text("");
-			$("#spon4").val("");
-			$("#spon4").focus();
 		} else {
-			$("#spon4").val($(this).val());
 			$("#mdSponsor").text($(this).val().substring(1));
 		}
 	});
@@ -324,13 +319,13 @@ function checkOnlyOne(checkbox) {
             price.innerHTML = document.getElementById("price2").value;
             mdCtgr2.textContent = "일반 후원";
             price5.innerHTML = document.getElementById("price2").value;
-            mdSponsor.innerHTML = document.getElementById("mdSponsor").value;
+            // mdSponsor.innerHTML = document.getElementById("mdSponsor").value;
         } else if (checkbox.id === "b") {
             mdCtgr.textContent = "정기 후원";
             price.innerHTML = document.getElementById("price4").value;
             mdCtgr2.textContent = "정기 후원";
             price5.innerHTML = document.getElementById("price4").value;
-            mdSponsor.innerHTML = document.getElementById("mdSponsor").value;
+         // mdSponsor.innerHTML = document.getElementById("mdSponsor").value;
         }
     }
 }

@@ -13,7 +13,7 @@ AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HAND2HAND Admin 22 - Dashboard</title>
+    <title>HAND2HAND Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -349,23 +349,18 @@ AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
                                 <div class="dropdown-divider"></div>
+                                <% if (loginInfo != null) {  %>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
+								<% } else { %>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    login
+                                </a>
+                                <% } %>
                             </div>
                         </li>
                     </ul>
@@ -728,23 +723,25 @@ AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <% if (loginInfo != null) { %>
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h5>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
- 
-                    <a class="btn btn-primary" href="login">로그인</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button> 
+                    <a class="btn btn-primary" href="logout">로그아웃</a>
                 </div>
-            </div>
+                <% } else { %>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">로그인 하시겠습니까?</h5>
+                </div>
+                <div class="modal-footer">
+                <a class="btn btn-primary" href="login">로그인</a>
+                </div>
+                <% } %>
         </div>
     </div>
 
