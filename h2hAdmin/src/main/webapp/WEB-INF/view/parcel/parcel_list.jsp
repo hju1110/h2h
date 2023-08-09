@@ -16,7 +16,7 @@ PageInfo pageInfo = (PageInfo)request.getAttribute("pi");
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+    
     }
     h2 {
         text-align: center;
