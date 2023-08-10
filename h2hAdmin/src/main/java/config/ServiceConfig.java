@@ -15,16 +15,6 @@ public class ServiceConfig {
 		return new ServiceDao(DbConfig.dataSource());
 	}
 	
-	@Bean
-	public ServiceChartDao serviceChartDao() {
-		return new ServiceChartDao(DbConfig.dataSource());
-	}
-	
-	@Bean
-	public ServiceAcceptDao serviceAcceptDao() {
-		return new ServiceAcceptDao(DbConfig.dataSource());
-	}
-	
 	
 	@Bean
 	public ServiceSvc serviceSvc() {
@@ -33,17 +23,4 @@ public class ServiceConfig {
 		return serviceSvc;
 	}
 	
-	@Bean
-	public ServiceChartSvc serviceChartSvc() {
-		ServiceChartSvc serviceChartSvc = new ServiceChartSvc();
-		serviceChartSvc.setServiceChartDao(serviceChartDao());
-		return serviceChartSvc;
-	}
-	
-	@Bean
-	public ServiceAcceptSvc serviceAcceptSvc() {
-		ServiceAcceptSvc serviceAcceptSvc = new ServiceAcceptSvc();
-		serviceAcceptSvc.setServiceAcceptDao(serviceAcceptDao());
-		return serviceAcceptSvc;
-	}
 }

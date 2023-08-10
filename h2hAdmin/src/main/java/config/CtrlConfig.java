@@ -35,12 +35,6 @@ public class CtrlConfig {
 	
 	@Autowired
 	private ServiceSvc serviceSvc;
-	
-	@Autowired
-	private ServiceChartSvc serviceChartSvc;
-	
-	@Autowired
-	private ServiceAcceptSvc serviceAcceptSvc;
 
 	@Autowired
 	private NoticeSvc noticeSvc;
@@ -103,25 +97,12 @@ public class CtrlConfig {
 		scheduleCtrl.setScheduleSvc(scheduleSvc);
 		return scheduleCtrl;
 	}
+	
 	@Bean
 	public ServiceCtrl serviceCtrl() {
 		ServiceCtrl serviceCtrl = new ServiceCtrl();
 		serviceCtrl.setServiceSvc(serviceSvc);
 		return serviceCtrl;
-	}
-	
-	@Bean
-	public ServiceChartCtrl serviceChartCtrl() {
-		ServiceChartCtrl serviceChartCtrl = new ServiceChartCtrl();
-		serviceChartCtrl.setServiceChartSvc(serviceChartSvc);
-		return serviceChartCtrl;
-	}
-	
-	@Bean
-	public ServiceAcceptCtrl serviceAcceptCtrl() {
-		ServiceAcceptCtrl serviceAcceptCtrl = new ServiceAcceptCtrl();
-		serviceAcceptCtrl.setServiceAcceptSvc(serviceAcceptSvc);
-		return serviceAcceptCtrl;
 	}
 	
     @Bean

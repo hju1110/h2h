@@ -78,10 +78,8 @@ AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="schedule">봉사일정</a>
-                        <a class="collapse-item" href="service">봉사등록</a>
-                        <a class="collapse-item" href="serviceChart">목록</a>
-                        <a class="collapse-item" href="serviceAccept">참여승인</a>
+                        <a class="collapse-item" href="service">봉사(미승인)</a>
+                        <a class="collapse-item" href="serviceChartz">봉사(승인)</a>
                     </div>
                 </div>
             </li>

@@ -2,10 +2,6 @@
 <%@include file="/resources/jsp/sidebar.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="vo.*" %>
-<%
-ServiceInfo si = new ServiceInfo();
-String accept = si.getSi_accept();
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +9,20 @@ String accept = si.getSi_accept();
 <title>Insert title here</title>
 </head>
 <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  .container {
+    width: 600px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
   table {
     width: 100%;
     border: 1px solid #444444;
@@ -20,12 +30,29 @@ String accept = si.getSi_accept();
   }
   th, td {
     border: 1px solid #444444;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+  }
+  .btn-secondary {
+    background-color: #6c757d;
   }
 </style>
 <script>
 function serChk(){
 	var button = document.getElementById("chk");
-	
 	if(button != null) {
 		alert("등록되었습니다.");
 	}
@@ -34,6 +61,7 @@ function serChk(){
 <body>
 <div align="center">
 <div class="left">
+<br />
 <h2>봉사활동 글보기</h2>
 <table width="600" cellpadding="5">
 <tr>
@@ -53,14 +81,14 @@ function serChk(){
 <tr><th>글 제목</th><td colspan="5">${si.getSi_title() }</td></tr>
 <tr><th>글 내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><th>활동상세내용</th><td colspan="5">${si.getSi_content() }</td></tr>
-<tr><td colspan="20" align="center">
+<tr><td colspan="19" align="center">
 	<c:if test="${si.getSi_accept() == 'n' }">
-	<input type="button" value="봉사 등록" onclick="location.href='serviceProcUp?siidx=${si.getSi_idx()}';"/>
+	<input type="button"  class="btn btn-danger ml-2" value="봉사 승인" onclick="location.href='serviceProcUp?siidx=${si.getSi_idx()}';"/>
 	</c:if>
-	<input type="button" value="수 정" onclick="location.href='serviceView?siidx=${si.getSi_idx()}';" />
-	<input type="button" value="목록 보기" onclick="location.href='service';"/>
 </td></tr>
 </table>
+<br />
+<input type="button" class="btn btn-primary" value="목록 보기" onclick="location.href='service';"/>
 </div>
 </div>
 </body>
