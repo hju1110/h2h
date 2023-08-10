@@ -28,7 +28,7 @@ private JdbcTemplate jdbc;
 				+ " if(curdate() = date(si_edate), right(si_edate, 8), mid(si_date, 3 , 8)) edate, "
 				+ " if(curdate() = date(si_date), right(si_date, 8), mid(si_date, 3 , 8)) wdate "
 				+ " from t_service_info " + where + " order by si_idx desc limit " + ((cpage - 1) * psize) + ", " + psize;
-		System.out.println(sql);
+//		System.out.println(sql);
 		
 		List<ServiceInfo> serviceInfo = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
 			ServiceInfo si = new ServiceInfo();
@@ -90,10 +90,13 @@ private JdbcTemplate jdbc;
 		return si;
 	}
 
-//	public int setFinish(int siidx) {
-//		String sql = "INSERT INTO t_serviece_join VALUES (?, ?, ?, ?, ?, ?) ";
-//		int result = jdbc.update(sql, );
-//		return 0;
-//	}
-
+	public int setFinish(ServiceMember sm) {
+		String sql = "INSERT INTO t_serviece_join VALUES (NULL, ?, ?, 'n', NULL)";
+		int result = jdbc.update(sql, sm.getSi_idx(), sm.getMi_id());
+		
+		sql = "INSERT INTO t_member_service VALUES (NULL, ?, ?, NULL, NOW())";
+		result += jdbc.update(sql, sm.getSi_idx(), sm.getMi_id());
+		
+		return result;
+	}
 }
