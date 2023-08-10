@@ -170,7 +170,7 @@ public class ReviewCtrl {
 	        // System.out.println("cpage: " + cpage);
 	        
 	        String args = "?cpage=" + cpage;
-	        
+	       // String mi_id = loginInfo.getMi_id();
 	        if (schtype != null && !schtype.equals("") &&
 	            keyword != null && !keyword.equals("")) {
 	            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoder�� ����� ������ �Ҵ������ �մϴ�.
@@ -244,12 +244,22 @@ public class ReviewCtrl {
 	                    }
 	                }
 	            }
-
+	            HttpSession session = request.getSession();
+				MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+				if (loginInfo == null) {
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('로그인이 필요합니다 로그인 창으로 이동합니다.');");
+					out.println("location.href='login';");
+					out.println("</script>");	
+					out.close();
+				}	
 	            String rl_writer = request.getParameter("rl_writer");
 	            String rl_title = request.getParameter("rl_title");
 	            String rl_content = request.getParameter("rl_content");
 	            String new_rl_name = piImgList.get(0);
-
+	            String mi_id = loginInfo.getMi_name();
 	            // ���� �̹��� ���� ����
 	            String imagePath = uploadPath2 + "/" + rl_name;
 	            File imageFile = new File(imagePath);
@@ -257,7 +267,7 @@ public class ReviewCtrl {
 	                imageFile.delete();
 	            }
 
-	            // ���ο� �̹��� ���ϸ����� ������Ʈ
+	     
 	            ReviewList rl = new ReviewList();
 	            rl.setRl_idx(rl_idx);
 	            rl.setRl_writer(rl_writer);
@@ -265,7 +275,7 @@ public class ReviewCtrl {
 	            rl.setRl_title(rl_title);
 	            rl.setRl_name(new_rl_name);
 
-	            int result = reviewSvc.reviewUpdate(rl);
+	            int result = reviewSvc.reviewUpdate(rl, mi_id);
 	            if (result != 1) {
 	                response.setContentType("text/html; charset=utf-8");
 	                PrintWriter out = response.getWriter();
@@ -315,8 +325,20 @@ public class ReviewCtrl {
 	        }
 	    }
 	    @GetMapping("/reviewdeleteform")
-	    public String reviewdeleteform(@RequestParam("rlidx") int rlidx) {
+	    public String reviewdeleteform(@RequestParam("rlidx") int rlidx, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	        // 여기에서 해당 게시글의 nl_isview를 'n'으로 업데이트하거나 삭제 작업 수행
+	    	HttpSession session = request.getSession();
+			MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+			if (loginInfo == null) {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인이 필요합니다 로그인 창으로 이동합니다.');");
+				out.println("location.href='login';");
+				out.println("</script>");	
+				out.close();
+			}	
+			String mi_name = loginInfo.getMi_name();
 	        reviewSvc.unpublishReview(rlidx);
 
 	        return "redirect:/reviewList"; // 게시글 목록 페이지로 리다이렉트

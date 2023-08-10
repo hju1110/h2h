@@ -117,14 +117,14 @@ public class ReviewDao {
 
 	        return reviewReplyList;
 	    }
-	    public int reviewUpdate(ReviewList rl) {
+	    public int reviewUpdate(ReviewList rl, String mi_id) {
 	    	 String sql = "update t_review_list set " +
 	    	            "rl_title = ?, " +
 	    	            "rl_name = ?, " +
 	    	            "rl_content = ? " +
-	    	            "where rl_idx = ?";
+	    	            "where rl_idx = ? and rl_writer = ?";
 
-	    	    int result = jdbc.update(sql, rl.getRl_title(), rl.getRl_name(), rl.getRl_content(), rl.getRl_idx());
+	    	    int result = jdbc.update(sql, rl.getRl_title(), rl.getRl_name(), rl.getRl_content(), rl.getRl_idx(),mi_id);
 
 	    	    return result;
 		}

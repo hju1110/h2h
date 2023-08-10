@@ -45,12 +45,13 @@ public class ReviewSvc {
 	   public List<ReviewReply> getReviewReply(int rlidx) {
 	        return reviewDao.getReviewReply(rlidx);
 	    }
-	   public int reviewUpdate(ReviewList rl) {
-			int result = reviewDao.reviewUpdate(rl);
+	   public int reviewUpdate(ReviewList rl, String mi_id) {
+			int result = reviewDao.reviewUpdate(rl, mi_id);
 			return result;
 	    }
 	public void unpublishReview(int rl_idx) {
 		reviewDao.unpublishReview(rl_idx);
 	}
+	
 	
 }

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../menuBar.jsp" %>
-<%
-MemberInfo isLogin = (MemberInfo)session.getAttribute("isLogin");
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -84,9 +81,13 @@ function confirmDelete(rlIdx) {
     </tr>
     <tr>
        <td colspan="6" class="center">
+  
+
            <input type="button" value="글목록" onclick="location.href='reviewList';" />
-           <input type="button" value="글삭제" onclick="confirmDelete(${rl.getRl_idx()});" />
-           <input type="button" value="글수정" onclick="location.href='reviewFormUp?rl_idx=${rl.getRl_idx()}';" />
+			<c:if test="${loginInfo.getMi_name() eq rl.getRl_writer()}" >
+			    <input type="button" value="글삭제" onclick="confirmDelete(${rl.getRl_idx()});" />
+			    <input type="button" value="글수정" onclick="location.href='reviewFormUp?rl_idx=${rl.getRl_idx()}';" />
+			</c:if>         
            <!-- 이미지 다운로드 버튼 -->
            <a href="downloadImage?filename=${rl.getRl_name()}" download>
                <input type="button" value="다운로드" />
@@ -102,11 +103,11 @@ function confirmDelete(rlIdx) {
 <hr>
 
 <form action="addReviewReply" method="post" class="comment-form">
-    <input type="hidden" name="rl_idx" value="${rl.getRl_idx()}" />
-    작성자: <input type="text" name="rr_writer" value="<%= loginInfo.getMi_name() %>" readonly /><br>
-    <textarea rows="5" cols="40" name="rr_content"></textarea><br>
-    <!-- 댓글 작성일은 자동으로 서버에서 처리하므로 input 요소에서는 입력하지 않습니다. -->
-    <input type="submit" value="댓글 등록" />
+	<input type="hidden" name="rl_idx" value="${rl.getRl_idx()}" />
+	작성자: <input type="text" name="rr_writer" value="<%=loginInfo.getMi_name() %>" readonly /><br>
+	<textarea rows="5" cols="40" name="rr_content"></textarea><br>
+	<!-- 댓글 작성일은 자동으로 서버에서 처리하므로 input 요소에서는 입력하지 않습니다. -->
+	<input type="submit" value="댓글 등록" />
 </form>
 <hr>
 <c:if test="${not empty reviewReply}">
