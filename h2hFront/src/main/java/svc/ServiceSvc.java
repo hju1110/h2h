@@ -1,6 +1,10 @@
 package svc;
 
+import java.sql.SQLException;
 import java.util.*;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import dao.*;
 import vo.*;
 
@@ -27,9 +31,9 @@ public class ServiceSvc {
 		return si;
 	}
 
-//	public int setFinish(int siidx) {
-//		int result = serviceDao.setFinish(siidx);
-//		return result;
-//	}
-
+	@Transactional(rollbackFor = SQLException.class)
+	public int setFinish(ServiceMember sm) {
+		int result = serviceDao.setFinish(sm);
+		return result;
+	}
 }

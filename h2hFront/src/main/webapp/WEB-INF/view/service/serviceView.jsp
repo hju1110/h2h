@@ -23,7 +23,7 @@ if (loginInfo == null) {
         }
 </style>
   <script>
-        alert("모든 칸을 정상적으로 입력해주세요.");
+      //  alert("모든 칸을 정상적으로 입력해주세요.");
     </script>
 </head>
 <script>
@@ -37,9 +37,7 @@ function serChk(){
 </script>
 <body>
 <div class="container mt-5">
-<form name="frmSView" action="serviceView"  method="post">
 <h2>봉사활동 글보기</h2>
-
 <br />
 <table class="table table-bordered" width="1000" cellpadding="5">
 <tr>
@@ -60,21 +58,29 @@ function serChk(){
 <hr />
 <h5>신청자정보</h5>
 <h6>연락처 번호 변경은 오른쪽 연락처 수정버튼을 클릭하여 변경해주시기 바라겠습니다.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary" id= "chk" value="회원정보 수정" onclick="location.href='http://localhost:8088/h2hFront/myInfoChk';" /></h6>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" class="btn btn-primary" id= "chk" value="회원정보 수정" 
+onclick="location.href='myInfoChk';" /></h6>
 
-</div>
 <br />
 <div style="border:1px solid; padding:10px;">
 <li>회원님이 등록하신 정보로 전송됩니다. 등록된 정보가 정확한지 확인해주세요</li>
 <li><font color="orange">연락처 및 이메일 주소는 확인 정보로 일회성으로만 사용됩니다.</font></li>
 <li>휴대폰번호 및 이메일로 봉사활동 정보를 제공 및 사용을 동의하십니까?</li>
 <div class="line"><input type="checkbox" value="정보제공 및 수신 동의">정보제공 및 수신 동의</div>
-</div>
-</form>
+
 </div>
 <br />
 <div class="line">
-<input type="button" class="btn btn-primary" id= "chk" value="봉사활동 신청" onclick="location.href='serviceFinish';" />
+<input type="button" class="btn btn-primary" id= "chk" value="봉사활동 신청" 
+	onclick="document.frmSView.submit();" />
 </div>
+<form name="frmSView" action="serviceFinish">
+<input type="hidden" name="siidx" value="${si.getSi_idx()}" />
+<input type="hidden" name="miid" value="<%=loginInfo.getMi_id() %>" />
+<input type="hidden" name="name" value="<%=loginInfo.getMi_name() %>" />
+<input type="hidden" name="birth" value="<%=loginInfo.getMi_birth() %>" />
+<input type="hidden" name="point" value="${si.getSi_point() }" />
+</form>
 </body>
 </html>

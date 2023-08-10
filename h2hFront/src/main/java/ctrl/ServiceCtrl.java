@@ -98,7 +98,32 @@ public class ServiceCtrl {
 	}
 	
 	@GetMapping("/serviceFinish")
-	public String serviceFinish() {
+	public String serviceFinish(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		int siidx = Integer.parseInt(request.getParameter("siidx"));
+		System.out.println(siidx);
+		
+		HttpSession session = request.getSession();
+		MemberInfo mi = (MemberInfo)session.getAttribute("loginInfo");
+		String miid = mi.getMi_id();
+		
+		ServiceMember sm = new ServiceMember();
+		sm.setSi_idx(siidx);
+		System.out.println("siidx : " + siidx);
+		sm.setMi_id(miid);
+		System.out.println("miid : " + miid);
+		
+		int result = serviceSvc.setFinish(sm);
+		if (result == 2) {
+	         response.setContentType("text/html; charset=utf-8");
+	         PrintWriter out = response.getWriter();
+	         out.println("<script>");
+	         out.println("alert('봉사 신청이 되지 않았습니다.');");
+	         out.println("history.back();");
+	         out.println("</script>");
+	         out.close();
+	    }
+		
 		return "service/serviceFinish";
 	}
 

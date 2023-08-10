@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../menuBar.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@ a:hover { text-decoration:underline; color:red; }
 </style>
 </head>
 <body>
-
+<div align="center">
 <h2>봉사활동 신청현황</h2>
 <table width="700" border="0" cellpadding="0" cellspacing="0" id="list" border="1">
 <tr height="30">
@@ -51,8 +52,8 @@ a:hover { text-decoration:underline; color:red; }
 			[처음]&nbsp;&nbsp;&nbsp;&nbsp;[이전]&nbsp;&nbsp;
 		</c:if>
 		<c:if test="${pi.getCpage() > 1}">
-			<a href="serviceRequestListInfo?cpage=1${pi.getSchargs() }">[처음]</a>&nbsp;&nbsp;&nbsp;
-			<a href="serviceRequestListInfo?cpage=${pi.getCpage() - 1}${pi.getSchargs() }">[이전]</a>&nbsp;&nbsp;
+			<a href="serviceRequestList?cpage=1">[처음]</a>&nbsp;&nbsp;&nbsp;
+			<a href="serviceRequestList?cpage=${pi.getCpage() - 1}">[이전]</a>&nbsp;&nbsp;
 		</c:if>
 		
 		<c:forEach var="i" begin="${pi.getSpage() }"
@@ -61,7 +62,7 @@ a:hover { text-decoration:underline; color:red; }
 					&nbsp;<strong>${i }</strong>&nbsp;
 				</c:if>
 				<c:if test="${i != pi.getCpage() }">
-					&nbsp;<a href="serviceRequestListInfo?cpage=${i }${pi.getSchargs() }">${i }</a>&nbsp;
+					&nbsp;<a href="serviceRequestList?cpage=${i }">${i }</a>&nbsp;
 				</c:if>
 		</c:forEach>
 		
@@ -69,8 +70,8 @@ a:hover { text-decoration:underline; color:red; }
 			&nbsp;&nbsp;[다음]&nbsp;&nbsp;&nbsp;[마지막]
 		</c:if>
 		<c:if test="${pi.getCpage() < pi.getPcnt()}">
-			&nbsp;&nbsp;<a href="serviceRequestListInfo?cpage=${pi.getCpage() + 1}${pi.getSchargs() }">[다음]</a>
-			&nbsp;&nbsp;&nbsp;<a href="serviceRequestListInfo?cpage=${pi.getPcnt() }${pi.getSchargs() }">[마지막]</a>
+			&nbsp;&nbsp;<a href="serviceRequestList?cpage=${pi.getCpage() + 1} }">[다음]</a>
+			&nbsp;&nbsp;&nbsp;<a href="serviceRequestList?cpage=${pi.getPcnt() } }">[마지막]</a>
 		</c:if>
 	</c:if>
 </td>
@@ -78,5 +79,6 @@ a:hover { text-decoration:underline; color:red; }
 </td>
 </tr>
 </table>
+</div>
 </body>
 </html>

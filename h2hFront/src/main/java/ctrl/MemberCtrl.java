@@ -203,7 +203,18 @@ public class MemberCtrl {
 	}
 	
 	@GetMapping("/myPage")
-	public String myPage() {
+	public String myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 후 이용 해주세요.');");
+			out.println("location.href='login?url=myPage';");
+			out.println("</script>");
+			out.close();
+		}
 		return "member/myPage";
 	}
 	
