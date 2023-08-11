@@ -16,39 +16,28 @@ private JdbcTemplate jdbc;
 	public int getServiceInfoCount(String where) {
 		// 검색된(검색어가 있을경우) 게시글의 총 개수를 리턴하는 메소드 여기서 작업
 			String sql = "select count(*) from t_service_info " + where;
+//			System.out.println(sql);
 			int rcnt = jdbc.queryForObject(sql, Integer.class);	// 레코드가 하나일 때 queryForObject 사용
 		return rcnt;
 	}
 	
+	// 참여 눌렀을 때 보이는 봉사 등록된 리스트
 	public List<ServiceInfo> getServiceInfo(String where, int cpage, int psize) {
-		String sql = "select si_idx, IF(si_view = 'y', '게시', '미게시') siview, si_title, si_person, " + 
-				" si_accept, CASE WHEN si_accept = 'y' THEN '승인' WHEN si_view = 'n' THEN '미승인' ELSE '대기'  END AS si_is_accept, "
-				+ " if(curdate() = date(si_acdate), right(si_date, 8), mid(si_date, 3 , 8)) acdate, si_place, "
-				+ " if(curdate() = date(si_sdate), right(si_sdate, 8), mid(si_date, 3 , 8)) sdate, "
-				+ " if(curdate() = date(si_edate), right(si_edate, 8), mid(si_date, 3 , 8)) edate, "
-				+ " if(curdate() = date(si_date), right(si_date, 8), mid(si_date, 3 , 8)) wdate "
-				+ " from t_service_info " + where + " order by si_idx desc limit " + ((cpage - 1) * psize) + ", " + psize;
+		String sql = "SELECT si_idx, " + 
+				" CASE WHEN si_accept = 'y' THEN '승인' WHEN si_view = 'n' THEN '미승인' ELSE '대기' END AS si_is_accept, " + 
+				" si_acname, si_acdate, si_sdate, si_edate, si_date FROM t_service_info " 
+				+ where + " order by si_idx desc limit " + ((cpage - 1) * psize) + ", " + psize;
 //		System.out.println(sql);
 		
 		List<ServiceInfo> serviceInfo = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
 			ServiceInfo si = new ServiceInfo();
 			si.setSi_idx(rs.getInt("si_idx"));
-			si.setSi_person(rs.getInt("si_person"));
 			si.setSi_is_accept(rs.getString("si_is_accept"));
-			si.setSi_acdate(rs.getString("acdate"));
-			si.setSi_sdate(rs.getString("sdate"));
-			si.setSi_edate(rs.getString("edate"));
-			si.setSi_view(rs.getString("siview"));
-			si.setSi_is_view(rs.getString("si_is_accept"));
-			si.setSi_title(rs.getString("si_title"));
-			si.setSi_place(rs.getString("si_place"));
-			si.setSi_date(rs.getString("wdate").replace("-", "."));
-			String title = "";	int cnt = 30;
-			if (rs.getString("si_title").length() > cnt)
-				title = rs.getString("si_title").substring(0, cnt - 3) + "..." + title;
-			else
-				title = rs.getString("si_title") + title;	
-			si.setSi_title(title);
+			si.setSi_acname(rs.getString("si_acname"));
+			si.setSi_acdate(rs.getString("si_acdate").replace("-", "."));
+			si.setSi_sdate(rs.getString("si_sdate").replace("-", "."));
+			si.setSi_edate(rs.getString("si_edate").replace("-", "."));
+			si.setSi_date(rs.getString("si_date").replace("-", "."));
 			return si;
 		});
 		return serviceInfo;
@@ -57,17 +46,17 @@ private JdbcTemplate jdbc;
 	public int readUpdate(int siidx) {
 	// 지정한 게시글의 조회수를 1 증가시키는 메소드
 		String sql = "update t_service_Info set si_read = si_read + 1 where si_idx = " + siidx;
+		System.out.println(sql);
 		int result = jdbc.update(sql);
 		return result;
 	}
 
+	// 봉사 게시글 상세
 	public ServiceInfo getServiceList(int siidx) {
 		int result = readUpdate(siidx);
 		
-		String sql = "SELECT si_idx, si_acname, IF(curdate() = date(si_acdate), right(si_date, 8), mid(si_date, 3 , 8)) acdate, " + 
-				" si_person, IF(curdate() = date(si_edate), right(si_edate, 8), mid(si_date, 3 , 8)) edate, " + 
-				" si_title, si_content, si_point, IF(si_type = 'a', '청소년', '성인') sitype " + 
-				" FROM t_service_info WHERE si_view = 'y' AND si_idx = " + siidx;
+		String sql = "SELECT si_idx, si_acname, si_acdate, si_edate, si_person, si_content, si_point, " + 
+				" IF(si_type = 'a', '청소년', '성인') sitype FROM t_service_info WHERE si_view = 'y' AND si_idx = " + siidx;
 //		System.out.println(sql);
 	
 		ServiceInfo si = jdbc.queryForObject(sql, new RowMapper<ServiceInfo>() {
@@ -76,10 +65,9 @@ private JdbcTemplate jdbc;
             	ServiceInfo si = new ServiceInfo();
             	si.setSi_idx(rs.getInt("si_idx"));
             	si.setSi_acname(rs.getString("si_acname"));
-    			si.setSi_acdate(rs.getString("acdate"));
+    			si.setSi_acdate(rs.getString("si_acdate").replace("-", "."));
+    			si.setSi_edate(rs.getString("si_edate").replace("-", "."));
     			si.setSi_person(rs.getInt("si_person"));
-    			si.setSi_edate(rs.getString("edate"));
-    		    si.setSi_title(rs.getString("si_title"));
             	si.setSi_content(rs.getString("si_content"));
             	si.setSi_point(rs.getInt("si_point"));
     			si.setSi_type(rs.getString("sitype"));
@@ -91,12 +79,42 @@ private JdbcTemplate jdbc;
 	}
 
 	public int setFinish(ServiceMember sm) {
-		String sql = "INSERT INTO t_serviece_join VALUES (NULL, ?, ?, 'n', NULL)";
+		String sql = "INSERT INTO t_serviece_join VALUES (NULL, ?, ?, 'n', 0, NOW())";
 		int result = jdbc.update(sql, sm.getSi_idx(), sm.getMi_id());
 		
-		sql = "INSERT INTO t_member_service VALUES (NULL, ?, ?, NULL, NOW())";
-		result += jdbc.update(sql, sm.getSi_idx(), sm.getMi_id());
+		sql = "UPDATE t_service_info SET si_cnt = si_cnt + 1 WHERE si_idx = " + sm.getSi_idx();
+		result += jdbc.update(sql);
 		
 		return result;
+	}
+
+	public int setSvcProcIn(ServiceInfo si) {
+		String sql = "INSERT INTO t_service_info (si_acname, si_acdate, si_sdate, si_edate, si_person, si_content, " + 
+				" si_point, si_type) VALUES (?, ?, ?, ?, ?, ?, 2000, ?)";
+		int result = jdbc.update(sql, si.getSi_acname(), si.getSi_acdate(), si.getSi_sdate(), si.getSi_edate(),
+				si.getSi_person(), si.getSi_content(), si.getSi_type());
+		return result;
+	}
+
+	public int getServiceListCount(String miid) {
+		String sql = "SELECT COUNT(*) FROM t_service_info a, t_serviece_join b WHERE a.si_idx = b.si_idx " + 
+				" AND b.mi_id = '" + miid + "'";
+		int rcnt = jdbc.queryForObject(sql, Integer.class);
+		return rcnt;
+	}
+
+	public List<ServiceInfo> getServiceMemList(String miid, int cpage, int psize) {
+		String sql = "SELECT a.si_acname, a.si_acdate, b.sj_date FROM t_service_info a, t_serviece_join b " + 
+				" WHERE a.si_idx = b.si_idx AND b.mi_id = '" + miid + "' " + 
+				" ORDER BY b.sj_date DESC LIMIT " + ((cpage - 1) * psize) + ", " + psize;
+		List<ServiceInfo> results = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
+			ServiceInfo si = new ServiceInfo();
+			si.setSi_acname(rs.getString("si_acname"));
+			si.setSi_acdate(rs.getString("si_acdate").replace("-", "."));
+			si.setSj_date(rs.getString("sj_date").replace("-", "."));
+			
+			return si;
+		});
+		return results;
 	}
 }

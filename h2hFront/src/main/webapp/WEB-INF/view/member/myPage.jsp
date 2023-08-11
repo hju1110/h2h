@@ -42,7 +42,7 @@
         <a class="btn btn-primary" href="myInfoChk">나의 회원정보</a>
         <a class="btn btn-primary" href="ParcelProc">주문내역</a>
         <a class="btn btn-primary" href="donaMemList">내가 신청한 후원</a>
-        <a class="btn btn-primary" href="serviceRequestList">봉사현황</a>
+        <a class="btn btn-primary" href="serviceTotalList">봉사현황</a>
     </div>
 </div>
 </body>

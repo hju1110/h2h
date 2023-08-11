@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../menuBar.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ServiceList</title>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
 <body>
+<div align="center">
 <div class="container mt-5">
 <h2>봉사활동 신청</h2>
 <form name= "frmSch">
@@ -22,7 +22,7 @@
 	<input type="text" name="seoul" value="서울 특별시" disabled="disabled" />
 </td>
 <td>
-	<select class="form-control">
+	<select class="form-control" name="place">
 		<option>서울 은평구</option>
 		<option>서울 동작구</option>
 		<option>서울 강남구</option>
@@ -34,14 +34,14 @@
 <tr>
 <th class="bg-primary text-white text-center">활동 일자</th>
 <td colspan="4">
-	<input type="text" name="edusdate" id="edusdate" value="" size="20" class="ipt" />
+	<input type="text" name="siAcdate" id="edusdate" value="" size="20" class="ipt" />
 </td>
 </tr>
 <tr>
 <th class="bg-primary text-white text-center">활동명</th>
 <td class="text-center">
 	<select class="form-control" name="schtype">
-		<option value="title" <c:if test="${pi.getSchtype() == 'title'}"> selected="selected"</c:if>>활동명</option>
+		<option value="acname" <c:if test="${pi.getSchtype() == 'acname'}"> selected="selected"</c:if>>활동명</option>
 	</select>
 </td>
 <td>
@@ -54,28 +54,34 @@
 </tr>
 </table>
 </form>
-</div>
 <br /><br />
-<table class="table table-bordered table-hover" width="1000" border="0" cellpadding="0" cellspacing="0" id="list" border="1">
-<tr height="30">
-<th class="text-center" width="10px">No</th>
-<th class="text-center" width="30px">등록상태</th>
-<th class="text-center" width="300px">봉사활동명</th>
-<th class="text-center" width="80px">활동일</th>
-<th class="text-center" width="100px">활동장소</th>
-<th class="text-center" width="200px">모집기간</th>
-<th class="text-center" width="80px">등록일</th>  
-</tr>
+<table class="table table-bordered" id="list" width="1000">
+<form>
+	<div class="mb-3 d-flex justify-content-end">
+	<% if (loginInfo != null && !loginInfo.getMi_type().equals("a")) { %>
+		<input type="button" class="btn btn-primary" value="봉사 등록 요청" onclick="location.href='svcRequestForm';" />
+	<% } %>
+	</div>
+</form>
+    <thead>
+        <tr>
+			<th class="text-center" style="width:5%;">No</th>
+			<th class="text-center" style="width:33%;">봉사활동명</th>
+			<th class="text-center" style="width:20%;">활동일</th>
+			<th class="text-center" style="width:25%;">모집 기간</th>			
+			<th class="text-center" style="width:10%;">모집 인원</th>
+			<th class="text-center" style="width:20%;">등록일</th>
+		</tr>
+	</thead>
 <c:if test="${serviceInfo.size() > 0}"><!-- 게시판 정보가 있으면~ else를 쓰고 싶으면 반대조건 주면 됨-->
 	<c:forEach items="${serviceInfo}" var="si" varStatus="status">	<!-- varStatus="status"하고 var 값만큼 돈다! -->
 	<tr height="30">
 	<td align="center">${pi.getNum() - status.index}</td><!-- - status.index 씀으로써 페이지 넘버가 하나씩 줄어듬 -->
-	<td align="center">${si.getSi_view() }</td> 
-	<td><a href="serviceView?siidx=${si.getSi_idx() }${pi.getArgs() }">${si.getSi_title() }</a></td>
-	<td align="center">${si.getSi_acdate() }</td>
-	<td align="center">${si.getSi_place() }</td>
-	<td align="center">${si.getSi_sdate() } ~ ${si.getSi_edate() }</td>
-	<td align="center">${si.getSi_date() }</td>
+	<td><a href="serviceView?siidx=${si.getSi_idx() }${pi.getArgs() }">${si.getSi_acname() }</a></td>
+	<td align="center">${si.getSi_acdate().substring(0, 11) }</td>
+	<td align="center">${si.getSi_sdate().substring(0, 11) } ~ ${si.getSi_edate().substring(0, 11) }</td>
+	<td align="center">${si.getSi_person() }</td>
+	<td align="center">${si.getSi_date().substring(0, 11) }</td>
 	</c:forEach>
 </c:if>	
 <c:if test="${serviceList.size() == 0}">
@@ -116,10 +122,10 @@
 		</c:if>
 	</c:if>
 </td>
-<td width="*">
-</td>
 </tr>
 </table>
+</div>
+</div>
 </body>
 <script>
 $(function() {

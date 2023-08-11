@@ -88,7 +88,7 @@ String chk = "";
 		<legend>봉사일정 검색</legend>
 			<select name="schtype">
 				<!-- <option value="">검색조건</option> -->
-				<option value="acname" <c:if test="${pi.getSchtype() == 'title'}"> selected="selected"</c:if>>활동명</option>
+				<option value="acname" <c:if test="${pi.getSchtype() == 'acname'}"> selected="selected"</c:if>>활동명</option>
 				<!--  <option value="content"<c:if test="${pi.getSchtype() == 'content'}"> selected="selected"</c:if>>내용</option>
 				<option value="writer"<c:if test="${pi.getSchtype() == 'writer'}"> selected="selected"</c:if>>작성자</option>
 				<option value="tc"<c:if test="${pi.getSchtype() == 'tc'}"> selected="selected"</c:if>>제목+내용</option>  -->
@@ -109,7 +109,6 @@ String chk = "";
 <th width="10%">No</th>
 <th width="10%">승인상태</th>
 <th width="*">봉사활동명</th>
-<th width="15%">활동장소</th>
 <th width="15%">활동일</th>
 <th width="10%">등록일</th>  
 </tr>
@@ -120,10 +119,9 @@ String chk = "";
 	<tr height="30">
 	<td align="center"><%=si.getSi_idx() %></td> 
 	<td align="center"><%=chk %></td> 
-	<td><a href="serviceView?siidx=<%=si.getSi_idx() %><%=pi.getArgs() %>"><%=si.getSi_title() %></a></td>
-	<td align="center"><%=si.getSi_place() %></td>
-	<td align="center"><%=si.getSi_acdate() %></td>
-	<td align="center"><%=si.getSi_date() %></td>	
+	<td><a href="serviceView?siidx=<%=si.getSi_idx() %><%=pi.getArgs() %>"><%=si.getSi_acname() %></a></td>
+	<td align="center"><%=si.getSi_acdate().substring(0, 11) %></td>
+	<td align="center"><%=si.getSi_date().substring(0, 11) %></td>	
 	<% } %>
 <% } else { %>
 	<tr height="50"><td colspan="5" align="center">
@@ -135,7 +133,7 @@ String chk = "";
 <table width="700" cellpadding="5">
 <tr>
 <td width="600">
-	<c:if test="${serviceInfo.size() > 0 }">
+	<c:if test="${serviceList.size() > 0 }">
 		<c:if test="${pi.getCpage() == 1}">
 			[처음]&nbsp;&nbsp;&nbsp;&nbsp;[이전]&nbsp;&nbsp;
 		</c:if>

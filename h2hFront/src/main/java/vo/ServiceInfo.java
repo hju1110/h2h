@@ -1,10 +1,10 @@
 package vo;
 
 public class ServiceInfo {
-	private int si_idx, si_person, si_point, si_read;
+	private int si_idx, si_person, si_point, si_read, si_cnt;
 	private String ai_id, si_acname, si_acdate, si_recruit, si_is_recruit, si_sdate, si_edate, si_view, si_is_view,
 			si_origine, si_name, si_place, si_title, si_content, si_accept, si_is_accept, si_type, si_is_type, si_date,
-			schtype, keyword, size;
+			schtype, keyword, size, sj_date;
 
 	public int getSi_idx() {
 		return si_idx;
@@ -36,6 +36,14 @@ public class ServiceInfo {
 
 	public void setSi_read(int si_read) {
 		this.si_read = si_read;
+	}
+
+	public int getSi_cnt() {
+		return si_cnt;
+	}
+
+	public void setSi_cnt(int si_cnt) {
+		this.si_cnt = si_cnt;
 	}
 
 	public String getAi_id() {
@@ -212,6 +220,14 @@ public class ServiceInfo {
 
 	public void setSize(String size) {
 		this.size = size;
+	}
+
+	public String getSj_date() {
+		return sj_date;
+	}
+
+	public void setSj_date(String sj_date) {
+		this.sj_date = sj_date;
 	}
 
 }

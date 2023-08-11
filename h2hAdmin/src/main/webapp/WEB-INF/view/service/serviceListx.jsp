@@ -110,7 +110,7 @@ function del(siidx) {
 		<legend>봉사일정 검색</legend>
 			<select name="schtype">
 				<!-- <option value="">검색조건</option> -->
-				<option value="acname" <c:if test="${pi.getSchtype() == 'title'}"> selected="selected"</c:if>>활동명</option>
+				<option value="acname" <c:if test="${pi.getSchtype() == 'acname'}"> selected="selected"</c:if>>활동명</option>
 				<!--  <option value="content"<c:if test="${pi.getSchtype() == 'content'}"> selected="selected"</c:if>>내용</option>
 				<option value="writer"<c:if test="${pi.getSchtype() == 'writer'}"> selected="selected"</c:if>>작성자</option>
 				<option value="tc"<c:if test="${pi.getSchtype() == 'tc'}"> selected="selected"</c:if>>제목+내용</option>  -->
@@ -143,10 +143,10 @@ function del(siidx) {
 	<tr height="30">
 	<td align="center"><%=si.getSi_idx() %></td> 
 	<td align="center"><%=chk %></td> 
-	<td><a href="serviceCheckForm?siidx=<%=si.getSi_idx() %><%=pi.getArgs() %>"><%=si.getSi_title() %></a></td>
+	<td><a href="serviceCheckForm?siidx=<%=si.getSi_idx() %><%=pi.getArgs() %>"><%=si.getSi_acname() %></a></td>
 	<td align="center"><div><%=si.getSi_cnt() %>/<%=si.getSi_person()%></div></td>
-	<td align="center"><%=si.getSi_acdate() %></td>
-	<td align="center"><%=si.getSi_date() %></td>
+	<td align="center"><%=si.getSi_acdate().substring(0, 11) %></td>
+	<td align="center"><%=si.getSi_date().substring(0, 11) %></td>
 	<td><% if (si.getSi_recruit().equals("y")) { %><input type="button" value="마감" onclick="del(<%=si.getSi_idx() %>);"/>   <% } %> </td>	
 	<% } %>
 <% } else { %>

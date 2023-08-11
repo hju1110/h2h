@@ -26,7 +26,7 @@ public class ServiceSvc {
 	}
 	
 	
-	public ServiceInfo getServiceInfo(int siidx) {
+	public ServiceInfo getServiceList(int siidx) {
 		ServiceInfo si = serviceDao.getServiceList(siidx);
 		return si;
 	}
@@ -35,5 +35,20 @@ public class ServiceSvc {
 	public int setFinish(ServiceMember sm) {
 		int result = serviceDao.setFinish(sm);
 		return result;
+	}
+
+	public int setSvcProcIn(ServiceInfo si) {
+		int result = serviceDao.setSvcProcIn(si);
+		return result;
+	}
+
+	public int getServiceListCount(String miid) {
+		int rcnt = serviceDao.getServiceListCount(miid);
+		return rcnt;
+	}
+
+	public List<ServiceInfo> getServiceMemList(String miid, int cpage, int psize) {
+		List<ServiceInfo> si = serviceDao.getServiceMemList(miid, cpage, psize);
+		return si;
 	}
 }

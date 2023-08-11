@@ -14,7 +14,8 @@ public class DonationDao {
 	}
 	
 	public int getDonaMemListCount(String miid) {
-		String sql = "SELECT COUNT(*) FROM t_donation_info a, t_member_dona b WHERE a.di_idx = b.di_idx and b.md_id = '" + miid + "' ";
+		String sql = "SELECT COUNT(*) FROM t_donation_info a, t_member_dona b WHERE a.di_idx = b.di_idx and b.md_id = '" 
+				+ miid + "' ";
 		System.out.println(sql);
 		int rcnt = jdbc.queryForObject(sql, Integer.class);
 		return rcnt;

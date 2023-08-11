@@ -67,7 +67,7 @@ function serChk(){
 <tr>
 <th width="10%">봉사활동명</th><td width = "15%">${si.getSi_acname() }</td>
 <th width="10%">봉사활동포인트</th><td width = "15%">${si.getSi_point() }</td>
-<th width="10%">봉사활동일자</th><td width = "15%">${si.getSi_acdate() }</td>
+<th width="10%">봉사활동일자</th><td width = "15%">${si.getSi_acdate().substring(0, 11) }</td>
 </tr>
 <tr>
 <th width="10%">모집인원</th><td width = "25%">${si.getSi_person() }명</td>
@@ -75,10 +75,9 @@ function serChk(){
 	<c:if test="${si.getSi_type() == 'a'}">청소년</c:if>
 	<c:if test="${si.getSi_type() == 'b'}">성인</c:if>
 </td>
-<th width="10%">봉사마감일자</th><td width = "25%">${si.getSi_edate() }</td>
+<th width="10%">봉사마감일자</th><td width = "25%">${si.getSi_edate().substring(0, 11) }</td>
 </tr>
 
-<tr><th>글 제목</th><td colspan="5">${si.getSi_title() }</td></tr>
 <tr><th>글 내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><th>활동상세내용</th><td colspan="5">${si.getSi_content() }</td></tr>
 <tr><td colspan="19" align="center">

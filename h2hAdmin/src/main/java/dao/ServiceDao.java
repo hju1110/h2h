@@ -34,21 +34,11 @@ private JdbcTemplate jdbc;
 			si.setSi_sdate(rs.getString("si_sdate"));
 			si.setSi_edate(rs.getString("si_edate"));
 			si.setSi_view(rs.getString("si_view"));
-			si.setSi_person(rs.getInt("si_person"));
-			si.setSi_origine(rs.getString("si_origine"));
-			si.setSi_name(rs.getString("si_name"));
-			si.setSi_place(rs.getString("si_place"));
 			si.setSi_accept(rs.getString("si_accept"));
 			si.setSi_point(rs.getInt("si_point"));
 			si.setSi_type(rs.getString("si_type"));
 			si.setSi_read(rs.getInt("si_read"));
 			si.setSi_date(rs.getString("si_date"));
-			String title = "";	int cnt = 30;
-			if (rs.getString("si_title").length() > cnt)
-				title = rs.getString("si_title").substring(0, cnt - 3) + "..." + title;
-			else
-				title = rs.getString("si_title") + title;	
-			si.setSi_title(title);
 			return si;
 		});
 		return serviceInfo;
@@ -71,20 +61,11 @@ private JdbcTemplate jdbc;
     			si.setSi_edate(rs.getString("si_edate"));
     			si.setSi_view(rs.getString("si_view"));
     			si.setSi_person(rs.getInt("si_person"));
-    			si.setSi_origine(rs.getString("si_origine"));
-    			si.setSi_name(rs.getString("si_name"));
-    			si.setSi_place(rs.getString("si_place"));
     			si.setSi_accept(rs.getString("si_accept"));
     			si.setSi_point(rs.getInt("si_point"));
     			si.setSi_type(rs.getString("si_type"));
     			si.setSi_read(rs.getInt("si_read"));
     			si.setSi_date(rs.getString("si_date"));
-    			String title = "";	int cnt = 30;
-    			if (rs.getString("si_title").length() > cnt)
-    				title = rs.getString("si_title").substring(0, cnt - 3) + "..." + title;
-    			else
-    				title = rs.getString("si_title") + title;	
-    			si.setSi_title(title);
                return si;
             }
          });
@@ -127,20 +108,11 @@ private JdbcTemplate jdbc;
     			si.setSi_edate(rs.getString("si_edate"));
     			si.setSi_view(rs.getString("si_view"));
     			si.setSi_person(rs.getInt("si_person"));
-    			si.setSi_origine(rs.getString("si_origine"));
-    			si.setSi_name(rs.getString("si_name"));
-    			si.setSi_place(rs.getString("si_place"));
     			si.setSi_accept(rs.getString("si_accept"));
     			si.setSi_point(rs.getInt("si_point"));
     			si.setSi_type(rs.getString("si_type"));
     			si.setSi_read(rs.getInt("si_read"));
     			si.setSi_date(rs.getString("si_date"));
-    			String title = "";	int cnt = 30;
-    			if (rs.getString("si_title").length() > cnt)
-    				title = rs.getString("si_title").substring(0, cnt - 3) + "..." + title;
-    			else
-    				title = rs.getString("si_title") + title;	
-    			si.setSi_title(title);
                return si;
             }
          });
