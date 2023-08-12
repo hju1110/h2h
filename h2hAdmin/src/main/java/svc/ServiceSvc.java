@@ -48,13 +48,13 @@ public class ServiceSvc {
 	
 	
 	////////// 아래부터는 미완성 부분 /////
-	public int serviceMemNO(int siidx, String miid) {
-		int result = serviceDao.serviceMemNO(siidx, miid);
+	public int serviceMemNO(String where) {
+		int result = serviceDao.serviceMemNO(where);
 		return result;
 	}
 
-	public int serviceMemOk(int siidx, String miid) {
-		int result = serviceDao.serviceMemOk(siidx, miid);
+	public int serviceMemOk(String where) {
+		int result = serviceDao.serviceMemOk(where);
 		return result;
 	}
 

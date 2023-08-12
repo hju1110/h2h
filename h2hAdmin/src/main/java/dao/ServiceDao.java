@@ -122,7 +122,7 @@ private JdbcTemplate jdbc;
 	public List<ServiceInfo> getServiceMember(int si_idx) {
 		String sql = "SELECT a.*, b.mi_name, b.mi_birth  FROM  t_serviece_join a, t_member_info b where a.si_idx = '" + si_idx + 
 				"' and a.mi_id = b.mi_id";
-		System.out.println(sql);
+		//System.out.println(sql);
 		List<ServiceInfo> ml = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
 			ServiceInfo si = new ServiceInfo();
 			si.setSj_idx(rs.getInt("sj_idx"));
@@ -137,16 +137,17 @@ private JdbcTemplate jdbc;
 		});
 		return ml;
 	}
+	
 	///// 아래부터는 미완성 부분 /////
-	public int serviceMemNO(int siidx, String miid) {
-		String sql = "update t_serviece_join set sj_status = 'n' where mi_id = '"+miid+"' and  si_idx = '" + siidx + "' ";
+	public int serviceMemNO(String where) {
+		String sql = "update t_serviece_join set sj_status = 'n' " + where;
 		System.out.println(sql);
 		int result = jdbc.update(sql);
 		return result;
 	}
 
-	public int serviceMemOk(int siidx, String miid) {
-		String sql = "update t_serviece_join set sj_status = 'y' where mi_id = '"+miid+"' and  si_idx = '" + siidx + "' ";
+	public int serviceMemOk(String where) {
+		String sql = "update t_serviece_join set sj_status = 'y' " + where;
 		System.out.println(sql);
 		int result = jdbc.update(sql);
 		return result;

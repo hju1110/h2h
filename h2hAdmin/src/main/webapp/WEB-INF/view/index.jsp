@@ -80,6 +80,7 @@ AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
                         <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" href="service">봉사(미승인)</a>
                         <a class="collapse-item" href="serviceChartz">봉사(승인)</a>
+                        <a class="collapse-item" href="schedule">봉사일정</a>
                     </div>
                 </div>
             </li>

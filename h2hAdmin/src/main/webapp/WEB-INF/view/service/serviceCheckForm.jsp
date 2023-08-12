@@ -91,65 +91,77 @@ function chkOne(one) {
   }
 }
 
+function getSelectedChk() {
+	// 체크박스들 중 선택된 체크박스들의 값(value)들을 쉼표로 구분하여 문자열로 리턴하는 함수
+   var chk = document.frmAcceptChk.chk;
+   var idxs = "";   // chk컨트롤 배열에서 선택된 체크박스의 값들을 누적 저장
+   for (var i = 1 ; i < chk.length ; i++) {
+      if (chk[i].checked) idxs += "," + chk[i].value;
+	}
+   return idxs.substring(1);
+
+}	
+
+function sendAjaxRequestForChkOk(sjidx) {
+    if (confirm("정말 승인하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "./ChkOk",
+            data: { sjidx : sjidx },
+            success: function(response) {
+                if (response < 1) {
+                    alert("봉사 승인 실패.");
+                } else {
+                    alert("봉사 승인 성공.");
+                    location.reload();
+                }
+            },
+            error: function() {
+                alert("오류 발생. 서버에 요청을 보내지 못했습니다.");
+            }
+        });
+    }
+}
+
+function sendAjaxRequestForChkNo(sjidx) {
+    if (confirm("정말 미승인하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "./ChkNo",
+            data: { sjidx : sjidx },
+            success: function(response) {
+                if (response < 1) {
+                    alert("봉사 미승인 실패.");
+                } else {
+                    alert("봉사 미승인 성공.");
+                    location.reload();
+                }
+            },
+            error: function() {
+                alert("오류 발생. 서버에 요청을 보내지 못했습니다.");
+            }
+        });
+    }
+}
+
 function chkOk() {
-  var selectedData = getSelectedData(["mi_id", "si_idx"]);
-  sendAjaxRequestForChkOk(selectedData);
+    var sjidx = getSelectedChk();
+    if (sjidx == "") {
+        alert("승인 처리할 회원을 선택하세요.");
+    } else {
+        sendAjaxRequestForChkOk(sjidx);
+    }
 }
 
 function chkNo() {
-  var selectedData = getSelectedData(["mi_id", "si_idx"]);
-  sendAjaxRequestForChkNo(selectedData);
-}
-
-function getSelectedData(fields) {
-	  var selectedData = [];
-	  var chk = document.frmAcceptChk.chk;
-	  for (var i = 0; i < chk.length; i++) {
-	    if (chk[i].checked) {
-	      var rowData = {};
-	      fields.forEach(function(field) {
-	        var inputField = chk[i].parentNode.querySelector("input[name='" + field + "']");
-	        if (inputField) {
-	          rowData[field] = inputField.value;
-	        } else {
-	          console.error("Field not found:", field);
-	        }
-	      });
-	      selectedData.push(rowData);
-	    }
-	  }
-	  return selectedData;
-	}
-
-function sendAjaxRequestForChkOk(data) {
-  $.ajax({
-    type: "POST",
-    url: "./ChkOk",
-    data: { selectedData: JSON.stringify(data) },
-    success: function(rs) {
-      if (rs < 1) {
-        alert("봉사 승인 실패.");
-      } else {
-        alert("봉사 승인 성공.");
-      }
+    var sjidx = getSelectedChk();
+    if (sjidx == "") {
+        alert("미승인 처리할 회원을 선택하세요.");
+    } else {
+        sendAjaxRequestForChkNo(sjidx);
     }
-  });
 }
 
-function sendAjaxRequestForChkNo(data) {
-  $.ajax({
-    type: "POST",
-    url: "./yourServerUrlForChkNo",
-    data: { selectedData: JSON.stringify(data) },
-    success: function(rs) {
-      if (rs < 1) {
-        alert("봉사 미승인 실패.");
-      } else {
-        alert("봉사 미승인 성공.");
-      }
-    }
-  });
-}
 </script>
 <body>
 <div align="center">
@@ -196,12 +208,12 @@ function sendAjaxRequestForChkNo(data) {
 <input type="hidden" name="si_idx" value="${sc.getSi_idx()}" />
 <tr>
 <td class="text-center">
-	<input type="checkbox" name="chk" value="${sc.getSi_idx() }" checked="checked" onclick="chkOne(this);" />
+	<input type="checkbox" name="chk" value="${sc.getSj_idx() }" checked="checked" onclick="chkOne(this);" />
 </td>
 	<td width="100px" class="text-center">${sc.getMi_name() }</td>
 	<td width="100px" class="text-center">${sc.getMi_birth() }</td>
-	<td width="100px" class="text-center"><c:if test="${sc.getSi_accept() == null }">대기 중</c:if>
-	<c:if test="${sc.getSi_accept() == 'y' }">승인</c:if><c:if test="${sc.getSi_accept() == 'n' }">미승인</c:if></td>
+	<td width="100px" class="text-center"><c:if test="${sc.getSj_status() == 'g' }">대기 중</c:if>
+	<c:if test="${sc.getSj_status() == 'y' }">승인</c:if><c:if test="${sc.getSj_status() == 'n' }">미승인</c:if></td>
 	<td width="100px" class="text-center">${sc.getSi_point() }</td>
 </tr>
 </c:forEach>

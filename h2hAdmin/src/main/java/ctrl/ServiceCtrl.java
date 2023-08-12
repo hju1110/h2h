@@ -21,7 +21,7 @@ public class ServiceCtrl {
 		this.serviceSvc = serviceSvc;
 		
 	}
-	
+		
 	@GetMapping("/service")
 	public String serviceList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
@@ -120,7 +120,7 @@ public class ServiceCtrl {
 	@GetMapping("/serviceChartz")
 	public String serviceChart(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		
+	
 		HttpSession session = request.getSession();
 		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
@@ -209,39 +209,50 @@ public class ServiceCtrl {
 		return "service/serviceCheckForm";
 	}
 	
-
-	
 ///// 아래부터는 미완성 부분 /////
 	@RequestMapping(value = "/ChkNo", method = RequestMethod.POST)
 	@ResponseBody
-	public String ChkNo(@RequestBody List<Map<String, String>> selectedData) {
-		int result = 0;
-	    // selectedData의 값을 처리하는 로직을 여기에 작성
-	    for (Map<String, String> data : selectedData) {
-	        String miid = data.get("mi_id");
-	        int siidx = Integer.parseInt(data.get("si_idx"));
-	        
-	        result += serviceSvc.serviceMemNO(siidx, miid);
-	  
-	    }
-	    
+	public String ChkNo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String sjidx = request.getParameter("sjidx");
+		//System.out.println(sjidx);		
+		String where = " where ";
+		if (sjidx.indexOf(',') >= 0) {		
+			String[] arr = sjidx.split(",");			
+			for (int i = 0; i < arr.length; i++) {
+				if (i == 0) where +=  " sj_idx =" + arr[i];
+				else 		where +=  " or sj_idx = " + arr[i];
+			}
+		} else {						
+			where += " sj_idx = " + sjidx;
+		}
+		int result = serviceSvc.serviceMemNO(where);
+		
+
 	    return result + ""; // 작업 완료 시 응답
 	}
-	
+
 	@RequestMapping(value = "/ChkOk", method = RequestMethod.POST)
 	@ResponseBody
-	public String ChkOk(@RequestBody List<Map<String, String>> selectedData) {
-		int result = 0;
-		// selectedData의 값을 처리하는 로직을 여기에 작성
-		for (Map<String, String> data : selectedData) {
-			String miid = data.get("mi_id");
-			int siidx = Integer.parseInt(data.get("si_idx"));
-			
-			result += serviceSvc.serviceMemOk(siidx, miid);
-			
-		}
+	public String ChkOk(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String sjidx = request.getParameter("sjidx");
+		//System.out.println(sjidx);
 		
-		return result + ""; // 작업 완료 시 응답
+		String where = " where ";
+		if (sjidx.indexOf(',') >= 0) {		
+			String[] arr = sjidx.split(",");			
+			for (int i = 0; i < arr.length; i++) {
+				if (i == 0) where +=  " sj_idx =" + arr[i];
+				else 		where +=  " or sj_idx = " + arr[i];
+			}
+		} else {						
+			where += " sj_idx = " + sjidx;
+		}
+		int result = serviceSvc.serviceMemOk(where);
+		
+
+	    return result + ""; // 작업 완료 시 응답
 	}
-	
+
 }
