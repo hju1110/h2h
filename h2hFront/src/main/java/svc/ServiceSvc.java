@@ -51,4 +51,15 @@ public class ServiceSvc {
 		List<ServiceInfo> si = serviceDao.getServiceMemList(miid, cpage, psize);
 		return si;
 	}
+
+	@Transactional(rollbackFor = SQLException.class)
+	public int setSvcCancel(int sjidx, int siidx, String miid) {
+		int result = serviceDao.setSvcCancel(sjidx, siidx, miid);
+		return result;
+	}
+
+	public String getMySvcSch(String where) {
+		String result = serviceDao.getMySvcSch(where);
+		return result;
+	}
 }

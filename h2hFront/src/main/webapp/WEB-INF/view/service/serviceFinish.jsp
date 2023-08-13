@@ -70,7 +70,7 @@
         '내가 신청한 봉사' 확인은 '마이페이지' 내에서도 확인이 가능합니다.
     </div>
     <div class="button-group">
-        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='serviceRequestList';">내가 신청한 봉사</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='serviceTotalList';">내가 신청한 봉사</button>
         <button type="button" class="btn btn-primary btn-lg btn-danger" onclick="location.href='/h2hFront/';">홈으로 가기</button>
     </div>
 </div>
