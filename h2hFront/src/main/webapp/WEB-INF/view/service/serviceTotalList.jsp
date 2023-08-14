@@ -18,7 +18,6 @@ request.setCharacterEncoding("UTF-8");
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
 function total() {
 	var siSch = $("#siSch").val(), miid = $('#miid').val();
@@ -27,11 +26,10 @@ function total() {
 		url: "./mySvcSch",
 		data : {"siSch" : siSch, "miid" : miid},
 		success : function(chkRs) {
-			if (chkRs != 1) {
+			if (chkRs < 1) {
 				alert("검색 결과가 없습니다.");
 			} else {
 				alert("검색 완료");
-				location.reload();
 			}
 		}
 	});
@@ -69,20 +67,21 @@ function del() {
 <h1>내가 신청한 참여</h1>
 <hr />
 
-<select id="siSch">
-	<option value="a">봉사 신청 내역</option>
-	<option value="b">활동 내역</option>
+<select id="siSch" onchange="location.href='serviceTotalList?siSch=' + this.value;">
+	<option value="g" <c:if test="${pi.getSchargs() == 'g' }" >selected="selected"</c:if>>봉사 신청 내역</option>
+	<option value="y" <c:if test="${pi.getSchargs() == 'y' }" >selected="selected"</c:if>>활동 내역</option>
 </select>
 <input type="hidden" name="miid" id="miid" value="<%=loginInfo.getMi_id() %>" />
-<input type="button" name="btn" id="btn" value="확인" onclick="total();"/>
+<!-- <input type="button" name="btn" id="btn" value="확인" onclick="total();"/> -->
 <br /><br />
 <hr />
 <table width="1400" cellpaddnng="0" cellspacing="0" id="list">
 	<tr align="center">
-	<th class="text-center" style="width:5%;">No</th>
+		<th class="text-center" style="width:5%;">No</th>
 		<th width="200" style="border-top: none; border-bottom: none;">활동명</th>
 		<th width="200" style="border-top: none; border-bottom: none;">봉사 신청일자</th>
 		<th width="200" style="border-top: none; border-bottom: none;">봉사 활동일자</th>
+		<th width="200" style="border-top: none; border-bottom: none;">봉사 신청 상태</th>
 	</tr>
 <tr align="center" onmouseover="this.bgColor='#efefef';" onmouseout="this.bgColor='';"></tr>
 	<c:forEach items="${serviceInfo }" var="si" varStatus="status">
@@ -93,6 +92,11 @@ function del() {
 			<td width="100"><a href="serviceView?siidx=${si.getSi_idx() }${pi.getArgs()}">${si.getSi_acname() }</a></td>
 			<td width="100">${si.getSj_date().substring(0, 11) }</td>
 			<td width="100">${si.getSi_acdate().substring(0, 11) }</td>
+			<td width="100">
+				<c:if test="${si.getSj_status() == 'g' }">대기 중</c:if>
+				<c:if test="${si.getSj_status() == 'y' }">승인</c:if>
+				<c:if test="${si.getSj_status() == 'n' }">미승인</c:if>
+			</td>
 			<td width="100">
 			<c:if test="${si.getSj_status() == 'g' && si.getSi_recruit() == 'y' }">
 			<input type="button" name="btn2" id="btn1" value="취소하기" onclick="svcDelete();"/>

@@ -42,13 +42,13 @@ public class ServiceSvc {
 		return result;
 	}
 
-	public int getServiceListCount(String where, String miid) {
-		int rcnt = serviceDao.getServiceListCount(where, miid);
+	public int getServiceListCount(String where) {
+		int rcnt = serviceDao.getServiceListCount(where);
 		return rcnt;
 	}
 
-	public List<ServiceInfo> getServiceMemList(String miid, int cpage, int psize) {
-		List<ServiceInfo> si = serviceDao.getServiceMemList(miid, cpage, psize);
+	public List<ServiceInfo> getServiceMemList(int cpage, int psize, String where) {
+		List<ServiceInfo> si = serviceDao.getServiceMemList(cpage, psize, where);
 		return si;
 	}
 
@@ -58,8 +58,8 @@ public class ServiceSvc {
 		return result;
 	}
 
-	public String getMySvcSch(String where) {
-		String result = serviceDao.getMySvcSch(where);
-		return result;
-	}
+//	public String getMySvcSch(String where) {
+//		String result = serviceDao.getMySvcSch(where);
+//		return result;
+//	}
 }

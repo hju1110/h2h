@@ -158,9 +158,8 @@ public class ServiceCtrl {
 		if (request.getParameter("cpage")!= null) {
 			cpage = Integer.parseInt(request.getParameter("cpage"));	// 보안상의 이유와 산술연산을 위해 int형으로 형변환 함
 		}
+		String siSch = request.getParameter("siSch");
 		
-		String args = "?cpage=" + cpage;
-		String where = " WHERE si_view = 'y' ";
 		HttpSession session = request.getSession();
 		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
@@ -172,11 +171,18 @@ public class ServiceCtrl {
 	         out.println("</script>");
 	         out.close();
 	    }
+		String args = "?cpage=" + cpage;
+		String where = " WHERE si_view = 'y'  AND b.mi_id = '" + loginInfo.getMi_id() + "' ";
+		if (siSch != null && !siSch.equals("")) {
+			if (siSch.equals("g")) {	// 봉사 신청 내역
+				where += " AND sj_status = 'g' ";
+			} else {	// 봉사 활동 내역
+				where += " AND sj_status = 'y' ";
+			} 
+		}
 		
-		String miid = loginInfo.getMi_id();		
-		
-		rcnt = serviceSvc.getServiceListCount(where, miid);	//검색된 게시글의 총 개수로 게시글 일련번호 출력과 전체 페이지수 계산을 위한 값
-		List<ServiceInfo> serviceInfo = serviceSvc.getServiceMemList(miid, cpage, psize);
+		rcnt = serviceSvc.getServiceListCount(where);	//검색된 게시글의 총 개수로 게시글 일련번호 출력과 전체 페이지수 계산을 위한 값
+		List<ServiceInfo> serviceInfo = serviceSvc.getServiceMemList(cpage, psize, where);
 		
 		pcnt = rcnt / psize;
 		if (rcnt % psize > 0) {
@@ -197,6 +203,7 @@ public class ServiceCtrl {
 		pi.setSpage(spage);
 		pi.setNum(num);
 		pi.setArgs(args);
+		pi.setSchargs(siSch);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("serviceInfo", serviceInfo);
@@ -217,22 +224,22 @@ public class ServiceCtrl {
 		return result + "";
 	}
 	
-	@PostMapping("/mySvcSch")
-	@ResponseBody
-	public String mySvcSch(HttpServletRequest request) throws Exception {
-		String siSch = request.getParameter("siSch");
-		String miid = request.getParameter("miid");
-		String where = " WHERE mi_id = '" + miid + "' " ;
-		if (siSch != null && !siSch.equals("")) {
-			if (siSch.equals("a")) {	// 봉사 신청 내역
-				where += " AND sj_status = 'g' ";
-			} else {	// 봉사 활동 내역
-				where += " AND sj_status = 'y' ";
-			} 
-		}
-		
-		String result = serviceSvc.getMySvcSch(where);
-		
-		return result;
-	}
+//	@PostMapping("/mySvcSch")
+//	@ResponseBody
+//	public String mySvcSch(HttpServletRequest request) throws Exception {
+//		String siSch = request.getParameter("siSch");
+//		String miid = request.getParameter("miid");
+//		String where = " AND b.mi_id = '" + miid + "' " ;
+//		if (siSch != null && !siSch.equals("")) {
+//			if (siSch.equals("g")) {	// 봉사 신청 내역
+//				where += " AND sj_status = 'g' ";
+//			} else {	// 봉사 활동 내역
+//				where += " AND sj_status = 'y' ";
+//			} 
+//		}
+//		
+//		String result = serviceSvc.getMySvcSch(where);
+//		
+//		return result;
+//	}
 }

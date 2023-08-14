@@ -97,18 +97,16 @@ private JdbcTemplate jdbc;
 		return result;
 	}
 
-	public int getServiceListCount(String where, String miid) {
-		String sql = "SELECT COUNT(*) FROM t_service_info a, t_service_join b " + where + " AND a.si_idx = b.si_idx " + 
-				" AND b.mi_id = '" + miid + "'";
+	public int getServiceListCount(String where) {
+		String sql = "SELECT COUNT(*) FROM t_service_info a, t_service_join b " + where + " AND a.si_idx = b.si_idx ";
 		System.out.println(sql);
 		int rcnt = jdbc.queryForObject(sql, Integer.class);
 		return rcnt;
 	}
 	
-	public List<ServiceInfo> getServiceMemList(String miid, int cpage, int psize) {
+	public List<ServiceInfo> getServiceMemList(int cpage, int psize, String where) {
 		String sql = "SELECT a.si_idx, a.si_acname, a.si_acdate, a.si_recruit, b.sj_idx, b.sj_status, b.sj_date " + 
-				" FROM t_service_info a, t_service_join b " + 
-				" WHERE a.si_idx = b.si_idx AND a.si_view = 'y' AND b.mi_id = '" + miid + "' " + 
+				" FROM t_service_info a, t_service_join b " + where + " AND a.si_idx = b.si_idx " + 
 				" ORDER BY b.sj_date DESC LIMIT " + ((cpage - 1) * psize) + ", " + psize;
 		System.out.println(sql);
 		List<ServiceInfo> results = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
@@ -138,10 +136,11 @@ private JdbcTemplate jdbc;
 		return result;
 	}
 
-	public String getMySvcSch(String where) {
-		String sql = "SELECT * FROM t_service_join " + where;
-		System.out.println(sql);
-		String result = jdbc.queryForObject(sql, String.class);
-		return result;
-	}
+//	public String getMySvcSch(String where) {
+//		String sql = "SELECT COUNT(*) FROM t_service_info a, t_service_join b " + 
+//					" WHERE a.si_idx = b.si_idx AND a.si_view = 'y' " + where;
+//		System.out.println(sql);
+//		String result = jdbc.queryForObject(sql, String.class);
+//		return result;
+//	}
 }
