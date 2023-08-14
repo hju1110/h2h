@@ -12,6 +12,12 @@ LocalDate today = LocalDate.now();
 int cYear = today.getYear();
 int cMonth = today.getMonthValue();
 
+String ydate = pageInfo.getYdate();
+String mdate = pageInfo.getMdate();
+
+if (ydate == null)	ydate = cYear + "";
+if (mdate == null) mdate = cMonth + "";
+
 String ctgr = "";
 String sponsor = "";
 String payment = "";
@@ -109,11 +115,13 @@ function total() {
   <div>
     <h3 class="sub-heading">총 후원 금액</h3>
     <select id="mdCtgr">
+		<option value="d">전체</option>
       <option value="a">일반후원</option>
       <option value="b">정기후원</option>
       <option value="c">정기후원 취소</option>
     </select>
     <select id="dnSponsor">
+		<option value="d">전체</option>
       <option value="a">행복한 손길</option>
       <option value="b">서울청소년 지원부</option>
       <option value="c">즐거운 어린이집</option>
@@ -140,29 +148,31 @@ function total() {
       <legend>후원자 검색</legend>
       <div>
         <select name="dnSponsor">
-          <option value="a" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("a")) { %> selected="selected"<% } %>>행복한 손길</option>
-          <option value="b" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("b")) { %> selected="selected"<% } %>>서울청소년 지원부</option>
-          <option value="c" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("c")) { %> selected="selected"<% } %>>즐거운 어린이집</option>
+	        <option value="d" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("d")) { %> selected="selected"<% } %>>전체</option>
+			<option value="a" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("a")) { %> selected="selected"<% } %>>행복한 손길</option>
+			<option value="b" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("b")) { %> selected="selected"<% } %>>서울청소년 지원부</option>
+			<option value="c" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("c")) { %> selected="selected"<% } %>>즐거운 어린이집</option>
         </select>
         <select name="mdCtgr">
-          <option value="a" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("a")) { %> selected="selected"<% } %>>일반후원</option>
-          <option value="b" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("b")) { %> selected="selected"<% } %>>정기후원</option>
-          <option value="c" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("c")) { %> selected="selected"<% } %>>정기후원 취소</option>
+        	<option value="d" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("d")) { %> selected="selected"<% } %>>전체</option>
+			<option value="a" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("a")) { %> selected="selected"<% } %>>일반후원</option>
+			<option value="b" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("b")) { %> selected="selected"<% } %>>정기후원</option>
+			<option value="c" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("c")) { %> selected="selected"<% } %>>정기후원 취소</option>
         </select>
         <select name="mi">
-          <option value="md_id" <% if (pageInfo.getMi() != null && pageInfo.getMi().equals("md_id")) { %> selected="selected"<% } %>>아이디</option>
-          <option value="md_name" <% if (pageInfo.getMi() != null && pageInfo.getMi().equals("md_name")) { %> selected="selected"<% } %>>이름</option>
+			<option value="md_id" <% if (pageInfo.getMi() != null && pageInfo.getMi().equals("md_id")) { %> selected="selected"<% } %>>아이디</option>
+			<option value="md_name" <% if (pageInfo.getMi() != null && pageInfo.getMi().equals("md_name")) { %> selected="selected"<% } %>>이름</option>
         </select>
         <select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);">
-          <option>전체</option>
+          <option value="all">전체</option>
           <% for(int i = 2022 ; i <= cYear ; i++) { %>
-            <option <% if (i == cYear) { %>selected="selected" <% } %>><%=i %></option>
+            <option <% if (ydate.equals(i + "")) { %>selected="selected"<% } %> value="<%=i %>" ><%=i %></option>
           <% } %>
         </select>
         <select name="mdate" id="m" onchange="resetday(this.form.ydate.value, this.value);">
-          <option>전체</option>
+          <option value="all">전체</option>
           <% for(int i = 1 ; i <= 12 ; i++) { %>
-            <option <% if (i == cMonth) { %>selected="selected" <% } %>><%=i %></option>
+            <option <% if (mdate.equals(i + "")) { %>selected="selected"<% } %> value="<%=i %>"><%=i %></option>
           <% } %>
         </select>
         <input type="text" name="keyword" value="<%=pageInfo.getKeyword() %>" />
@@ -189,16 +199,20 @@ function total() {
           ctgr = "일반후원";
         } else if (dn.getMd_ctgr().equals("b")) {
           ctgr = "정기후원";
-        }  else {
+        }  else if (dn.getMd_ctgr().equals("c")) {
           ctgr = "정기후원 취소";
+        } else {
+        	ctgr = "전체";
         }
         
         if (dn.getDi_sponsor().equals("a")) {
           sponsor = "행복한 손길";
         } else if (dn.getDi_sponsor().equals("b")) {
           sponsor = "서울청소년 지원부";
-        }  else {
+        }  else if (dn.getDi_sponsor().equals("c")) {
           sponsor = "즐거운 어린이집";
+        } else {
+        	sponsor = "전체";
         }
         
         if (dn.getMd_payment().equals("a")) {
@@ -214,7 +228,7 @@ function total() {
       <td><%=sponsor %></td>
       <td><%=dn.getMd_id() %></td>
       <td><%=dn.getMd_name() %></td>
-      <td><%=dn.getMd_sdate() %></td>
+      <td><%=dn.getMd_sdate().substring(0, 11) %></td>
       <td><%=dn.getMd_price() %></td>
       <td><%=payment %></td>
     </tr>

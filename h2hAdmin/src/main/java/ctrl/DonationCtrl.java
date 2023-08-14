@@ -61,10 +61,10 @@ public class DonationCtrl {
 	            if (dnSponsor.equals("a") || dnSponsor.equals("b") || dnSponsor.equals("c")) {
 	                where += " AND a.di_sponsor = '" + dnSponsor + "' ";
 	            }
-	            if (!ydate.equals("전체")) {
+	            if (!ydate.equals("all")) {
 	                where += " AND YEAR(b.md_sdate) = " + ydate + " ";
 	            }
-	            if (!mdate.equals("전체")) {
+	            if (!mdate.equals("all")) {
 	                where += " AND MONTH(b.md_sdate) = " + mdate + " ";
 	            }
 	            // keyword 검색 조건 추가
@@ -73,7 +73,7 @@ public class DonationCtrl {
 	            } else if (mi.equals("md_id")) {
 	                where += " AND b.md_id LIKE '%" + keyword + "%' ";
 	            }
-	            schargs = "&dnSponso=" + dnSponsor + "&mdCtgr=" +  mdCtgr + "&ydate=" + ydate + "&mdate=" + mdate + "&keyword=" + keyword;
+	            schargs = "&dnSponsor=" + dnSponsor + "&mdCtgr=" +  mdCtgr + "&ydate=" + ydate + "&mdate=" + mdate + "&keyword=" + keyword;
 	        }
 	    }
 	    
@@ -98,8 +98,8 @@ public class DonationCtrl {
 		pi.setKeyword(keyword);
 		pi.setMdCtgr(mdCtgr);
 		pi.setDnSponsor(dnSponsor);
-		pi.setYdate(ydate);
-		pi.setMdate(mdate);
+		pi.setYdate((ydate == null ? "all" : ydate));
+		pi.setMdate((mdate == null ? "all" : mdate));
 		pi.setMi(mi);
 		pi.setSchargs(schargs);
 		request.setAttribute("pi",pi);
