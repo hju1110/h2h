@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("utf-8");
+String url = request.getParameter("url");
+if (url == null)	url = "";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,6 +39,7 @@ a, label {
 		<input type="text" name="uid" class="tsize" placeholder="아이디" value="ucheri72"><br>
 		<input type="password" name="pwd" class="tsize" placeholder="비밀번호" value="1234"><br><br>
 		<input type="submit" class="tsize" id="login" value="로그인"><br>
+		<input type="hidden" name="url" value="<%=url %>" />
 		<div class="fontsize">
 			<input type="checkbox" id="remember-check"><label for="remember-check">아이디 저장</label>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

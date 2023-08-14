@@ -33,7 +33,7 @@ public class DonationCtrl {
 	         PrintWriter out = response.getWriter();
 	         out.println("<script>");
 	         out.println("alert('로그인이 필요합니다.');");
-	         out.println("location.href='/h2hFront/login';");
+	         out.println("location.href='login?url=donaMemList';");
 	         out.println("</script>");
 	         out.close();
 	    }

@@ -98,7 +98,7 @@ public class ReviewCtrl {
 					PrintWriter out = response.getWriter();
 					out.println("<script>");
 					out.println("alert('로그인이 필요합니다 로그인 창으로 이동합니다.');");
-					out.println("location.href='login';");
+					out.println("location.href='login?url=reviewFormIn';");
 					out.println("</script>");	
 					out.close();
 				}

@@ -28,7 +28,7 @@ public class ParcelProcCtrl {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인이 필요합니다.');");
-			out.println("location.href='login';");
+			out.println("location.href='login?url=ParcelProc';");
 			out.println("</script>");	
 			out.close();
 		}
@@ -57,7 +57,7 @@ public class ParcelProcCtrl {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인이 필요합니다.');");
-			out.println("location.href='login';");
+			out.println("location.href='login?url=ParcelView';");
 			out.println("</script>");	
 			out.close();
 		}
