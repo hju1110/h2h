@@ -49,7 +49,7 @@ public class MemberJoinCtrl {
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('ȸ�� ���Կ� �����߽��ϴ�.');");
+				out.println("alert('정보 불러오기 실패');");
 				out.println("history.back();");
 				out.println("</script>");
 				out.close();
