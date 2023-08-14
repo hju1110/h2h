@@ -64,7 +64,7 @@ onclick="location.href='myInfoChk';" /></h6>
 <c:if test="${si.getSi_recruit()  == 'y' }" >
 <input type="button" class="btn btn-primary" id= "chk" value="봉사활동 신청" 
 	<% if (loginInfo != null) { %>onclick="document.frmSView.submit();" <% } else { %>
-	onclick="location.href='login?url=serviceView?siidx=${si.getSi_idx()}';" <% } %> />
+	onclick="alert('로그인 후에 사용하실 수 있습니다.'); location.href='login?url=serviceView?siidx=${si.getSi_idx()}';" <% } %> />
 </c:if>
 </div>
 <form name="frmSView" action="serviceFinish">
