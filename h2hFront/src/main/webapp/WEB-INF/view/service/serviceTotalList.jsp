@@ -110,8 +110,8 @@ function del() {
 		[처음]&nbsp;&nbsp;&nbsp;&nbsp;[이전]&nbsp;&nbsp;
 	</c:if>
 	<c:if test="${pi.getCpage() > 1}">
-		<a href="serviceTotalList?cpage=1${pi.getSchargs() }">[처음]</a>&nbsp;&nbsp;&nbsp;
-		<a href="serviceTotalList?cpage=${pi.getCpage() - 1} }">[이전]</a>&nbsp;&nbsp;
+		<a href="serviceTotalList?cpage=1">[처음]</a>&nbsp;&nbsp;&nbsp;
+		<a href="serviceTotalList?cpage=${pi.getCpage() - 1} ">[이전]</a>&nbsp;&nbsp;
 	</c:if>
 	
 	<c:forEach var="i" begin="${pi.getSpage() }"
@@ -128,8 +128,8 @@ function del() {
 		&nbsp;&nbsp;[다음]&nbsp;&nbsp;&nbsp;[마지막]
 	</c:if>
 	<c:if test="${pi.getCpage() < pi.getPcnt()}">
-		&nbsp;&nbsp;<a href="serviceTotalList?cpage=${pi.getCpage() + 1} }">[다음]</a>
-		&nbsp;&nbsp;&nbsp;<a href="serviceTotalList?cpage=${pi.getPcnt() } }">[마지막]</a>
+		&nbsp;&nbsp;<a href="serviceTotalList?cpage=${pi.getCpage() + 1} ">[다음]</a>
+		&nbsp;&nbsp;&nbsp;<a href="serviceTotalList?cpage=${pi.getPcnt() } ">[마지막]</a>
 	</c:if>
 </c:if>
 </td>

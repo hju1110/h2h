@@ -16,7 +16,7 @@ private JdbcTemplate jdbc;
 	public int getServiceInfoCount(String where) {
 		// 검색된(검색어가 있을경우) 게시글의 총 개수를 리턴하는 메소드 여기서 작업
 			String sql = "select count(*) from t_service_info " + where;
-//			System.out.println(sql);
+			System.out.println(sql);
 			int rcnt = jdbc.queryForObject(sql, Integer.class);	// 레코드가 하나일 때 queryForObject 사용
 		return rcnt;
 	}
@@ -80,7 +80,7 @@ private JdbcTemplate jdbc;
 	}
 
 	public int setFinish(ServiceMember sm) {
-		String sql = "INSERT INTO t_serviece_join VALUES (NULL, ?, ?, 'g', 0, NOW())";
+		String sql = "INSERT INTO t_service_join VALUES (NULL, ?, ?, 'g', 0, NOW())";
 		int result = jdbc.update(sql, sm.getSi_idx(), sm.getMi_id());
 		
 		sql = "UPDATE t_service_info SET si_cnt = si_cnt + 1 WHERE si_idx = " + sm.getSi_idx();
@@ -97,17 +97,18 @@ private JdbcTemplate jdbc;
 		return result;
 	}
 
-	public int getServiceListCount(String miid) {
-		String sql = "SELECT COUNT(*) FROM t_service_info a, t_serviece_join b WHERE a.si_idx = b.si_idx " + 
+	public int getServiceListCount(String where, String miid) {
+		String sql = "SELECT COUNT(*) FROM t_service_info a, t_service_join b " + where + " AND a.si_idx = b.si_idx " + 
 				" AND b.mi_id = '" + miid + "'";
+		System.out.println(sql);
 		int rcnt = jdbc.queryForObject(sql, Integer.class);
 		return rcnt;
 	}
 	
 	public List<ServiceInfo> getServiceMemList(String miid, int cpage, int psize) {
 		String sql = "SELECT a.si_idx, a.si_acname, a.si_acdate, a.si_recruit, b.sj_idx, b.sj_status, b.sj_date " + 
-				" FROM t_service_info a, t_serviece_join b " + 
-				" WHERE a.si_idx = b.si_idx AND b.mi_id = '" + miid + "' " + 
+				" FROM t_service_info a, t_service_join b " + 
+				" WHERE a.si_idx = b.si_idx AND a.si_view = 'y' AND b.mi_id = '" + miid + "' " + 
 				" ORDER BY b.sj_date DESC LIMIT " + ((cpage - 1) * psize) + ", " + psize;
 		System.out.println(sql);
 		List<ServiceInfo> results = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
@@ -126,7 +127,7 @@ private JdbcTemplate jdbc;
 	}
 
 	public int setSvcCancel(int sjidx, int siidx, String miid) {
-		String sql = "DELETE FROM t_serviece_join WHERE mi_id = '" + miid + "' AND sj_idx = " + sjidx + " " + 
+		String sql = "DELETE FROM t_service_join WHERE mi_id = '" + miid + "' AND sj_idx = " + sjidx + " " + 
 				" AND si_idx = " + siidx;
 		System.out.println(sql);
 		int result = jdbc.update(sql);
@@ -138,7 +139,7 @@ private JdbcTemplate jdbc;
 	}
 
 	public String getMySvcSch(String where) {
-		String sql = "SELECT * FROM t_serviece_join " + where;
+		String sql = "SELECT * FROM t_service_join " + where;
 		System.out.println(sql);
 		String result = jdbc.queryForObject(sql, String.class);
 		return result;

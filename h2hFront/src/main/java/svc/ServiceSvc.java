@@ -42,8 +42,8 @@ public class ServiceSvc {
 		return result;
 	}
 
-	public int getServiceListCount(String miid) {
-		int rcnt = serviceDao.getServiceListCount(miid);
+	public int getServiceListCount(String where, String miid) {
+		int rcnt = serviceDao.getServiceListCount(where, miid);
 		return rcnt;
 	}
 

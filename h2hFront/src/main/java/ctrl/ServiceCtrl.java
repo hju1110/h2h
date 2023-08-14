@@ -163,9 +163,19 @@ public class ServiceCtrl {
 		String where = " WHERE si_view = 'y' ";
 		HttpSession session = request.getSession();
 		MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
-		String miid = loginInfo.getMi_id();
+		if (loginInfo == null) {
+	         response.setContentType("text/html; charset=utf-8");
+	         PrintWriter out = response.getWriter();
+	         out.println("<script>");
+	         out.println("alert('로그인이 필요합니다.');");
+	         out.println("location.href='login?url=serviceTotalList';");
+	         out.println("</script>");
+	         out.close();
+	    }
 		
-		rcnt = serviceSvc.getServiceInfoCount(where);	//검색된 게시글의 총 개수로 게시글 일련번호 출력과 전체 페이지수 계산을 위한 값
+		String miid = loginInfo.getMi_id();		
+		
+		rcnt = serviceSvc.getServiceListCount(where, miid);	//검색된 게시글의 총 개수로 게시글 일련번호 출력과 전체 페이지수 계산을 위한 값
 		List<ServiceInfo> serviceInfo = serviceSvc.getServiceMemList(miid, cpage, psize);
 		
 		pcnt = rcnt / psize;
