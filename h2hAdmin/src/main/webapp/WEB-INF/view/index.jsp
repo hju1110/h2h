@@ -35,7 +35,7 @@ AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">H2H Adminsss <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">H2H Admin<sup>2</sup></div>
             </a>
 
             <!-- Divider -->
