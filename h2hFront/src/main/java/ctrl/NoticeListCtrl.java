@@ -24,11 +24,10 @@ public class NoticeListCtrl {
     public String noticelist(Model model, HttpServletRequest request) throws Exception {
       request.setCharacterEncoding("utf-8");
       int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
-      // 현재 페이지 번호, 페이지 수, 시작페이지, 게시글 수, 페이지 크기
-      // 블록크기, 번호 등을 저장할 변수
+  
       if (request.getParameter("cpage") != null)
          cpage = Integer.parseInt(request.getParameter("cpage"));
-      // 보안상의 이유와 산술연산을 위해 int형으로 형변환함
+   
       
       String schtype = request.getParameter("schtype");
       String keyword = request.getParameter("keyword");
@@ -40,7 +39,7 @@ public class NoticeListCtrl {
       } else if (!schtype.equals("") && !keyword.trim().equals("")) {
          URLEncoder.encode(keyword, "UTF-8");
          keyword = keyword.trim();
-         if (schtype.equals("tc")) {   // 검색조건이 '제목 + 내용' 일 경
+         if (schtype.equals("tc")) {  
             where += " and (nl_title like '%" + keyword + "%' or nl_content like '%" + keyword + "%') ";
          } else {
             where += " and nl_" + schtype + " like '%" + keyword + "%' ";
@@ -67,7 +66,6 @@ public class NoticeListCtrl {
       pi.setKeyword(keyword);
       pi.setArgs(args);
       pi.setSchargs(schargs);
-      // 페이징에 필요한 정보들과 검색조건을 pageInfo에 인스턴스에 저장
         
       model.addAttribute("noticeList", noticeList);
       model.addAttribute("pi", pi);
@@ -84,18 +82,18 @@ public class NoticeListCtrl {
           HttpServletRequest request, HttpServletResponse response) throws Exception {
        request.setCharacterEncoding("utf-8");
        
-       String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";   // 업로드 프론트 경로 지정
+       String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";
         
        
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : nl_file) {
             if (!file.isEmpty()) {
-                File saveFile1 = new File(uploadPath1, file.getOriginalFilename()); // 프론트
-                // File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // 어드민
+                File saveFile1 = new File(uploadPath1, file.getOriginalFilename()); 
+
                 try {
-                   file.transferTo(saveFile1); // 프론트
-                   // file.transferTo(saveFile2); // 어드민
-                    piImgList.add(file.getOriginalFilename()); // 파일명 추가
+                   file.transferTo(saveFile1); 
+
+                    piImgList.add(file.getOriginalFilename()); 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -118,7 +116,7 @@ public class NoticeListCtrl {
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = response.getWriter();   
             out.println("<script>");
-            out.println("alert('공지사항 등록에 실패 .'); history.back();");
+            out.println("alert(); history.back();");
             out.println("</script>");
             out.close();
          } 
@@ -136,15 +134,12 @@ public class NoticeListCtrl {
                              @RequestParam(value = "keyword", required = false) String keyword,
                              HttpServletRequest request) throws Exception {
         request.setCharacterEncoding("utf-8");
-        
-        // System.out.println("nlidx: " + nlidx);
-        // System.out.println("cpage: " + cpage);
-        
+
         String args = "?cpage=" + cpage;
         
         if (schtype != null && !schtype.equals("") &&
             keyword != null && !keyword.equals("")) {
-            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoder의 결과를 변수에 할당해줘야 합니다.
+            keyword = URLEncoder.encode(keyword, "UTF-8");
             args += "&schtype=" + schtype + "&keyword=" + keyword;
         }
         
@@ -157,7 +152,6 @@ public class NoticeListCtrl {
 
     @GetMapping("/noticeFormUp")
     public String noticeUpForm(Model model, @RequestParam("nl_idx") int nl_idx) {
-        // 게시글 수정 페이지로 이동하기 위한 컨트롤러 메서드
         NoticeList nl = noticeSvc.getNoticeInfo(nl_idx);
         model.addAttribute("nl", nl);
 
@@ -171,17 +165,15 @@ public class NoticeListCtrl {
                                HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("utf-8");
 
-        // 업로드 어드민 경로 지정
         String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
   
-        // 기존 이미지 파일 삭제 후 새로운 이미지 업로드
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : nl_file) {
             if (!file.isEmpty()) {
-                File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // 어드민
+                File saveFile2 = new File(uploadPath2, file.getOriginalFilename());
                 try {
-                    file.transferTo(saveFile2); // 어드민
-                    piImgList.add(file.getOriginalFilename()); // 파일명 추가
+                    file.transferTo(saveFile2);
+                    piImgList.add(file.getOriginalFilename());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -190,18 +182,16 @@ public class NoticeListCtrl {
 
         String nl_writer = request.getParameter("nl_writer");
         String nl_title = request.getParameter("nl_title");
-        // 빈 문자열로 초기화하여 NULL 값 방지
+
         String nl_content = request.getParameter("nl_content") != null ? request.getParameter("nl_content") : "";
         String new_nl_name = piImgList.isEmpty() ? nl_name : piImgList.get(0);
 
-        // 기존 이미지 파일 삭제
         String imagePath = uploadPath2 + "/" + nl_name;
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
             imageFile.delete();
         }
 
-        // 새로운 이미지 파일명으로 업데이트
         NoticeList nl = new NoticeList();
         nl.setNl_idx(nl_idx);
         nl.setNl_writer(nl_writer);
@@ -214,7 +204,7 @@ public class NoticeListCtrl {
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");
-            out.println("alert('게시글 수정에 실패하였습니다.'); history.back();");
+            out.println("alert(); history.back();");
             out.println("</script>");
             out.close();
         }

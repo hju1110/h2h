@@ -31,14 +31,8 @@ public class ReviewSvc {
 		return result;
 	}
 	
-	 /*public String getImagePath(String filename) {
-	        // �̹��� ������ ����� ���丮 ��θ� �������� �̹��� ������ ��ü ��θ� �����մϴ�.
-	        String imagePath = uploadPath2 + "/" + filename;
-	        // ������ �̹��� ���� ��θ� ��ȯ�մϴ�.
-	        return imagePath;
-	    }*/
 	 public int addReviewReply(ReviewReply rr) {
-	        // ��� ��� ó���� �����ϴ� �޼���
+
 	        int result = reviewDao.addReviewReply(rr);
 	        return result;
 	    }

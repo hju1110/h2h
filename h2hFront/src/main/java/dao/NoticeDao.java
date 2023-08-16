@@ -9,21 +9,18 @@ import vo.*;
 public class NoticeDao {
     private JdbcTemplate jdbc;
 
-
-    // 생성자
     public NoticeDao(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
     }
     
     
     public int getNoticeListCount(String where) {
-       // 검색된(검색어가 있을 경우) 게시글의 총 개수를 리턴하는 메소드
+
           String sql = "select count(*) from t_notice_list " + where;
           int rcnt = jdbc.queryForObject(sql, Integer.class);
           return rcnt;
        }
     public List<NoticeList> getNoticeList(String where, int cpage, int psize) {
-       // 게시글의 목록을  FreeList형 인스턴스로 저장한 List로 리턴하는 메소드
           
           String sql = "select nl_idx, nl_title, nl_writer, nl_read, " + 
                 "if(curdate() = date(nl_date), right(nl_date, 8), " + 
@@ -51,14 +48,13 @@ public class NoticeDao {
           return noticeList;
        }
     public int readUpdate(int nlidx) {
-      // 지정한 게시글의 조회수를 1증가 시키는 매소드
       String sql = "update t_notice_list set nl_read = nl_read + 1 where nl_idx = " + nlidx;
       int result = jdbc.update(sql);
       return result;
    }
 
     public NoticeList getNoticeInfo(int nlidx) {
-       readUpdate(nlidx);   // 조회수 증간
+       readUpdate(nlidx);   
 
        String sql = "select * from t_notice_list " + " where nl_isview = 'y' and nl_idx = " + nlidx;
       NoticeList nl = jdbc.queryForObject(sql, 
@@ -83,7 +79,7 @@ public class NoticeDao {
    public int noticeInsert(NoticeList nl) {
       String sql = "insert into t_notice_list (nl_writer, nl_title, nl_content, nl_name) values ('" + nl.getNl_writer() + "'," +
    " '" + nl.getNl_title() + "','" + nl.getNl_content() + "','" + nl.getNl_name() + "')";
-      // System.out.println(sql);
+
       int result = jdbc.update(sql);   
        return result;
 

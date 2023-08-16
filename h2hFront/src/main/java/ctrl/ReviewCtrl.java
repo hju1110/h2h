@@ -52,7 +52,7 @@ public class ReviewCtrl {
 			} else if (!schtype.equals("") && !keyword.trim().equals("")) {
 				URLEncoder.encode(keyword, "UTF-8");
 				keyword = keyword.trim();
-				if (schtype.equals("tc")) {	// �˻������� '���� + ����' �� ��
+				if (schtype.equals("tc")) {	
 					where += " and (rl_title like '%" + keyword + "%' or rl_content like '%" + keyword + "%') ";
 				} else {
 					where += " and rl_" + schtype + " like '%" + keyword + "%' ";
@@ -79,7 +79,6 @@ public class ReviewCtrl {
 			pi.setKeyword(keyword);
 			pi.setArgs(args);
 			pi.setSchargs(schargs);
-			// ����¡�� �ʿ��� ������� �˻������� pageInfo�� �ν��Ͻ��� ����
 	        
 			model.addAttribute("reviewList", reviewList);
 			model.addAttribute("pi", pi);
@@ -108,16 +107,15 @@ public class ReviewCtrl {
 	            HttpServletRequest request, HttpServletResponse response) throws Exception {
 	        request.setCharacterEncoding("utf-8");
 	        
-	        // ���ε� ���� ��� ����
 	        String uploadPath2 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {
 	            if (!file.isEmpty()) {
-	            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 // ����
+	            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 
 	                try {
-	                    file.transferTo(saveFile2); // ����
-	                    piImgList.add(file.getOriginalFilename()); // ���ϸ� �߰�
+	                    file.transferTo(saveFile2);
+	                    piImgList.add(file.getOriginalFilename());
 	                } catch (Exception e) {
 	                    e.printStackTrace();
 	                }
@@ -168,7 +166,7 @@ public class ReviewCtrl {
 	        String args = "?cpage=" + cpage;
 	        if (schtype != null && !schtype.equals("") &&
 	            keyword != null && !keyword.equals("")) {
-	            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoder�� ����� ������ �Ҵ������ �մϴ�.
+	            keyword = URLEncoder.encode(keyword, "UTF-8");
 	            args += "&schtype=" + schtype + "&keyword=" + keyword;
 	        }
 	        
@@ -224,10 +222,10 @@ public class ReviewCtrl {
 	            List<String> piImgList = new ArrayList<>();
 	            for (MultipartFile file : rl_file) {
 	                if (!file.isEmpty()) {
-	                    File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // ����
+	                    File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); 
 	                    try {
-	                        file.transferTo(saveFile2); // ����
-	                        piImgList.add(file.getOriginalFilename()); // ���ϸ� �߰�
+	                        file.transferTo(saveFile2);
+	                        piImgList.add(file.getOriginalFilename()); 
 	                    } catch (Exception e) {
 	                        e.printStackTrace();
 	                    }
@@ -249,7 +247,7 @@ public class ReviewCtrl {
 	            String rl_content = request.getParameter("rl_content");
 	            String new_rl_name = piImgList.get(0);
 	            String mi_id = loginInfo.getMi_name();
-	            // ���� �̹��� ���� ����
+
 	            String imagePath = uploadPath2 + "/" + rl_name;
 	            File imageFile = new File(imagePath);
 	            if (imageFile.exists()) {
@@ -285,7 +283,7 @@ public class ReviewCtrl {
 	        if (imageFile.exists()) {
 	            try {
 	                response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-	                response.setContentType("image/jpeg"); // �̹��� ���� Ÿ�Կ� �°� ����
+	                response.setContentType("image/jpeg"); 
 
 	                FileInputStream fis = new FileInputStream(imageFile);
 	                ServletOutputStream os = response.getOutputStream();

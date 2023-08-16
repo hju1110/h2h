@@ -38,7 +38,7 @@ public class NoticeListCtrl {
 		} else if (!schtype.equals("") && !keyword.trim().equals("")) {
 			URLEncoder.encode(keyword, "UTF-8");
 			keyword = keyword.trim();
-			if (schtype.equals("tc")) {	// 寃��깋議곌굔�씠 '�젣紐� + �궡�슜' �씪 寃�
+			if (schtype.equals("tc")) {	
 				where += " and (nl_title like '%" + keyword + "%' or nl_content like '%" + keyword + "%') ";
 			} else {
 				where += " and nl_" + schtype + " like '%" + keyword + "%' ";
@@ -80,7 +80,7 @@ public class NoticeListCtrl {
     		HttpServletRequest request, HttpServletResponse response) throws Exception {
     	request.setCharacterEncoding("utf-8");
     	
-    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";   // �뾽濡쒕뱶 �봽濡좏듃 寃쎈줈 吏��젙
+    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";
         
         List<String> piImgList = new ArrayList<>();
         if (nl_file != null) {
@@ -136,7 +136,7 @@ public class NoticeListCtrl {
         
         if (schtype != null && !schtype.equals("") &&
             keyword != null && !keyword.equals("")) {
-            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoder�쓽 寃곌낵瑜� 蹂��닔�뿉 �븷�떦�빐以섏빞 �빀�땲�떎.
+            keyword = URLEncoder.encode(keyword, "UTF-8"); 
             args += "&schtype=" + schtype + "&keyword=" + keyword;
         }
         
@@ -168,10 +168,10 @@ public class NoticeListCtrl {
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : nl_file) {
             if (!file.isEmpty()) {
-                File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // �뼱�뱶誘�
+                File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); 
                 try {
-                    file.transferTo(saveFile2); // �뼱�뱶誘�
-                    piImgList.add(file.getOriginalFilename()); // �뙆�씪紐� 異붽�
+                    file.transferTo(saveFile2); 
+                    piImgList.add(file.getOriginalFilename()); 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

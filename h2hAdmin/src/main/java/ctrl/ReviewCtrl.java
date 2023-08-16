@@ -53,7 +53,7 @@ public class ReviewCtrl {
 			} else if (!schtype.equals("") && !keyword.trim().equals("")) {
 				URLEncoder.encode(keyword, "UTF-8");
 				keyword = keyword.trim();
-				if (schtype.equals("tc")) {	// �˻������� '���� + ����' �� ��
+				if (schtype.equals("tc")) {	
 					where += " and (rl_title like '%" + keyword + "%' or rl_content like '%" + keyword + "%') ";
 				} else {
 					where += " and rl_" + schtype + " like '%" + keyword + "%' ";
@@ -80,7 +80,6 @@ public class ReviewCtrl {
 			pi.setKeyword(keyword);
 			pi.setArgs(args);
 			pi.setSchargs(schargs);
-			// ����¡�� �ʿ��� ������� �˻������� pageInfo�� �ν��Ͻ��� ����
 	        
 			model.addAttribute("reviewList", reviewList);
 			model.addAttribute("pi", pi);
@@ -113,10 +112,10 @@ public class ReviewCtrl {
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {
 	            if (!file.isEmpty()) {
-	            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 // ����
+	            	File saveFile2 = new File(uploadPath2, file.getOriginalFilename());	 
 	                try {
 	                    file.transferTo(saveFile2);
-	                    piImgList.add(file.getOriginalFilename()); // ���ϸ� �߰�
+	                    piImgList.add(file.getOriginalFilename()); 
 	                } catch (Exception e) {
 	                    e.printStackTrace();
 	                }
@@ -158,7 +157,7 @@ public class ReviewCtrl {
 	        
 	        if (schtype != null && !schtype.equals("") &&
 	            keyword != null && !keyword.equals("")) {
-	            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoder�� ����� ������ �Ҵ������ �մϴ�.
+	            keyword = URLEncoder.encode(keyword, "UTF-8"); 
 	            args += "&schtype=" + schtype + "&keyword=" + keyword;
 	        }
 	        
@@ -175,7 +174,6 @@ public class ReviewCtrl {
 	    
 	    @PostMapping("/addReviewReply")
 	    public String addReviewReply(HttpServletRequest request) {
-	        // ��� ��� ó��
 	        int rl_idx = Integer.parseInt(request.getParameter("rl_idx"));
 	        String rr_writer = request.getParameter("rr_writer");
 	        String rr_content = request.getParameter("rr_content");
@@ -218,10 +216,10 @@ public class ReviewCtrl {
 	           List<String> piImgList = new ArrayList<>();
 	            for (MultipartFile file : rl_file) {
 	                if (!file.isEmpty()) {
-	                    File saveFile2 = new File(uploadPath2, file.getOriginalFilename()); // ����
+	                    File saveFile2 = new File(uploadPath2, file.getOriginalFilename());
 	                    try {
-	                        file.transferTo(saveFile2); // ����
-	                        piImgList.add(file.getOriginalFilename()); // ���ϸ� �߰�
+	                        file.transferTo(saveFile2);
+	                        piImgList.add(file.getOriginalFilename());
 	                    } catch (Exception e) {
 	                        e.printStackTrace();
 	                    }
@@ -278,7 +276,7 @@ public class ReviewCtrl {
 	        if (imageFile.exists()) {
 	            try {
 	                response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-	                response.setContentType("image/jpeg"); // �̹��� ���� Ÿ�Կ� �°� ����
+	                response.setContentType("image/jpeg"); 
 
 	                FileInputStream fis = new FileInputStream(imageFile);
 	                ServletOutputStream os = response.getOutputStream();

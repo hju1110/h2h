@@ -15,19 +15,18 @@ public class ReviewDao {
 	        this.jdbc = new JdbcTemplate(dataSource);
 	    }
 	    public int getReviewListCount(String where) {
-	    	// �˻���(�˻�� ���� ���) �Խñ��� �� ������ �����ϴ� �޼ҵ�
+	  
 	    		String sql = "select count(*) from t_review_list " + where;
 	    		int rcnt = jdbc.queryForObject(sql, Integer.class);
 	    		return rcnt;
 	    	}
 	    public List<ReviewList> getReviewList(String where, int cpage, int psize) {
-	    	// �Խñ��� �����  FreeList�� �ν��Ͻ��� ������ List�� �����ϴ� �޼ҵ�
-	    		
+   		
 	    		String sql = "select rl_idx, rl_title, rl_writer, rl_read, " + 
 	    				"if(curdate() = date(rl_date), right(rl_date, 8), " + 
 	    				"mid(rl_date, 3, 8)) wdate from t_review_list " + where + 
 	    				" order by rl_idx desc limit " + ((cpage - 1) * psize) + ", " + psize;
-	    		// System.out.println(sql);
+
 	    		List<ReviewList> reviewList = jdbc.query(sql,  (ResultSet rs, int rowNum) -> {
 	    			ReviewList rl = new ReviewList();
 	    			rl.setRl_idx(rs.getInt("rl_idx"));
@@ -36,10 +35,7 @@ public class ReviewDao {
 	    			rl.setRl_date(rs.getString("wdate").replace("-", "."));
 	    			
 	    			String title = ""; int cnt = 30;
-	    			/*if (rs.getInt("fl_reply") > 0) {
-	    				title = " [" + rs.getInt("fl_reply") + "]";
-	    				cnt -= 3;
-	    			}*/
+	    			
 	    			if (rs.getString("rl_title").length() > cnt)
 	    				title = rs.getString("rl_title").substring(0, cnt - 3) + "..." + title;
 	    			else 
@@ -52,7 +48,7 @@ public class ReviewDao {
 	    		return reviewList;
 	    	}
 	    public int readUpdate(int rlidx) {
-			// ������ �Խñ��� ��ȸ���� 1���� ��Ű�� �żҵ�
+
 			String sql = "update t_review_list set rl_read = rl_read + 1 where rl_idx = " + rlidx;
 		
 			int result = jdbc.update(sql);
@@ -60,7 +56,7 @@ public class ReviewDao {
 		}
 	    
 	    public ReviewList getReviewInfo(int rlidx) {
-	    	readUpdate(rlidx);	// ��ȸ�� ����
+	    	readUpdate(rlidx);
 
 	    	String sql = "select * from t_review_list " + " where rl_isview = 'y' and rl_idx = " + rlidx;
 			ReviewList rl = jdbc.queryForObject(sql, 
@@ -94,7 +90,6 @@ public class ReviewDao {
 
 		}
 	    public int addReviewReply(ReviewReply rr) {
-	        // ����� �����ͺ��̽��� ����ϴ� ������ �ۼ��ϰ� �����ϴ� �޼���
 	        String sql = "INSERT INTO t_review_reply (rl_idx, rr_writer, rr_content) VALUES (?, ?, ?)";
 	        System.out.println(sql);
 	        int result = jdbc.update(sql, rr.getRl_idx(), rr.getRr_writer(), rr.getRr_content());
