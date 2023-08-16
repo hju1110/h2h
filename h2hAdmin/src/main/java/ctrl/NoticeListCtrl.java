@@ -201,7 +201,7 @@ public class NoticeListCtrl {
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");
-            out.println("alert('寃뚯떆湲� �닔�젙�뿉 �떎�뙣�븯���뒿�땲�떎.'); history.back();");
+            out.println("alert('글 등록에 실패했습니다.'); history.back();");
             out.println("</script>");
             out.close();
         }

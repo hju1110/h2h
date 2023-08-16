@@ -138,7 +138,7 @@ public class ReviewCtrl {
 	            response.setContentType("text/html; charset=utf-8");
 	            PrintWriter out = response.getWriter();   
 	            out.println("<script>");
-	            out.println("alert('�������� ��Ͽ� ���� .'); history.back();");
+	            out.println("alert('글 등록에 실패하였습니다'); history.back();");
 	            out.println("</script>");
 	            out.close();
 	         } 
