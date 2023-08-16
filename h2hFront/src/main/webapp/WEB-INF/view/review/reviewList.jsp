@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>후기 게시판 목록</title>
 <style>
 body {
   font-size: 12px;
@@ -177,7 +177,13 @@ input[type="button"]:hover {
 </c:if>
 </td>
 <td width="*">
-	<input type="button" value="글 등록" onclick="location.href='reviewFormIn';" />
+	<c:if test="${reviewList.size() > 0 }">
+		<c:forEach items="${reviewList }" var="sj">
+			<c:if test="${sj.getSjReview() eq 'n' && sj.getSjStatus() eq 'y' }">
+				<input type="button" value="글 등록" onclick="location.href='reviewFormIn';" />
+			</c:if>
+		</c:forEach>
+	</c:if>
 </td>
 </tr>
 <tr><td colspan="2" align="center">

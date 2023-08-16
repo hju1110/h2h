@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../menuBar.jsp" %>
-<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.io.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title><!-- Add Bootstrap CSS link -->
+<title>후기 작성 등록</title>
+<!-- Add Bootstrap CSS link -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
@@ -20,6 +22,18 @@
 <tr>
 <th width="15%">작성자</th>
 <td width="35%"><input type="text" name="rl_writer" class="form-control" value="<%=loginInfo.getMi_name() %>" readonly /></td>
+</tr>
+<tr>
+<th width="15%">활동 명</th>
+<td width="35%">
+	<select name="siAcname">
+	<c:if test="${rl > 0 }" var="sj">
+	<c:forEach items="${sj.getSjStatus() == 'y' }">
+		<option>${sj.getSjAcname() }</option>
+	</c:forEach>
+	</c:if>
+	</select>
+</td>
 </tr>
 <tr>
 <th width="15%">글제목</th>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>후기 게시판 상세</title>
 <style>
     /* 스타일 추가 */
     body {
