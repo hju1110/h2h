@@ -65,12 +65,13 @@
 </form>
     <thead>
         <tr>
-			<th class="text-center" style="width:5%;">No</th>
-			<th class="text-center" style="width:33%;">봉사활동명</th>
-			<th class="text-center" style="width:20%;">활동일</th>
-			<th class="text-center" style="width:25%;">모집 기간</th>			
-			<th class="text-center" style="width:10%;">모집 인원</th>
-			<th class="text-center" style="width:20%;">등록일</th>
+			<th class="text-center" style="width:20;">No</th>
+			<th class="text-center" style="width:120;">봉사활동명</th>
+			<th class="text-center" style="width:100;">활동일</th>
+			<th class="text-center" style="width:125;">모집 기간</th>			
+			<th class="text-center" style="width:80;">모집 인원</th>		
+			<th class="text-center" style="width:100;">모집 상태</th>
+			<th class="text-center" style="width:100;">등록일</th>
 		</tr>
 	</thead>
 <c:if test="${serviceInfo.size() > 0}"><!-- 게시판 정보가 있으면~ else를 쓰고 싶으면 반대조건 주면 됨-->
@@ -81,6 +82,10 @@
 	<td align="center">${si.getSi_acdate().substring(0, 11) }</td>
 	<td align="center">${si.getSi_sdate().substring(0, 11) } ~ ${si.getSi_edate().substring(0, 11) }</td>
 	<td align="center">${si.getSi_person() }</td>
+	<td align="center">
+		<c:if test="${si.getSi_recruit() == 'y' }">모집 중</c:if>
+		<c:if test="${si.getSi_recruit() == 'n' }">모집 마감</c:if>
+	</td>
 	<td align="center">${si.getSi_date().substring(0, 11) }</td>
 	</c:forEach>
 </c:if>	
