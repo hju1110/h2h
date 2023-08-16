@@ -38,11 +38,9 @@ public class ReviewCtrl {
 	    public String reviewlist(Model model, HttpServletRequest request) throws Exception {
 			request.setCharacterEncoding("utf-8");
 			int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
-			// ���� ������ ��ȣ, ������ ��, ����������, �Խñ� ��, ������ ũ��
-			// ���ũ��, ��ȣ ���� ������ ����
+			
 			if (request.getParameter("cpage") != null)
 				cpage = Integer.parseInt(request.getParameter("cpage"));
-			// ���Ȼ��� ������ ��������� ���� int������ ����ȯ��
 			
 			String schtype = request.getParameter("schtype");
 			String keyword = request.getParameter("keyword");
@@ -166,11 +164,8 @@ public class ReviewCtrl {
 				out.println("</script>");	
 				out.close();
 			}
-	        // System.out.println("nlidx: " + nlidx);
-	        // System.out.println("cpage: " + cpage);
-	        
+	       
 	        String args = "?cpage=" + cpage;
-	       // String mi_id = loginInfo.getMi_id();
 	        if (schtype != null && !schtype.equals("") &&
 	            keyword != null && !keyword.equals("")) {
 	            keyword = URLEncoder.encode(keyword, "UTF-8"); // URLEncoder�� ����� ������ �Ҵ������ �մϴ�.
@@ -190,7 +185,6 @@ public class ReviewCtrl {
 	    
 	    @PostMapping("/addReviewReply")
 	    public String addReviewReply(HttpServletRequest request) {
-	        // ��� ��� ó��
 	        int rl_idx = Integer.parseInt(request.getParameter("rl_idx"));
 	        String rr_writer = request.getParameter("rr_writer");
 	        String rr_content = request.getParameter("rr_content");
@@ -205,9 +199,6 @@ public class ReviewCtrl {
 	        
 	        reviewSvc.addReviewReply(rr);
 
-	        // ���� �������� rl_idx, rr_writer, rr_content ������ Ȱ���Ͽ� ����� ����ϴ� �ڵ带 �ۼ��մϴ�.
-
-	        // �����̷�Ʈ�Ͽ� ��� ����� �����ݴϴ�.
 	        return "redirect:/reviewView?rlidx=" + rl_idx;
 	    }
 	    
@@ -228,10 +219,8 @@ public class ReviewCtrl {
 	                               HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    				request.setCharacterEncoding("utf-8");
 
-	            // ���ε� ���� ��� ����
 	            String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 
-	            // ���� �̹��� ���� ���� �� ���ο� �̹��� ���ε�
 	            List<String> piImgList = new ArrayList<>();
 	            for (MultipartFile file : rl_file) {
 	                if (!file.isEmpty()) {
@@ -287,23 +276,11 @@ public class ReviewCtrl {
 
 	            return "redirect:/reviewList";
 	        }
-	    /*
-	    @RequestMapping("/reviewList")
-	    public String reviewList(Model model) {
-	        List<ReviewReply> reviewList = reviewSvc.getReviewCommentCount();
-	        model.addAttribute("reviewList", reviewList);
-	        // ...
-	        return "review/reviewList";
-	    }*/
-    
 
-	    
 	    @RequestMapping("/downloadImage")
 	    public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
-	        // �̹��� ������ ��ü ��θ� �����մϴ�.
 	        String imagePath = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
 
-	        // ���� �ڵ�� ������ �����մϴ�.
 	        File imageFile = new File(imagePath);
 	        if (imageFile.exists()) {
 	            try {
@@ -326,7 +303,6 @@ public class ReviewCtrl {
 	    }
 	    @GetMapping("/reviewdeleteform")
 	    public String reviewdeleteform(@RequestParam("rlidx") int rlidx, HttpServletRequest request, HttpServletResponse response) throws Exception {
-	        // 여기에서 해당 게시글의 nl_isview를 'n'으로 업데이트하거나 삭제 작업 수행
 	    	HttpSession session = request.getSession();
 			MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
 			if (loginInfo == null) {
@@ -341,7 +317,7 @@ public class ReviewCtrl {
 			String mi_name = loginInfo.getMi_name();
 	        reviewSvc.unpublishReview(rlidx);
 
-	        return "redirect:/reviewList"; // 게시글 목록 페이지로 리다이렉트
+	        return "redirect:/reviewList";
 	    }
 	}
 

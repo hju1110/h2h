@@ -39,11 +39,9 @@ public class ReviewCtrl {
 			}
 			
 			int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
-			// ���� ������ ��ȣ, ������ ��, ����������, �Խñ� ��, ������ ũ��
-			// ���ũ��, ��ȣ ���� ������ ����
+
 			if (request.getParameter("cpage") != null)
 				cpage = Integer.parseInt(request.getParameter("cpage"));
-			// ���Ȼ��� ������ ��������� ���� int������ ����ȯ��
 			
 			String schtype = request.getParameter("schtype");
 			String keyword = request.getParameter("keyword");
@@ -98,8 +96,18 @@ public class ReviewCtrl {
 	    public String reviewProcIn(@RequestParam("rl_file") MultipartFile[] rl_file,
 	            HttpServletRequest request, HttpServletResponse response) throws Exception {
 	        request.setCharacterEncoding("utf-8");
+	        HttpSession session = request.getSession();
+			AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+			if (loginInfo == null) {
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('로그인 후 이용가능합니다.');");
+				out.println("location.href='login?url=reviewList';");
+				out.println("</script>");
+				out.close();
+			}
 	        
-	        // ���ε� ���� ��� ����
 	        String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
@@ -146,9 +154,6 @@ public class ReviewCtrl {
 	                             HttpServletRequest request) throws Exception {
 	        request.setCharacterEncoding("utf-8");
 	        
-	        // System.out.println("nlidx: " + nlidx);
-	        // System.out.println("cpage: " + cpage);
-	        
 	        String args = "?cpage=" + cpage;
 	        
 	        if (schtype != null && !schtype.equals("") &&
@@ -186,16 +191,18 @@ public class ReviewCtrl {
 	        reviewSvc.addReviewReply(rr);
 
 	        return "redirect:/reviewView?rlidx=" + rl_idx;
+	        
 	    }
 	    
 	    @GetMapping("/reviewFormUp")
 	    public String reviewUpForm(Model model, @RequestParam("rl_idx") int rl_idx) {
-	        // �Խñ� ���� �������� �̵��ϱ� ���� ��Ʈ�ѷ� �޼���
 	        ReviewList rl = reviewSvc.getReviewInfo(rl_idx);
 	        model.addAttribute("rl", rl);
+	        
 
 	        return "review/reviewupdateform";
 	    }
+	    
 
 
 
@@ -220,20 +227,29 @@ public class ReviewCtrl {
 	                    }
 	                }
 	            }
+	            HttpSession session = request.getSession();
+				AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
+				if (loginInfo == null) {
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('로그인 후 이용가능합니다.');");
+					out.println("location.href='login?url=reviewList';");
+					out.println("</script>");
+					out.close();
+				}
 
 	            String rl_writer = request.getParameter("rl_writer");
 	            String rl_title = request.getParameter("rl_title");
 	            String rl_content = request.getParameter("rl_content");
 	            String new_rl_name = piImgList.get(0);
 
-	            // ���� �̹��� ���� ����
 	            String imagePath = uploadPath2 + "/" + rl_name;
 	            File imageFile = new File(imagePath);
 	            if (imageFile.exists()) {
 	                imageFile.delete();
 	            }
 
-	            // ���ο� �̹��� ���ϸ����� ������Ʈ
 	            ReviewList rl = new ReviewList();
 	            rl.setRl_idx(rl_idx);
 	            rl.setRl_writer(rl_writer);
@@ -253,23 +269,11 @@ public class ReviewCtrl {
 
 	            return "redirect:/reviewList";
 	        }
-	    /*
-	    @RequestMapping("/reviewList")
-	    public String reviewList(Model model) {
-	        List<ReviewReply> reviewList = reviewSvc.getReviewCommentCount();
-	        model.addAttribute("reviewList", reviewList);
-	        // ...
-	        return "review/reviewList";
-	    }*/
-    
 
-	    
 	    @RequestMapping("/downloadImage")
 	    public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
-	        // �̹��� ������ ��ü ��θ� �����մϴ�.
 	        String imagePath = "E:/lns/spring/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
 
-	        // ���� �ڵ�� ������ �����մϴ�.
 	        File imageFile = new File(imagePath);
 	        if (imageFile.exists()) {
 	            try {
@@ -292,10 +296,9 @@ public class ReviewCtrl {
 	    }
 	    @GetMapping("/reviewdeleteform")
 	    public String reviewdeleteform(@RequestParam("rlidx") int rlidx) {
-	        // 여기에서 해당 게시글의 nl_isview를 'n'으로 업데이트하거나 삭제 작업 수행
 	        reviewSvc.unpublishReview(rlidx);
 
-	        return "redirect:/reviewList"; // 게시글 목록 페이지로 리다이렉트
+	        return "redirect:/reviewList";
 	    }
 	}
 

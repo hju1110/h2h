@@ -39,11 +39,8 @@
 <script>
 function confirmDelete(nlIdx) {
     if (confirm("정말로 이 글을 삭제하시겠습니까?")) {
-        // 확인을 눌렀을 때
         location.href = "noticedeleteform?nlidx=" + nlIdx;
     } else {
-        // 취소를 눌렀을 때
-        // 아무 작업도 수행하지 않음
     }
 }
 </script>

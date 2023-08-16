@@ -55,6 +55,7 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
           <li class="nav-item"><a href="ProductProc" class="nav-link">쇼핑몰</a></li>
           <li class="nav-item"><a href="ParcelProc" class="nav-link">현황</a></li>
           <li class="nav-item"><a href="noticeList" class="nav-link">공지사항</a></li>
+          <li class="nav-item"><a href="qnaList" class="nav-link">QnA</a></li>
           <li class="nav-item"><a href="myPage" class="nav-link">마이페이지</a></li>
           <li class="nav-item"><a href="login" class="nav-link">로그인</a></li>
           <% } else { %>
@@ -64,6 +65,7 @@ MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
           <li class="nav-item"><a href="ProductProc" class="nav-link">쇼핑몰</a></li>
           <li class="nav-item"><a href="ParcelProc" class="nav-link">현황</a></li>
           <li class="nav-item"><a href="noticeList" class="nav-link">공지사항</a></li>
+          <li class="nav-item"><a href="qnaList" class="nav-link">QnA</a></li>
           <li class="nav-item"><a href="myPage" class="nav-link">마이페이지</a></li>
           <li class="nav-item"><a href="logout" class="nav-link">로그아웃</a></li>
           <% } %>

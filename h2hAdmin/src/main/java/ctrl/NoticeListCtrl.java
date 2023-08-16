@@ -25,11 +25,8 @@ public class NoticeListCtrl {
     public String noticelist(Model model, HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
-		// �쁽�옱 �럹�씠吏� 踰덊샇, �럹�씠吏� �닔, �떆�옉�럹�씠吏�, 寃뚯떆湲� �닔, �럹�씠吏� �겕湲�
-		// 釉붾줉�겕湲�, 踰덊샇 �벑�쓣 ���옣�븷 蹂��닔
 		if (request.getParameter("cpage") != null)
 			cpage = Integer.parseInt(request.getParameter("cpage"));
-		// 蹂댁븞�긽�쓽 �씠�쑀�� �궛�닠�뿰�궛�쓣 �쐞�빐 int�삎�쑝濡� �삎蹂��솚�븿
 		
 		String schtype = request.getParameter("schtype");
 		String keyword = request.getParameter("keyword");
@@ -68,8 +65,6 @@ public class NoticeListCtrl {
 		pi.setKeyword(keyword);
 		pi.setArgs(args);
 		pi.setSchargs(schargs);
-		// �럹�씠吏뺤뿉 �븘�슂�븳 �젙蹂대뱾怨� 寃��깋議곌굔�쓣 pageInfo�뿉 �씤�뒪�꽩�뒪�뿉 ���옣
-        
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pi", pi);
 		
@@ -137,9 +132,6 @@ public class NoticeListCtrl {
                              HttpServletRequest request) throws Exception {
         request.setCharacterEncoding("utf-8");
         
-        // System.out.println("nlidx: " + nlidx);
-        // System.out.println("cpage: " + cpage);
-        
         String args = "?cpage=" + cpage;
         
         if (schtype != null && !schtype.equals("") &&
@@ -173,7 +165,6 @@ public class NoticeListCtrl {
 
        String uploadPath2 = "E:/lns/h2h/spring/h2hAdmin/src/main/webapp/resources/img";
         
-        // 湲곗〈 �씠誘몄� �뙆�씪 �궘�젣 �썑 �깉濡쒖슫 �씠誘몄� �뾽濡쒕뱶
         List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : nl_file) {
             if (!file.isEmpty()) {
@@ -189,18 +180,15 @@ public class NoticeListCtrl {
 
         String nl_writer = request.getParameter("nl_writer");
         String nl_title = request.getParameter("nl_title");
-        // 鍮� 臾몄옄�뿴濡� 珥덇린�솕�븯�뿬 NULL 媛� 諛⑹�
         String nl_content = request.getParameter("nl_content") != null ? request.getParameter("nl_content") : "";
         String new_nl_name = piImgList.isEmpty() ? nl_name : piImgList.get(0);
 
-        // 湲곗〈 �씠誘몄� �뙆�씪 �궘�젣
         String imagePath = uploadPath2 + "/" + nl_name;
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
             imageFile.delete();
         }
 
-        // �깉濡쒖슫 �씠誘몄� �뙆�씪紐낆쑝濡� �뾽�뜲�씠�듃
         NoticeList nl = new NoticeList();
         nl.setNl_idx(nl_idx);
         nl.setNl_writer(nl_writer);
@@ -222,10 +210,9 @@ public class NoticeListCtrl {
     }
     @GetMapping("/noticedeleteform")
     public String noticedeleteform(@RequestParam("nlidx") int nlidx) {
-        // 여기에서 해당 게시글의 nl_isview를 'n'으로 업데이트하거나 삭제 작업 수행
         noticeSvc.unpublishNotice(nlidx);
 
-        return "redirect:/noticeList"; // 게시글 목록 페이지로 리다이렉트
+        return "redirect:/noticeList"; 
     }
 
 }
