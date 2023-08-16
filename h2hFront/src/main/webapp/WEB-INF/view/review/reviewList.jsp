@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../menuBar.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -133,7 +135,7 @@ input[type="button"]:hover {
 	<td align="center">${pi.getNum() - status.index}</td>
 	<td><a href="reviewView?rlidx=${rl.getRl_idx()}${pi.getArgs()}">${rl.getRl_title()}</a></td>
 	<td align="center">${rl.getRl_writer()}</td>
-	<td align="center">${rl.getRl_date()}</td>
+	<td align="center">${rl.getRl_date().substring(0, 10)}</td>
 	<td align="center">${rl.getRl_read()}</td>
 	</tr>
 	</c:forEach>
@@ -177,13 +179,9 @@ input[type="button"]:hover {
 </c:if>
 </td>
 <td width="*">
-	<c:if test="${reviewList.size() > 0 }">
-		<c:forEach items="${reviewList }" var="sj">
-			<c:if test="${sj.getSjReview() eq 'n' && sj.getSjStatus() eq 'y' }">
-				<input type="button" value="글 등록" onclick="location.href='reviewFormIn';" />
-			</c:if>
-		</c:forEach>
-	</c:if>
+	<% if (loginInfo != null) { %>
+		<input type="button" value="글 등록" onclick="location.href='reviewFormIn';" />
+	<% } %>
 </td>
 </tr>
 <tr><td colspan="2" align="center">
