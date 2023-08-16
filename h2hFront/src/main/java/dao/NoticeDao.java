@@ -96,12 +96,5 @@ public class NoticeDao {
 
               return result;
       }
-     /*
-     public int noticedelete(int nl_idx) {
-          String sql = "DELETE FROM t_notice_list WHERE nl_idx = " + nl_idx;
-          System.out.println("Delete SQL: " + sql);
 
-          int result = jdbc.update(sql);
-          return result;
-      }*/
 }

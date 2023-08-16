@@ -19,7 +19,6 @@ public class QnaDao {
         this.jdbc = new JdbcTemplate(dataSource);
     }
     public int getQnaListCount(String where) {
-    	// 검색된(검색어가 있을 경우) 게시글의 총 개수를 리턴하는 메소드
     		String sql = "select count(*) from t_qna_list " + where;
     		int rcnt = jdbc.queryForObject(sql, Integer.class);
     		return rcnt;
@@ -53,7 +52,6 @@ public class QnaDao {
 		return result;
 	}
 	public QnaList getQnaList(int qlidx) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
