@@ -92,6 +92,7 @@ public class ServiceCtrl {
 		request.setCharacterEncoding("UTF-8");
 		int siidx = Integer.parseInt(request.getParameter("siidx"));
 		System.out.println(siidx);
+		String siAcname = request.getParameter("siAcname");
 		
 		HttpSession session = request.getSession();
 		MemberInfo mi = (MemberInfo)session.getAttribute("loginInfo");
@@ -102,6 +103,8 @@ public class ServiceCtrl {
 		System.out.println("siidx : " + siidx);
 		sm.setMi_id(miid);
 		System.out.println("miid : " + miid);
+		sm.setSi_acname(siAcname);
+		System.out.println("siAcname : " + siAcname);
 		
 		int result = serviceSvc.setFinish(sm);
 		if (result == 1) {

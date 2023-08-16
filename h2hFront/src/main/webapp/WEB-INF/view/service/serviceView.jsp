@@ -69,10 +69,7 @@ onclick="location.href='myInfoChk';" /></h6>
 </div>
 <form name="frmSView" action="serviceFinish">
 <input type="hidden" name="siidx" value="${si.getSi_idx()}" />
-<input type="hidden" name="miid" value="miid" />
-<input type="hidden" name="name" value="name" />
-<input type="hidden" name="birth" value="birth" />
-<input type="hidden" name="point" value="${si.getSi_point() }" />
+<input type="hidden" name="siAcname" value="${si.getSi_acname() }" />
 </form>
 </body>
 </html>

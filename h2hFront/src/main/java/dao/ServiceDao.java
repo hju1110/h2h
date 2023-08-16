@@ -79,9 +79,10 @@ private JdbcTemplate jdbc;
 		return si;
 	}
 
+	// 봉사 참여 신청 Insert문
 	public int setFinish(ServiceMember sm) {
-		String sql = "INSERT INTO t_service_join VALUES (NULL, ?, ?, 'g', 0, NOW())";
-		int result = jdbc.update(sql, sm.getSi_idx(), sm.getMi_id());
+		String sql = "INSERT INTO t_service_join VALUES (NULL, ?, ?, ?, 'g', 0, 'n', NOW())";
+		int result = jdbc.update(sql, sm.getSi_idx(), sm.getMi_id(), sm.getSi_acname());
 		
 		sql = "UPDATE t_service_info SET si_cnt = si_cnt + 1 WHERE si_idx = " + sm.getSi_idx();
 		result += jdbc.update(sql);
@@ -89,6 +90,7 @@ private JdbcTemplate jdbc;
 		return result;
 	}
 
+	// 봉사 등록 Insert문
 	public int setSvcProcIn(ServiceInfo si) {
 		String sql = "INSERT INTO t_service_info (si_acname, si_acdate, si_sdate, si_edate, si_person, si_content, " + 
 				" si_point, si_type) VALUES (?, ?, ?, ?, ?, ?, 2000, ?)";
@@ -97,6 +99,7 @@ private JdbcTemplate jdbc;
 		return result;
 	}
 
+	// 나의 봉사 현황 목록 개수
 	public int getServiceListCount(String where) {
 		String sql = "SELECT COUNT(*) FROM t_service_info a, t_service_join b " + where + " AND a.si_idx = b.si_idx ";
 		System.out.println(sql);
@@ -104,6 +107,7 @@ private JdbcTemplate jdbc;
 		return rcnt;
 	}
 	
+	// 나의 봉사 현황 목록
 	public List<ServiceInfo> getServiceMemList(int cpage, int psize, String where) {
 		String sql = "SELECT a.si_idx, a.si_acname, a.si_acdate, a.si_recruit, b.sj_idx, b.sj_status, b.sj_date " + 
 				" FROM t_service_info a, t_service_join b " + where + " AND a.si_idx = b.si_idx " + 
@@ -124,6 +128,7 @@ private JdbcTemplate jdbc;
 		return results;
 	}
 
+	// 봉사 참여 신청 취소
 	public int setSvcCancel(int sjidx, int siidx, String miid) {
 		String sql = "DELETE FROM t_service_join WHERE mi_id = '" + miid + "' AND sj_idx = " + sjidx + " " + 
 				" AND si_idx = " + siidx;
