@@ -16,27 +16,26 @@ private JdbcTemplate jdbc;
 	public int getServiceInfoCount(String where) {
 		// 검색된(검색어가 있을경우) 게시글의 총 개수를 리턴하는 메소드 여기서 작업
 			String sql = "select count(*) from t_service_info " + where;
-			System.out.println(sql);
+//			System.out.println(sql);
 			int rcnt = jdbc.queryForObject(sql, Integer.class);	// 레코드가 하나일 때 queryForObject 사용
 		return rcnt;
 	}
 	
 	// 참여 눌렀을 때 보이는 봉사 등록된 리스트
 	public List<ServiceInfo> getServiceInfo(String where, int cpage, int psize) {
-		String sql = "SELECT si_idx, " + 
-				" CASE WHEN si_accept = 'y' THEN '승인' WHEN si_view = 'n' THEN '미승인' ELSE '대기' END AS si_is_accept, " + 
-				" si_acname, si_acdate, si_sdate, si_edate, si_date FROM t_service_info " 
-				+ where + " order by si_idx desc limit " + ((cpage - 1) * psize) + ", " + psize;
+		String sql = "SELECT si_idx, si_acname, si_acdate, si_sdate, si_edate, si_person, si_recruit, si_date " + 
+				" FROM t_service_info "	+ where + " AND si_accept = 'y' ORDER BY si_idx DESC LIMIT " + ((cpage - 1) * psize) + ", " + psize;
 //		System.out.println(sql);
 		
 		List<ServiceInfo> serviceInfo = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
 			ServiceInfo si = new ServiceInfo();
 			si.setSi_idx(rs.getInt("si_idx"));
-			si.setSi_is_accept(rs.getString("si_is_accept"));
 			si.setSi_acname(rs.getString("si_acname"));
 			si.setSi_acdate(rs.getString("si_acdate").replace("-", "."));
 			si.setSi_sdate(rs.getString("si_sdate").replace("-", "."));
 			si.setSi_edate(rs.getString("si_edate").replace("-", "."));
+			si.setSi_person(rs.getInt("si_person"));
+			si.setSi_recruit(rs.getString("si_recruit"));
 			si.setSi_date(rs.getString("si_date").replace("-", "."));
 			return si;
 		});
