@@ -51,8 +51,56 @@ fieldset {
 <script>
 $(document).ready(function() {
 	$('#join').click(function() {
-		var form = document.frm;
-	    form.submit();
+		var frm = document.frm;
+		if (frm.gname.value == "") {
+			alert("기업/단체명을 입력해 주세요");
+			frm.gname.focus();
+			return false;
+		}
+		
+		if (frm.name.value == "") {
+			alert("담당자명을 입력해 주세요");
+			frm.name.focus();
+			return false;
+		}
+		
+		if (frm.id.value == "") {
+			alert("아이디를 입력해 주세요");
+			frm.id.focus();
+			return false;
+		}
+		
+		if (frm.password.value == "") {
+			alert("비밀번호를 입력해 주세요");
+			frm.password.focus();
+			return false;
+		}
+		
+		if (frm.rname.value == "") {
+			alert("수취인을 입력해 주세요");
+			frm.rname.focus();
+			return false;
+		}
+		
+		if (frm.zip.value == "") {
+			alert("우편번호를 입력해 주세요");
+			frm.zip.focus();
+			return false;
+		}
+		
+		if (frm.addr1.value == "") {
+			alert("주소를입력해 주세요");
+			frm.addr1.focus();
+			return false;
+		}
+		
+		if (frm.addr2.value == "") {
+			alert("상세주소를 입력해 주세요");
+			frm.addr2.focus();
+			return false;
+		}
+
+	    frm.submit();
 	});
 	
 	$('#chG').click(function() {

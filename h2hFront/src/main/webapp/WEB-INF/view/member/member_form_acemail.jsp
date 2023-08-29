@@ -49,8 +49,27 @@ fieldset {
 <script>
 $(document).ready(function() {
 	$('#mail-Check-Btn').click(function() {
+		var f = document.frm;
+		var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+		if (f.e1.value == "") {
+			alert("이메일 주소를 확인해 주세요");
+			f.e1.focus();
+			return false;
+		}
+		
+		if (f.e2.value == "") {
+			alert("이메일 주소를 확인해 주세요");
+			f.e2.focus();
+			return false;
+		}
+		
 		const emailn = $('#e1').val() + "@" + $('#e2').val(); // 이메일 주소값 얻어오기!
 		const email = emailn.replace(/\s+/g, '');
+		
+		if (email.match(regExp) == null) {
+			alert("이메일 주소를 확인해 주세요");
+			return false;
+		}
 		
 		$.ajax({
 			type : "POST", url : "./dupEmail", data : {"email" : email}, 
