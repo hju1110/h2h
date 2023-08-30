@@ -93,15 +93,15 @@ public class MemberCtrl {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-		} else {
-			out.println("<script>");
-			out.println("alert('회원가입에 성공했습니다.');");
-			out.println("</script>");
 		}
 		
 		if (type.equals("a")) { // 일반회원일 경우 주소도 추가
 			result = memberSvc.memberAddrInsert(ma);
 		}
+		
+		out.println("<script>");
+		out.println("('회원가입에 성공했습니다.');");
+		out.println("</script>");
 
 		return "member/login_form";
 	}
