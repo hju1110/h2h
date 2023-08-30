@@ -32,6 +32,10 @@ fieldset {
 </style>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 <script>
+function onlyNum(num) {	// 숫자만 사용가능한 정규식
+	num.value = num.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+}
+
 $(document).ready(function() {
 	$('#join').click(function() {
 		var frm = document.frm;
@@ -60,7 +64,7 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		if (frm.password.value == "") {
+		if (frm.pw.value == "") {
 			alert("비밀번호를 입력해 주세요");
 			frm.password.focus();
 			return false;
@@ -90,6 +94,12 @@ $(document).ready(function() {
 			return false;
 		}
 		
+		if (frm.pw.value != frm.chkPw.value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			frm.chkPw.focus();
+			return false;
+		}
+		
 	    frm.submit();
 	});
 });
@@ -111,7 +121,7 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td width="130"><p>생년월일</p></td>
-			<td><input type="text" name="birth" maxlength="6" placeholder="주민등록번호 앞 6자리"> - <input type="text" name="birth2" size="1" maxlength="1">******</td>
+			<td><input type="text" name="birth" maxlength="6" placeholder="주민등록번호 앞 6자리" oninput="onlyNum(this);"> - <input type="" name="birth2" size="1" maxlength="1" oninput="onlyNum(this);">******</td>
 		</tr>
 		<tr>
 			<td width="130"><p>아이디</p></td>
@@ -123,11 +133,11 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td width="130"><p>비밀번호 확인</p></td>
-			<td><input type="password"></td>
+			<td><input type="password" name="chkPw"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>휴대폰번호</p></td>
-			<td>010 - <input type="text" name="p1" size="5" maxlength="4"> - <input type="text" name="p2" size="5" maxlength="4"></td>
+			<td>010 - <input type="text" name="p1" size="5" maxlength="4" oninput="onlyNum(this);"> - <input type="text" name="p2" size="5" maxlength="4" oninput="onlyNum(this);"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>이메일</p></td>
@@ -142,11 +152,11 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td width="130"><p>휴대폰번호</p></td>
-			<td>010 - <input type="text" name="adp1" size="5" maxlength="4"> - <input type="text" name="adp2" size="5" maxlength="4"></td>
+			<td>010 - <input type="text" name="adp1" size="5" maxlength="4" oninput="onlyNum(this);"> - <input type="text" name="adp2" size="5" maxlength="4" oninput="onlyNum(this);"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>우편번호</p></td>
-			<td><input type="text" name="zip" maxlength="5"></td>
+			<td><input type="text" name="zip" maxlength="5" oninput="onlyNum(this);"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>주소</p></td>
