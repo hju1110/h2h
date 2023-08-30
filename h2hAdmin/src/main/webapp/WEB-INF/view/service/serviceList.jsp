@@ -2,7 +2,6 @@
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*"%>
-<%@include file="/resources/jsp/sidebar.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 List<ServiceInfo> serviceList = (List<ServiceInfo>)request.getAttribute("serviceList");

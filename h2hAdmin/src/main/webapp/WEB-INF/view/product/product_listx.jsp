@@ -2,7 +2,6 @@
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
-<%@include file="/resources/jsp/sidebar.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");

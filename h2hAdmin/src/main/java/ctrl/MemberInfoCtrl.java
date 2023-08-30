@@ -24,18 +24,6 @@ public class MemberInfoCtrl {
 	public String MemberInfo(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		HttpSession session = request.getSession();
-		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-		if (loginInfo == null) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인 후 이용가능합니다.');");
-			out.println("location.href='login?url=memberInfo';");
-			out.println("</script>");
-			out.close();
-		}
-		
 		int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 5, num = 0;
 		// 현재 페이지 번호, 페이지 수, 시작페이지, 게시글 수, 페이지 크기, 블록 크기, 번호, 블록 크기 번호
 		if (request.getParameter("cpage") != null)

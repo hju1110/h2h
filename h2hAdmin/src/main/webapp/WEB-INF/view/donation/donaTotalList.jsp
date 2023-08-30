@@ -2,7 +2,6 @@
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
-<%@include file="/resources/jsp/sidebar.jsp" %>
 <%
 List<DonationInfo> dl = (List<DonationInfo>)request.getAttribute("dl");
 DonationInfo di = (DonationInfo)request.getAttribute("di");

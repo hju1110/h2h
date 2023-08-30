@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="vo.*"%>
-<%@include file="/resources/jsp/sidebar.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
 ProductInfo pi = (ProductInfo)request.getAttribute("pi");

@@ -42,7 +42,7 @@ public class LoginCtrl {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginInfo", loginInfo);
 		}
-		
+
 		return "redirect:/" + url;
 	}
 }

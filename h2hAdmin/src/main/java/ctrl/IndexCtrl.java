@@ -5,8 +5,18 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class IndexCtrl {
-	@GetMapping("/")
+	@GetMapping("/incLeft")
+	public String incLeft() {
+		return "inc/incLeft";
+	}
+
+	@GetMapping("/mainPage")
+	public String mainPage() {
+		return "inc/mainPage";
+	}
+
+	@GetMapping("/index")
 	public String index() {
-		return "login";
+		return "index";
 	}
 }

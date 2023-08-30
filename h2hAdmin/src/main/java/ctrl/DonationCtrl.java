@@ -20,20 +20,7 @@ public class DonationCtrl {
 	
 	@GetMapping("/donaMemList")
 	public String DonaMemList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		HttpSession session = request.getSession();
-		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-		if (loginInfo == null) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인 후 이용가능합니다.');");
-			out.println("location.href='login?url=donaMemList';");
-			out.println("</script>");
-			out.close();
-		}
-		
-		int cpage = 1, pcnt = 0, spage = 0,  rcnt = 0, psize = 20, bsize = 10;
+				int cpage = 1, pcnt = 0, spage = 0,  rcnt = 0, psize = 20, bsize = 10;
 		
 		if (request.getParameter("cpage")!= null) {
 			cpage = Integer.parseInt(request.getParameter("cpage"));	

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/resources/jsp/sidebar.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>

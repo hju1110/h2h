@@ -2,7 +2,6 @@
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*"%>
-<%@include file="/resources/jsp/sidebar.jsp" %>
 <%
 AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 ParcelInfo pi = (ParcelInfo)request.getAttribute("parcelInfo");

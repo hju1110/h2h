@@ -24,16 +24,6 @@ public class OrderCtrl {
 		
 		HttpSession session = request.getSession();
 		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-		if (loginInfo == null) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인 후 이용가능합니다.');");
-			out.println("location.href='login?url=OrderForm';");
-			out.println("</script>");
-			out.close();
-		}
-		
 		String aiid = loginInfo.getAi_id();
 		
 		String piid = request.getParameter("piid");
@@ -61,20 +51,10 @@ public class OrderCtrl {
 	
 	@PostMapping("/orderProcIn")
 	public String orderProcIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");	
+		request.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession();
 		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인이 필요합니다.');");
-			out.println("location.href='login';");
-			out.println("</script>");	
-			out.close();
-		}
 		
 		OrderProcInCtrl oi = new OrderProcInCtrl();
 		

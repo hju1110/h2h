@@ -80,7 +80,7 @@ public class NoticeListCtrl {
     		HttpServletRequest request, HttpServletResponse response) throws Exception {
     	request.setCharacterEncoding("utf-8");
     	
-    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";
+    	String uploadPath1 = "E:/lhj/spring/h2h/h2hFront/src/main/webapp/resources/img";
         
         List<String> piImgList = new ArrayList<>();
         if (nl_file != null) {

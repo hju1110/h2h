@@ -25,19 +25,6 @@ public class ReviewCtrl {
 	    @GetMapping("/reviewList")
 	    public String reviewlist(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 			request.setCharacterEncoding("utf-8");
-			
-			HttpSession session = request.getSession();
-			AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-			if (loginInfo == null) {
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('로그인 후 이용가능합니다.');");
-				out.println("location.href='login?url=reviewList';");
-				out.println("</script>");
-				out.close();
-			}
-			
 			int cpage = 1, pcnt = 0, spage = 0, rcnt = 0, psize = 10, bsize = 10, num = 0;
 
 			if (request.getParameter("cpage") != null)
@@ -107,7 +94,7 @@ public class ReviewCtrl {
 				out.close();
 			}
 	        
-	        String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
+	        String uploadPath2 = "E:/lhj/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 	        
 	        List<String> piImgList = new ArrayList<>();
 	        for (MultipartFile file : rl_file) {
@@ -211,7 +198,7 @@ public class ReviewCtrl {
 	                               HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    				request.setCharacterEncoding("utf-8");
 
-	           String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
+	           String uploadPath2 = "E:/lhj/spring/h2h/h2hAdmin/src/main/webapp/resources/img";
 
 	           List<String> piImgList = new ArrayList<>();
 	            for (MultipartFile file : rl_file) {
@@ -225,17 +212,6 @@ public class ReviewCtrl {
 	                    }
 	                }
 	            }
-	            HttpSession session = request.getSession();
-				AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-				if (loginInfo == null) {
-					response.setContentType("text/html; charset=utf-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>");
-					out.println("alert('로그인 후 이용가능합니다.');");
-					out.println("location.href='login?url=reviewList';");
-					out.println("</script>");
-					out.close();
-				}
 
 	            String rl_writer = request.getParameter("rl_writer");
 	            String rl_title = request.getParameter("rl_title");
@@ -270,7 +246,7 @@ public class ReviewCtrl {
 
 	    @RequestMapping("/downloadImage")
 	    public void downloadImage(@RequestParam("filename") String filename, HttpServletResponse response) {
-	        String imagePath = "E:/lns/spring/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
+	        String imagePath = "E:/lhj/spring/h2hAdmin/src/main/webapp/resources/img" + "/" + filename;
 
 	        File imageFile = new File(imagePath);
 	        if (imageFile.exists()) {

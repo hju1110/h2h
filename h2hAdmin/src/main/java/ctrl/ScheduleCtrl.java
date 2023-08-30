@@ -23,15 +23,6 @@ public class ScheduleCtrl {	// 일정관리 관련 모든 기능을 매핑시키
 		
 		HttpSession session = request.getSession();
 		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-		if (loginInfo == null) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인 후 이용가능합니다.');");
-			out.println("location.href='login?url=schedule';");
-			out.println("</script>");
-			out.close();
-		}
 	
 		int curYear, curMonth, curDay, schYear, schMonth, schDay, schLast;
 		LocalDate today = LocalDate.now(); // 오늘 날짜를 가진 인스턴스 생성

@@ -29,18 +29,6 @@ public class ProductCtrl {
 	public String productList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		
-		HttpSession session = request.getSession();
-		AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
-		if (loginInfo == null) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인 후 이용가능합니다.');");
-			out.println("location.href='login?url=productList';");
-			out.println("</script>");
-			out.close();
-		}
-		
 		int cpage = 1, spage = 0, psize = 6, bsize = 10, rcnt = 0, pcnt = 0;
 		
 		if (request.getParameter("cpage") != null) 
@@ -139,8 +127,8 @@ public class ProductCtrl {
       //  String uploadPath1 = "C:/lns/spring/h2hFront/src/main/webapp/resources/img";	
        // String uploadPath2 = "C:/lns/spring/h2hAdmin/src/main/webapp/resources/img";
         
-    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";	
-        String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";	
+    	String uploadPath1 = "E:/lhj/spring/h2h/h2hFront/src/main/webapp/resources/img";	
+        String uploadPath2 = "E:/lhj/spring/h2h/h2hAdmin/src/main/webapp/resources/img";	
     	
     	List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : pi_img) {
@@ -289,8 +277,8 @@ public class ProductCtrl {
         request.setCharacterEncoding("UTF-8");
        
       
-    	String uploadPath1 = "E:/lns/spring/h2h/h2hFront/src/main/webapp/resources/img";	
-    	String uploadPath2 = "E:/lns/spring/h2h/h2hAdmin/src/main/webapp/resources/img";	
+    	String uploadPath1 = "E:/lhj/spring/h2h/h2hFront/src/main/webapp/resources/img";	
+    	String uploadPath2 = "E:/lhj/spring/h2h/h2hAdmin/src/main/webapp/resources/img";	
     	
     	List<String> piImgList = new ArrayList<>();
         for (MultipartFile file : pi_img) {

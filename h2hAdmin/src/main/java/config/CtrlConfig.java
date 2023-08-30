@@ -44,6 +44,11 @@ public class CtrlConfig {
 
 	@Autowired
 	private QnaSvc qnaSvc;
+	
+	@Bean
+	public IndexCtrl indexCtrl() {
+		return new IndexCtrl();
+	}
 
 	@Bean
 	public ProductCtrl productCtrl() {

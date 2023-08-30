@@ -88,14 +88,14 @@ public class ReviewCtrl {
 	    
 	    @GetMapping("/reviewFormIn")
 	    public String reviewInForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    	 HttpSession session = request.getSession();
-				MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
-				if (loginInfo == null) {
+	    	 
+				ServiceInfo si = new ServiceInfo();
+				if (si.getSj_status() != "y") {
 					response.setContentType("text/html; charset=utf-8");
 					PrintWriter out = response.getWriter();
 					out.println("<script>");
-					out.println("alert('로그인이 필요합니다 로그인 창으로 이동합니다.');");
-					out.println("location.href='login?url=reviewFormIn';");
+					out.println("alert('참여한 봉사가 있어야 후기 등록이 가능합니다.');");
+					out.println("history.back();");
 					out.println("</script>");	
 					out.close();
 				}
