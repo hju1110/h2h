@@ -1,0 +1,10 @@
+span {color: gray;}
+.ftco-navbar-light { background-color: #fff !important; top: 0;}
+.navbar-dark .navbar-brand:hover, .ftco-navbar-light .navbar-brand, .ftco-navbar-light .navbar-nav > .nav-item > .nav-link, .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover { color: #333;}
+.ftco-navbar-light .navbar-nav > .nav-item.active > .nav-link:hover { color: #f86f2d ;}
+.form-control {height: auto !important;}
+
+.block-27 ul li a, .block-27 ul li span {width: 30px; height: 30px; line-height: 30px;}
+.btn {-webkit-box-shadow: none; box-shadow: none;}
+
+#wrap { padding-top: 74px; }

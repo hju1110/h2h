@@ -1,133 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<style>
-body {
-  font-size: 12px;
-}
-
-a:link, a:visited {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: red;
-}
-
-#list {
-  width: 700px;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-#list th, #list td {
-  padding: 8px 3px;
-}
-
-#list th {
-  border-bottom: double black 3px;
-}
-
-#list td {
-  border-bottom: dotted black 1px;
-}
-
-#list th:nth-child(1) {
-  width: 10%;
-}
-
-#list th:nth-child(2) {
-  width: 50%;
-}
-
-#list th:nth-child(3),
-#list th:nth-child(4),
-#list th:nth-child(5),
-#list td:nth-child(3),
-#list td:nth-child(4),
-#list td:nth-child(5) {
-  width: 15%;
-}
-
-#list tr:nth-child(odd) {
-  background-color: #f2f2f2;
-}
-
-#list tr:hover {
-  background-color: #f9f9f9;
-}
-
-form {
-  margin-top: 20px;
-  text-align: center;
-}
-
-fieldset {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-legend {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-select, input[type="text"], input[type="submit"], input[type="button"] {
-  font-size: 12px;
-  padding: 5px;
-  margin: 5px;
-}
-
-input[type="submit"] {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-input[type="button"] {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-input[type="button"]:hover {
-  background-color: #1b6f2c;
-}
-
-#notice-form {
-  width: 700px;
-  margin: 20px auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-</style>
+<div class="hero-wrap" style="background-image: url('/h2hFront/resources/img/bg_5.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">QnA List</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 </head>
 <body>
-<h2>QnA</h2>
-<table id="list">
-<tr height="30">
-<th>번호</th>
-<th>제목</th>
-<th>작성자</th>
-<th>작성일</th>	
-<th>답변여부</th>
-</tr>
+<div align="center" style="padding:100px;">
+ <h1 class="text-center text-primary ftco-animate mb-3">QnA 목록</h1>
+ <table class="table table-bordered" id="list">
+ 	<thead>
+		<tr>
+			 <th class="text-center" style="width:5%;">번호</th>
+			 <th class="text-center" style="width:30%;">제목</th>
+			 <th class="text-center" style="width:5%;">작성자</th>
+			 <th class="text-center" style="width:5%;">작성일</th>	
+			 <th class="text-center" style="width:5%;">답변여부</th>
+		</tr>
+	</thead>
 <c:if test="${qnaList.size() > 0}">
 	<c:forEach items="${qnaList}" var="ql" varStatus="status">
+	<table class="table table-bordered" width="1000" cellpadding="5">
 	<tr height="30">
 	<td align="center">${pi.getNum() - status.index}</td>
 	<td><a href="qnaView?qlidx=${ql.getQl_idx()}${pi.getArgs()}">${ql.getQl_title()}</a></td>
@@ -178,6 +83,7 @@ input[type="button"]:hover {
 	</c:if>
 </c:if>
 </td>
+
 <td width="*">
 	<input type="button" value="글 등록" onclick="location.href='qnaFormIn';" />
 </td>
@@ -199,5 +105,5 @@ input[type="button"]:hover {
 	</fieldset>
 	</form>
 </table>
-</body>
-</html>
+</div>
+<%@ include file="../_inc/inc_foot.jsp" %>

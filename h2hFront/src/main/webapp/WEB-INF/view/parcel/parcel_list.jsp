@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*"%>
@@ -118,3 +118,4 @@
 %>
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>

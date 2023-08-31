@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head2.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,7 +44,9 @@
         <a class="btn btn-primary" href="ParcelProc">주문내역</a>
         <a class="btn btn-primary" href="donaMemList">내가 신청한 후원</a>
         <a class="btn btn-primary" href="serviceTotalList">봉사현황</a>
+           <a class="btn btn-primary" href="#">나의 후기</a>
     </div>
 </div>
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>

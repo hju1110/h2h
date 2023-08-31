@@ -25,7 +25,7 @@ public class ServiceCtrl {
 	public String serviceList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");	
 		int cpage = 1, pcnt = 0, spage = 0, rcnt = 0;
-		int psize = 2, bsize = 4, num = 0;
+		int psize = 10, bsize = 4, num = 0;
 		if(request.getParameter("cpage") != null)	//	request.getParameter("?") -> 받으면 무조건 String 안받으면 null
 			cpage = Integer.parseInt(request.getParameter("cpage"));
 		

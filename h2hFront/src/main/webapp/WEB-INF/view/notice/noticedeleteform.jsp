@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,3 +59,4 @@ function confirmDelete(nlIdx) {
 </div>
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="vo.MemberInfo" %>
+<%@ include file="../_inc/inc_head.jsp" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 MemberInfo mi = (MemberInfo)session.getAttribute("loginInfo");
@@ -37,6 +38,7 @@ $(document).ready(function() {
 });
 </script>
 </head>
+<div align="center" style="padding:150px;"> 
 <body>
 <h2>나의 회원정보</h2><hr>
 <form name="frm" id="frm" method="post" action="chgMemberInfo">
@@ -69,4 +71,6 @@ $(document).ready(function() {
 </form>
 
 </body>
+</div>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>

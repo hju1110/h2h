@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head2.jsp" %>
 <%@ page import="java.util.*" %>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -14,7 +14,72 @@ request.setCharacterEncoding("UTF-8");
     <link href="/h2hFront/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="/h2hFront/resources/css/sb-admin-2.min.css" rel="stylesheet">
+      <link href="/h2hFront/resources/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+      
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top:100px;
+            
+        }
+
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        fieldset {
+            margin-bottom: 20px;
+        }
+
+        select, input[type="button"], input[type="text"] {
+            padding: 5px;
+        }
+
+        input[type="button"] {
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #efefef;
+        }
+
+        #list {
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+<script src="${pageContext.request.contextPath}/resources/js/date_change.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -63,6 +128,7 @@ function del() {
 </script>
 </head>
 <body>
+<div>
 <br />
 <h1>내가 신청한 참여</h1>
 <hr />
@@ -82,6 +148,7 @@ function del() {
 		<th width="200" style="border-top: none; border-bottom: none;">봉사 신청일자</th>
 		<th width="200" style="border-top: none; border-bottom: none;">봉사 활동일자</th>
 		<th width="200" style="border-top: none; border-bottom: none;">봉사 신청 상태</th>
+		<th width="200" style="border-top: none; border-bottom: none;">신청 취소</th>
 	</tr>
 <tr align="center" onmouseover="this.bgColor='#efefef';" onmouseout="this.bgColor='';"></tr>
 	<c:forEach items="${serviceInfo }" var="si" varStatus="status">
@@ -140,5 +207,7 @@ function del() {
 </tr>
 </table>
 <br />
+</div>
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>

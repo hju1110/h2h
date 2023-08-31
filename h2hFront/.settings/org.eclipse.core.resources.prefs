@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java/ctrl/MemberCtrl.java=UTF-8
 encoding//src/main/java/dao/OrderProcDao.java=UTF-8
+encoding//src/main/webapp/WEB-INF/view/_inc/inc_foot.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/view/product/product_in.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/view/product/product_list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/view/service/serviceList.jsp=UTF-8

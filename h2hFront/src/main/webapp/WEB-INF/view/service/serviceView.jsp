@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head.jsp" %>
 <%@ page import="vo.*" %>
 <!DOCTYPE html>
 <html>
@@ -26,8 +26,8 @@ function serChk(){
 }
 </script>
 <body>
-<div class="container mt-5">
-<h2>봉사활동 글보기</h2>
+<div class="container mt-5"align="center" style="padding:100px;">
+<h2>봉사활동 상세내용</h2>
 <br />
 <table class="table table-bordered" width="1000" cellpadding="5">
 <tr>
@@ -71,5 +71,5 @@ onclick="location.href='myInfoChk';" /></h6>
 <input type="hidden" name="siidx" value="${si.getSi_idx()}" />
 <input type="hidden" name="siAcname" value="${si.getSi_acname() }" />
 </form>
-</body>
-</html>
+</div>
+<%@ include file="../_inc/inc_foot.jsp" %>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head2.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공지사항</title>
 <style>
+ .line {
+        text-align: center;
+        }
     body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
@@ -15,9 +18,8 @@
         padding: 0;
     }
     h2 {
-        background-color: #007BFF;
-        color: #FFF;
-        padding: 10px;
+        color: #000;
+        padding-top: 10px;
         margin: 0;
     }
     table {
@@ -35,7 +37,7 @@
     }
     a {
         text-decoration: none;
-        color: #007BFF;
+        color: #FFB044;
     }
     a:hover {
         text-decoration: underline;
@@ -49,7 +51,7 @@
     .buttons input {
         padding: 5px 10px;
         margin-right: 10px;
-        background-color: #007BFF;
+        background-color: #FFB044;
         color: #FFF;
         border: none;
         cursor: pointer;
@@ -60,6 +62,7 @@
 </style>
 </head>
 <body>
+<div class="container mt-5"align="center" style="padding:100px;">
 <h2>공지사항</h2>
 <table>
     <tr>
@@ -89,5 +92,5 @@
             </td>
     </tr>
 </table>
-</body>
-</html>
+</div>
+<%@ include file="../_inc/inc_foot.jsp" %>

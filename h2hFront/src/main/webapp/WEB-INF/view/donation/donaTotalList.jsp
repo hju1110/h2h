@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head2.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
@@ -38,7 +38,8 @@ String payment = "";
             text-align: center;
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 20px;
+  			margin-bottom: 20px;
+            margin-top:100px;
         }
 
         hr {
@@ -149,7 +150,7 @@ function del() {
 </script>
 </head>
 <body>
-<dnv>
+<div>
 <br />
 <h1>내가 신청한 후원</h1>
 <hr />
@@ -287,3 +288,4 @@ out.println("</p>");
 <br />
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>

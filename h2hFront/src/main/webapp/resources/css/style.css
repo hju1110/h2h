@@ -487,7 +487,9 @@ pre {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-right: -15px;
-  margin-left: -15px; }
+  margin-left: -15px;
+
+ }
 
 .no-gutters {
   margin-right: 0;
@@ -4997,7 +4999,7 @@ button.bg-light:focus {
   background-color: #dae0e5 !important; }
 
 .bg-dark {
-  background-color: #343a40 !important; }
+  background-color: #dae0e5 !important; }
 
 a.bg-dark:hover, a.bg-dark:focus,
 button.bg-dark:hover,
@@ -7706,9 +7708,9 @@ h1, h2, h3, h4, h5,
     .ftco-intro .block-18.color-1 {
       background: #f86f2d; }
     .ftco-intro .block-18.color-2 {
-      background: #fa8f3d; }
+      background: #d14646aa; }
     .ftco-intro .block-18.color-3 {
-      background: #faaa3a; }
+      background: #ff021bc4; }
     .ftco-intro .block-18 .text strong {
       font-size: 60px;
       color: #000;
@@ -8238,7 +8240,7 @@ textarea.form-control {
   visibility: hidden; }
 
 .bg-primary {
-  background: #f86f2d !important; }
+  background: #ff9b00f0 !important; }
 
 .ftco-section .ftco-sub-title {
   font-size: 16px;

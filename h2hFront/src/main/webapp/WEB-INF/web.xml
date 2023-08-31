@@ -45,24 +45,14 @@
 		</multipart-config>
 		<!-- 파일 업로드를 위한 추가 부분 종룔 -->
 	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-      <servlet-name>default</servlet-name>
-      <url-pattern>*.js</url-pattern>
-      <url-pattern>*.css</url-pattern>
-      <url-pattern>*.jpg</url-pattern>
-      <url-pattern>*.gif</url-pattern>
-      <url-pattern>*.png</url-pattern>
-      <url-pattern>*.ico</url-pattern>
-      <url-pattern>*.swf</url-pattern>
-      <url-pattern>*.json</url-pattern>
-      <url-pattern>*.svg</url-pattern>
+
+   
+     <servlet-mapping>
+      <servlet-name>jsp</servlet-name>
+      <url-pattern>*.jsp</url-pattern>
+      <url-pattern>*.jspx</url-pattern>
    </servlet-mapping>
+   
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>
@@ -83,4 +73,24 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/spring-servlet.xml</param-value>
 	</context-param>
+	
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+      <servlet-name>default</servlet-name>
+      <url-pattern>*.js</url-pattern>
+      <url-pattern>*.css</url-pattern>
+      <url-pattern>*.jpg</url-pattern>
+      <url-pattern>*.gif</url-pattern>
+      <url-pattern>*.png</url-pattern>
+      <url-pattern>*.ico</url-pattern>
+      <url-pattern>*.swf</url-pattern>
+      <url-pattern>*.json</url-pattern>
+      <url-pattern>*.svg</url-pattern>
+      <url-pattern>*.ttf</url-pattern>
+      <url-pattern>*.woff</url-pattern>
+   </servlet-mapping>
 </web-app>

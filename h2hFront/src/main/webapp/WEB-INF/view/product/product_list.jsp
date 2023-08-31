@@ -2,7 +2,8 @@
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*"%>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../_inc/inc_head.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 request.setCharacterEncoding("utf-8");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -30,6 +31,16 @@ if (sch != null && !sch.equals("")) {
 <head>
 <meta >
 <title>상품 목록</title>
+    <div class="hero-wrap" style="background-image: url('/h2hFront/resources/img/bg_2.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Shopping	</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -71,7 +82,7 @@ if (sch != null && !sch.equals("")) {
 </head>
 <body>
 <br />
-<h2>상품 목록</h2>
+ <h1 class="text-center text-primary ftco-animate mb-3">상품목록</h1>
 <hr />
 <table>
 <tr>
@@ -146,5 +157,4 @@ if (sch != null && !sch.equals("")) {
     </td>
 </tr>
 </table>
-</body>
-</html>
+<%@ include file="../_inc/inc_foot.jsp" %>

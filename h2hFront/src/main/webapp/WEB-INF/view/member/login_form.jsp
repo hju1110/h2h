@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="vo.*"%>
+<%@ include file="../_inc/inc_head2.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
 String url = request.getParameter("url");
@@ -25,7 +27,7 @@ a, label {
 }
 
 #login {
-	background-color: red;
+	background-color: #FF3232;
 	color: white;
 }
 
@@ -49,9 +51,10 @@ a, label {
 		<br>
 		<input type="button" class="tsize" id="kakao" onclick="" value="카카오톡 로그인"><br>
 		<input type="button" class="tsize" id="naver" onclick="" value="네이버 로그인"><br>
-		<a href="memberJoin">회원가입 ></a>
+		<a href="memberJoin">회원가입</a>
 	</form>
 </fieldset>
 </div>
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>
