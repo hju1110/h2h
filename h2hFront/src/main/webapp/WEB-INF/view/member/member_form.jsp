@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../_inc/inc_head2.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
 String email = (String)request.getAttribute("email");
@@ -14,11 +15,10 @@ fieldset {
 }
 
 .center {
-	position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	display:grid;
+	place-content:center;
 }
+
 .textcenter {
 	text-align: center;
 }
@@ -174,3 +174,4 @@ $(document).ready(function() {
 </div>
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>

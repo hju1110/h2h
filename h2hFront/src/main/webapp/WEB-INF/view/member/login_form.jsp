@@ -11,7 +11,7 @@ if (url == null)	url = "";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>h2h</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/test.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memberStyle.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
 <style>
@@ -36,9 +36,9 @@ a, label {
 </style>
 </head>
 <body>
-<div class="wrapper center">
-<fieldset>
-	<h2>로그인</h2>
+<div class="wrapper memcenter" style="width: 400px; height: 500px;">
+<fieldset id="member">
+	<h2>HAND2HAND 로그인</h2>
 	<form action="login" id="loginform" name="frmLogin" method="post">
 		<input type="text" name="uid" class="tsize" placeholder="아이디" value="ucheri72"><br>
 		<input type="password" name="pwd" class="tsize" placeholder="비밀번호" value="1234"><br><br>
@@ -53,7 +53,7 @@ a, label {
 		<br>
 		<input type="button" class="tsize" id="kakao" onclick="" value="카카오톡 로그인"><br>
 		<input type="button" class="tsize" id="naver" onclick="" value="네이버 로그인"><br>
-		<a href="memberJoin">회원가입</a>
+		<a href="memberJoin" style="text-align: right;">회원가입</a>
 	</form>
 </fieldset>
 </div>

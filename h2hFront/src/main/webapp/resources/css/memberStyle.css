@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+fieldset #member {
+	width: 400px;
+}
+
+.wrapper {
+	display:grid;
+	place-content:center;
+}
+
+.memcenter {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid;
+}
+
+.textcenter {
+	text-align: center;
+}
+
+.tsize {
+	height: 40px;
+	width: 300px;
+}
+
+.btn {
+	height: 40px;
+	width: 100px;
+	background-color: #B3B1B1;
+	color: white;
+}
+
+.btn1 {
+	height: 40px;
+	width: 100px;
+	background-color: white;
+	color: black;
+}
+
+.btn2 {
+	height: 40px;
+	width: 300px;
+	background-color: red;
+	color: white;
+}

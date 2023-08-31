@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../_inc/inc_head2.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,16 +10,22 @@ fieldset {
 	width: 450px;
 	text-align: center;
 }
+
 #center {
 	text-align: center;
-
+	border: 1px solid;
+	height: 300px;
+	width: 500px;
+	display:grid;
+	place-content:center;
 }
 
 #mail-Check-Btn {
 	height: 40px;
 	width: 100px;
 	background-color: #B3B1B1;
-	color: white;
+	color: black;
+	text-align: center;
 }
 
 .center {
@@ -30,7 +37,7 @@ fieldset {
 
 .btn2 {
 	height: 40px;
-	width: 100px;
+	width: 120px;
 	background-color: #B3B1B1;
 	color: white;
 }
@@ -40,7 +47,7 @@ fieldset {
 }
 
 .acc {
-	width: 330px;
+	width: 320px;
 }
 
 </style>
@@ -113,7 +120,7 @@ function chkAcc() {
 				<option value="direct">직접 입력</option>
 			</select>
 			<input type="button" class="btn btn-primary" id="mail-Check-Btn" value="이메일 인증"><br><br>
-			<input type="text" class="acc textp" id="acc" name="acc" disabled="disabled">
+			<input type="text" class="acc textp" id="acc" name="acc"disabled="disabled">
 			<input type="submit" id="ac" name="ac" value="인증번호 확인" class="btn2" disabled="disabled">
 		</form>
 	</div>
@@ -121,3 +128,4 @@ function chkAcc() {
 </div>
 </body>
 </html>
+<%@ include file="../_inc/inc_foot.jsp" %>
