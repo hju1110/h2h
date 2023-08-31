@@ -12,6 +12,8 @@ if (url == null)	url = "";
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>h2h</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/test.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"charset="utf-8"></script>
 <style>
 a, label {
 	font-size: 11px;
