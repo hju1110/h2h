@@ -49,6 +49,10 @@ fieldset {
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/email_address.js"></script>
 <script>
+function onlyNum(num) {	// 숫자만 사용가능한 정규식
+	num.value = num.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+}
+
 $(document).ready(function() {
 	$('#join').click(function() {
 		var frm = document.frm;
@@ -64,39 +68,48 @@ $(document).ready(function() {
 			return false;
 		}
 		
+		if (frm.type.value == "c" && frm.bnum.value == "") {
+			alert("사업자번호를 입력해 주세요");
+			frm.bnum.focus();
+			return false;
+		}
+		
 		if (frm.id.value == "") {
 			alert("아이디를 입력해 주세요");
 			frm.id.focus();
 			return false;
 		}
 		
-		if (frm.password.value == "") {
+		if (frm.pw.value == "") {
 			alert("비밀번호를 입력해 주세요");
 			frm.password.focus();
 			return false;
 		}
 		
-		if (frm.rname.value == "") {
-			alert("수취인을 입력해 주세요");
-			frm.rname.focus();
+		if (frm.e1.value == "") {
+			alert("이메일 주소를 확인해 주세요");
+			frm.e1.focus();
 			return false;
 		}
 		
-		if (frm.zip.value == "") {
-			alert("우편번호를 입력해 주세요");
-			frm.zip.focus();
+		if (frm.e2.value == "") {
+			alert("이메일 주소를 확인해 주세요");
+			frm.e2.focus();
 			return false;
 		}
 		
-		if (frm.addr1.value == "") {
-			alert("주소를입력해 주세요");
-			frm.addr1.focus();
+		const emailn = $('#e1').val() + "@" + $('#e2').val(); // 이메일 주소값 얻어오기!
+		const email = emailn.replace(/\s+/g, '');
+		var regExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+		
+		if (email.match(regExp) == null) {
+			alert("이메일 주소를 확인해 주세요");
 			return false;
 		}
 		
-		if (frm.addr2.value == "") {
-			alert("상세주소를 입력해 주세요");
-			frm.addr2.focus();
+		if (frm.pw.value != frm.chkPw.value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			frm.chkPw.focus();
 			return false;
 		}
 
@@ -114,7 +127,7 @@ $(document).ready(function() {
 
 
 	$('#chC').click(function() {
-		$('#type').val('b');
+		$('#type').val('c');
 		$('#bNum').css("display", "");
 		$('#chG').css("color", "black");
 		$('#chG').css("background-color", "white");
@@ -168,11 +181,11 @@ const autoHyphen2 = (target) => {
 		</tr>
 		<tr>
 			<td width="130"><p>비밀번호 확인</p></td>
-			<td><input type="password"></td>
+			<td><input type="password" name="chkPw"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>전화번호</p></td>
-			<td>010 - <input type="text" name="p1" size="5" maxlength="4"> - <input type="text" name="p2" size="5" maxlength="4"></td>
+			<td>010 - <input type="text" name="p1" size="5" maxlength="4" oninput="onlyNum(this);"> - <input type="text" name="p2" size="5" maxlength="4" oninput="onlyNum(this);"></td>
 		</tr>
 		<tr>
 			<td width="130"><p>이메일</p></td>
