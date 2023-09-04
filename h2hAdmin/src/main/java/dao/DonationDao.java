@@ -66,5 +66,18 @@ public class DonationDao {
 		String total = jdbc.queryForObject(sql, String.class);
 		return total;
 	}
-
+	
+	public List<DonationInfo> getDonaStatistics() {
+		String sql = "SELECT 'x', 'x', SUM(di_rprice) rprice, SUM(di_gprice) gprice " + 
+				" FROM t_donation_info UNION SELECT di_sponsor, di_name, di_gprice, di_rprice FROM t_donation_info";
+	    List<DonationInfo> results = jdbc.query(sql, (ResultSet rs, int rowNum) -> {
+			DonationInfo di = new DonationInfo();
+			di.setDi_sponsor(rs.getString(1));
+			di.setDi_name(rs.getString(2));
+			di.setDi_gprice(rs.getInt(3));
+			di.setDi_rprice(rs.getInt(4));
+			return di;
+		});	    
+	    return results;
+	}
 }

@@ -31,11 +31,8 @@ public class DonationSvc {
 		return total;
 	}
 
-
-
-
-	/*public List<DonaTotalPrice> getDonaTotalPrice(int mdPrice, String mdCtgr, String diSponsor, String ydate, String mdate) {
-		List<DonaTotalPrice> donaTPrice = donationDao.getDonaTotalPrice(mdPrice, mdCtgr, diSponsor, ydate, mdate);
-		return donaTPrice;
-	}*/
+	public List<DonationInfo> getDonaStatistics() {
+		List<DonationInfo> donationList = donationDao.getDonaStatistics();
+		return donationList;
+	}
 }

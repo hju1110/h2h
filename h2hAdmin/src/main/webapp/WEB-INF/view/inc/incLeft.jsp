@@ -82,7 +82,7 @@ $(document).ready(function(){
 			</a>
 			<ul class="hide">
 				<li><a href="donaMemList" target="body">후원 목록</a></li>
-				<li><a href="" target="body">후원 통계</a></li>
+				<li><a href="donaStatistics" target="body">후원 통계</a></li>
 			</ul>
 		</li>
 	</ul>

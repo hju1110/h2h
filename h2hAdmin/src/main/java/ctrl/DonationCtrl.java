@@ -130,4 +130,11 @@ public class DonationCtrl {
       return total;
    }
 	
+	@GetMapping("/donaStatistics")
+	public String donaStatistics(Model model) {
+		List<DonationInfo> donationList = donationSvc.getDonaStatistics();
+
+		model.addAttribute("donationList", donationList);
+		return "donation/donaStatistics";
+	}
 }
