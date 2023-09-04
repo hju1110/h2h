@@ -15,7 +15,7 @@ rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
 <style>
-#chartDiv { height:500px; border:1px solid black; margin:0 0 10px 0; }
+#chartDiv { height:500px; border:0; margin:0 0 10px 0; }
 </style>
 </head>
 <body>
