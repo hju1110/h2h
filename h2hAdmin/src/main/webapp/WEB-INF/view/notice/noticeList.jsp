@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../inc/mainPage.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -6,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <style>
-body {
+/* body {
   font-size: 12px;
 }
 
@@ -112,41 +113,44 @@ input[type="button"]:hover {
   padding: 10px;
   border: 1px solid #ccc;
 }
-
+*/
 </style>
 </head>
 <body>
-<div class="left">
+<div class="container mt-5">
 <h2>공지사항 목록</h2>
-<table id="list">
-<tr height="30">
-<th>번호</th>
-<th>제목</th>
-<th>작성자</th>
-<th>작성일</th>	
-<th>조회</th>
-</tr>
+<table id="list" class="table table-bordered table-striped">
+<thead>
+	<tr>
+		<th scope="col">번호</th>
+		<th scope="col">제목</th>
+		<th scope="col">작성자</th>
+		<th scope="col">작성일</th>	
+		<th scope="col">조회</th>
+	</tr>
+</thead>
+<tbody>
 <c:if test="${noticeList.size() > 0}">
 	<c:forEach items="${noticeList}" var="nl" varStatus="status">
-	<tr height="30">
+<tr height="30">
 	<td align="center">${pi.getNum() - status.index}</td>
 	<td><a href="noticeView?nlidx=${nl.getNl_idx()}${pi.getArgs()}">${nl.getNl_title()}</a></td>
 	<td align="center">${nl.getNl_writer()}</td>
 	<td align="center">${nl.getNl_date()}</td>
 	<td align="center">${nl.getNl_read()}</td>
-	</tr>
+</tr>
 	</c:forEach>
 </c:if>
 <c:if test="${noticelist.size() == 0 }">
-	<tr height="50"><td colspan="5" align="center">
-	검색결과가 없습니다.
-	</td></tr>
+	<tr height="50">
+		<td colspan="5" align="center">검색결과가 없습니다.</td>
+	</tr>
 </c:if>
+</tbody>
 </table>
 <br />
-<table width="700" cellpadding="5">
-<tr>
-<td width="600">
+<div class="row">
+<div class="col-md-9">
 <c:if test="${noticeList.size() > 0}">
 	<c:if test="${pi.getCpage() == 1}">
 		[처음]&nbsp;&nbsp;&nbsp;[이전]&nbsp;&nbsp;
@@ -174,28 +178,40 @@ input[type="button"]:hover {
 		&nbsp;&nbsp;&nbsp;<a href="noticeList?cpage=${pi.getPcnt()}${pi.getSchargs()}">[마지막]</a>
 	</c:if>
 </c:if>
-</td>
-<td width="*">
-	<input type="button" value="글 등록" onclick="location.href='noticeFormIn';" />
-</td>
-</tr>
-<tr><td colspan="2" align="center">
+</div>
+<div class="col-md-3">
+	<button class="btn btn-primary" onclick="location.href='noticeFormIn';">글 등록</button>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-md-12">
 	<form name="frmSch">
 	<fieldset>
 		<legend>게시판 검색</legend>
-		<select name="schtype">
+	<div class="row">
+	<div class="col-md-2">
+		<select class="form-select" name="schtype">
 			<option value="">검색조건</option>
 			<option value="title" <c:if test="${pi.getSchtype() == 'title'}">selected="selected"</c:if>>제목</option>
 			<option value="content"<c:if test="${pi.getSchtype() == 'content'}">selected="selected"</c:if>>내용</option>
 			<option value="writer"<c:if test="${pi.getSchtype() == 'writer'}">selected="selected"</c:if>>작성자</option>
 			<option value="tc" <c:if test="${pi.getSchtype() == 'tc'}">selected="selected"</c:if>>제목+내용</option>
 		</select>
-		<input type="text" name="keyword" value="${pi.getKeyword() }"/>
-		<input type="submit" value="검색" />
-		<input type="button" value="전체글" onclick="location.href='noticeList';" />
+	</div>
+	<div class="col-md-4">
+		<input type="text" class="form-control" name="keyword" value="${pi.getKeyword() }"/>
+	</div>
+	<div class="col-md-2">
+		<input type="submit" class="btn btn-primary" value="검색" />
+	</div>
+	<div class="col-md-2">
+		<input type="button" class="btn btn-secondary" value="전체글" onclick="location.href='noticeList';" />
+	</div>
+	</div>
 	</fieldset>
 	</form>
-</table>
-</div>
+	</div>
+	</div>
+	</div>
 </body>
 </html>

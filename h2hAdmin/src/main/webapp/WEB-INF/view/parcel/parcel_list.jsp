@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../inc/mainPage.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*"%>
 <%
-AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 List<OrderProcInCtrl> parcelList = (List<OrderProcInCtrl>)request.getAttribute("parcelList");
 PageInfo pageInfo = (PageInfo)request.getAttribute("pi");
 %>

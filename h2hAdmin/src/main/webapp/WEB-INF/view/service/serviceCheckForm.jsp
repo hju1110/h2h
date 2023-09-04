@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../inc/mainPage.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="vo.*" %>
 <%
@@ -63,7 +64,6 @@ String accept = si.getSi_accept();
     margin-left: 10px;
   }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function chkAll(all) {
   var arr = document.frmAcceptChk.chk;

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../inc/mainPage.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
@@ -16,7 +17,6 @@ int sWeek = ci.getsWeek(), eDay = ci.getSchLast();
 <meta charset="UTF-8">
 <title>봉사 일정 등록</title>
 <script src="${pageContext.request.contextPath}/resources/js/date_change.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 <script>
 $(document).ready(function() {
 	$("#btn").click(function() {
