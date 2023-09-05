@@ -47,4 +47,6 @@
            <a class="btn btn-primary" href="#">나의 후기</a>
     </div>
 </div>
+</body>
+</html>
 <%@ include file="../inc/incFoot.jsp" %>

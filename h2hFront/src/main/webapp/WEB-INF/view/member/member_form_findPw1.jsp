@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memberStyle.css">
 <style>
 fieldset {
 	width: 400px;
@@ -39,7 +40,11 @@ fieldset {
 
 #e1, #e2, #e3 {
 	height: 40px;
-	width: 100px;
+	width: 110px;
+}
+
+#id, #name, #join {
+	width: 353px;
 }
 </style>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
@@ -55,23 +60,25 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="wrapper center">
+<div class="wrapper memcenter" style="width: 500px; height: 300px; line-height: 50%;">
 <fieldset>
-<h2>비밀번호 재설정</h2>
+<h2>비밀번호 재설정</h2><br>
 <form id="frm" method="post" action="findPw">
 	<input type="text" name="id" id="id" class="tsize" placeholder="아이디"><br><br>
 	<input type="text" name="name" id="name" class="tsize" placeholder="이름"><br><br>
-	<input type="text" name="e1" id="e1" size="5" class="tsize" placeholder="이메일" style="width: 90px;"> @ <input type="text" name="e2" id="e2" size="10" class="tsize" style="width: 70px;"> 
-	<select name="e3" id="e3" class="tsize" >
+	<input type="text" name="e1" id="e1" size="5" class="tsize" placeholder="이메일"> @ <input type="text" name="e2" id="e2" size="10" class="tsize"> 
+	<select name="e3" id="e3" class="tsize">
 		<option value="">도메인 선택</option>
 		<option value="naver.com">naver.com</option>
 		<option value="hanmail.net">hanmail.net</option>
 		<option value="gmail.com">gmail.com</option>
 		<option value="nate.com">nate.com</option>
 		<option value="direct">직접 입력</option>
-	</select>
-	<input type="submit" id="join" class="btn" value="확인"><br>
+	</select><br><br>
+	<input type="submit" id="join" class="btn" value="확인" style=""><br>
 </form>
 </fieldset>
 </div>
+</body>
+</html>
 <%@ include file="../inc/incFoot.jsp" %>

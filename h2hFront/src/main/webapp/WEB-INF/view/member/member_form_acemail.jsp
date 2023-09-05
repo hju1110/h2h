@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 fieldset {
-	width: 450px;
+	width: 500px;
 	text-align: center;
 }
 
@@ -15,15 +15,16 @@ fieldset {
 	text-align: center;
 	border: 1px solid;
 	height: 300px;
-	width: 500px;
+	width: 600px;
 	display:grid;
 	place-content:center;
 }
 
 #mail-Check-Btn {
 	height: 40px;
-	width: 100px;
-	background-color: #B3B1B1;
+	width: 110px;
+	background-color: #d74049;
+	border-color: black;
 	color: black;
 	text-align: center;
 }
@@ -37,7 +38,7 @@ fieldset {
 
 .btn2 {
 	height: 40px;
-	width: 120px;
+	width: 110px;
 	background-color: #B3B1B1;
 	color: white;
 }
@@ -47,7 +48,13 @@ fieldset {
 }
 
 .acc {
-	width: 320px;
+	height: 40px;
+	width: 355px;
+}
+
+#e1, #e2, #e3 {
+	height: 40px;
+	width: 110px;
 }
 
 </style>
@@ -104,10 +111,10 @@ function chkAcc() {
 </script>
 </head>
 <body>
-<div id="center" class="center">
+<div id="center" class="center" style="line-height: 50%;">
 <fieldset>
-	<h2>회원가입</h2>
-	<p>회원 가입을 위해 이메일을 인증해 주세요</p>
+	<h2>회원가입</h2><br>
+	<p>회원 가입을 위해 이메일을 인증해 주세요</p><br>
 	<div class="input-group">
 		<form name="frm" action="memberForm" method="post" onsubmit="return chkAcc();">
 			<input type="text" name="e1" id="e1" size="10" class="textp"> @ <input type="text" name="e2" id="e2" size="10" class="textp">

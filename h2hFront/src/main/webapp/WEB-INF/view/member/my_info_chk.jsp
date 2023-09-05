@@ -9,7 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/test.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memberStyle.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 <script>
 $(document).ready(function() {
@@ -21,11 +21,11 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="wrapper center">
+<div class="wrapper memcenter" style="width: 500px; height: 300px; line-height: 50%;">
 <fieldset>
-	<h2>나의 회원정보</h2>
-	회원님의 정보를 안전하게 보호하기 위하여 <br>
-	비밀번호를 다시 한 번 입력해주세요<br><br>
+	<h2>나의 회원정보</h2><br><br>
+	회원님의 정보를 안전하게 보호하기 위하여 <br><br><br>
+	비밀번호를 다시 한 번 입력해주세요<br><br><br>
 	<form id="frm" method="post" action="Info">
 		<input type="hidden" name="id" value="<%=loginInfo.getMi_id() %>">
 		<input type="password" name="pwChk" id="pwChk" class="tsize" placeholder="비밀번호" ><br><br>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../inc/incHead2.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
 String id = (String)request.getAttribute("id");
@@ -6,6 +7,7 @@ String id = (String)request.getAttribute("id");
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memberStyle.css">
 <style>
 fieldset {
 	width: 400px;
@@ -37,14 +39,15 @@ fieldset {
 <title>Insert title here</title>
 </head>
 <body>
-<div class="wrapper center">
+<div class="wrapper memcenter" style="width: 500px; height: 300px; line-height: 50%;">
 <fieldset>
-	<h2>아이디 찾기</h2>
-	회원님이 입력하신 정보와 일치하는 아이디 입니다.<br><br>
+	<h2>아이디 찾기</h2><br><br>
+	회원님이 입력하신 정보와 일치하는 아이디 입니다.<br><br><br>
 	<input type="text" id="idbox" class="tsize" value="<%=id %>" size="20" readonly="readonly"><br><br>
-	<input type="button" class="btn" value="로그인" onclick="location.href='login'"><br>
+	<input type="button" class="btn" value="로그인" onclick="location.href='login'"><br><br>
 	<a href="findPw" style="font-size: 10px;">비밀번호 찾기</a>
 </fieldset>
 </div>
 </body>
 </html>
+<%@ include file="../inc/incFoot.jsp" %>

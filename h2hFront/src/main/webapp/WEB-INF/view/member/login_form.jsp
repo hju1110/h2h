@@ -36,13 +36,13 @@ a, label {
 </style>
 </head>
 <body>
-<div class="wrapper memcenter" style="width: 400px; height: 500px;">
+<div class="wrapper memcenter" style="width: 400px; height: 500px; line-height: 50%;"">
 <fieldset id="member">
 	<h2>HAND2HAND 로그인</h2>
 	<form action="login" id="loginform" name="frmLogin" method="post">
-		<input type="text" name="uid" class="tsize" placeholder="아이디" value="ucheri72"><br>
+		<input type="text" name="uid" class="tsize" placeholder="아이디" value="ucheri72"><br><br>
 		<input type="password" name="pwd" class="tsize" placeholder="비밀번호" value="1234"><br><br>
-		<input type="submit" class="tsize" id="login" value="로그인"><br>
+		<input type="submit" class="tsize" id="login" value="로그인"><br><br>
 		<input type="hidden" name="url" value="<%=url %>" />
 		<div class="fontsize">
 			<input type="checkbox" id="remember-check"><label for="remember-check">아이디 저장</label>
@@ -51,8 +51,8 @@ a, label {
 			<a href="findPw">비밀번호 재설정</a>
 		</div>
 		<br>
-		<input type="button" class="tsize" id="kakao" onclick="" value="카카오톡 로그인"><br>
-		<input type="button" class="tsize" id="naver" onclick="" value="네이버 로그인"><br>
+		<input type="button" class="tsize" id="kakao" onclick="" value="카카오톡 로그인"><br><br>
+		<input type="button" class="tsize" id="naver" onclick="" value="네이버 로그인"><br><br>
 		<a href="memberJoin" style="text-align: right;">회원가입</a>
 	</form>
 </fieldset>

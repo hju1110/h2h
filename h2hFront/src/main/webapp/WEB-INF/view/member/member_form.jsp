@@ -9,6 +9,7 @@ String email = (String)request.getAttribute("email");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memberStyle.css">
 <style>
 fieldset {
 	width: 600px;
@@ -106,7 +107,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="center">
+<div class="memcenter">
 <h2 class="textcenter">회원가입</h2>
 <form name="frm" method="post" action="insertMemberJoin">
 	<input type="hidden" name="type" value="a">
@@ -172,4 +173,6 @@ $(document).ready(function() {
 	<p id="center"><input type="button" id="join" value="회원가입" class="btn textcenter"></p>
 </form>
 </div>
+</body>
+</html>
 <%@ include file="../inc/incFoot.jsp" %>

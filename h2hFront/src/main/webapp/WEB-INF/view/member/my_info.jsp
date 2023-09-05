@@ -70,6 +70,7 @@ $(document).ready(function() {
 	<input type="submit" id="join" class="btn" value="저장">
 </form>
 
-
+</body>
 </div>
+</html>
 <%@ include file="../inc/incFoot.jsp" %>
