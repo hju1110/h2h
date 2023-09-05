@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="vo.*"%>
-<%@ include file="../_inc/inc_head.jsp" %>
+<%@ include file="../inc/incHead.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String url = "/h2hFront/";
@@ -49,14 +49,9 @@ String url = "/h2hFront/";
                   <div class="progress-bar bg-primary" role="progressbar" style="width: 28%" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <span class="fund-raised d-block">$12,000 raised of $30,000</span>
-    					</div>
     				</div>
-      		</div>
-      		
-      
-        </div>
-        
+    			</div>
+      		</div>    
+        </div>       
     </section>
-</body>
-</html>
-<%@ include file="../_inc/inc_foot.jsp" %>
+<%@ include file="../inc/incFoot.jsp" %>

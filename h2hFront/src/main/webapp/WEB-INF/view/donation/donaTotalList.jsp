@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../_inc/inc_head2.jsp" %>
+<%@ include file="../inc/incHead2.jsp" %>
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*" %>
@@ -286,6 +286,4 @@ out.println("</p>");
 %>
 <hr align="left"/>
 <br />
-</body>
-</html>
-<%@ include file="../_inc/inc_foot.jsp" %>
+<%@ include file="../inc/incFoot.jsp" %>
