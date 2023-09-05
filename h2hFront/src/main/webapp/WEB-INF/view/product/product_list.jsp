@@ -2,7 +2,7 @@
 <%@ page import="java.time.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*"%>
-<%@ include file="../_inc/inc_head.jsp" %>
+<%@ include file="../inc/incHead.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 request.setCharacterEncoding("utf-8");
@@ -157,4 +157,4 @@ if (sch != null && !sch.equals("")) {
     </td>
 </tr>
 </table>
-<%@ include file="../_inc/inc_foot.jsp" %>
+<%@ include file="../inc/incFoot.jsp" %>

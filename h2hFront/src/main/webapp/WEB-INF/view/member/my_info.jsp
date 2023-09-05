@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="vo.MemberInfo" %>
-<%@ include file="../_inc/inc_head.jsp" %>
+<%@ include file="../inc/incHead.jsp" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 MemberInfo mi = (MemberInfo)session.getAttribute("loginInfo");
@@ -70,7 +70,6 @@ $(document).ready(function() {
 	<input type="submit" id="join" class="btn" value="저장">
 </form>
 
-</body>
+
 </div>
-</html>
-<%@ include file="../_inc/inc_foot.jsp" %>
+<%@ include file="../inc/incFoot.jsp" %>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../_inc/inc_head.jsp" %>
+<%@ include file="../inc/incHead.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.io.*" %>
 
@@ -66,7 +66,4 @@ function checkFileUpload() {
     return true;
 }
 </script>
-
-</body>
-</html>
-<%@ include file="../_inc/inc_foot.jsp" %>
+<%@ include file="../inc/incFoot.jsp" %>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../menuBar.jsp" %>
+<%@ include file="../inc/incHead2.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,5 +51,4 @@
     </form>
 </div>
 </div>
-</body>
-</html>
+<%@ include file="../inc/incFoot.jsp" %>

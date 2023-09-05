@@ -1,4 +1,4 @@
-<%@ include file="../_inc/inc_head.jsp" %>
+<%@ include file="../inc/incHead.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +41,4 @@
   <a class="link" href="ProductProc">상품 목록</a>
   <a class="link" href="ParcelProc">주문 현황</a>
 </div>
-</body>
-</html>
-<%@ include file="../_inc/inc_foot.jsp" %>
+<%@ include file="../inc/incFoot.jsp" %>

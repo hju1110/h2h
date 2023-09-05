@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../_inc/inc_head2.jsp" %>
+<%@ include file="../inc/incHead2.jsp" %>
 <%
 request.setCharacterEncoding("utf-8");
 String email = (String)request.getAttribute("email");
@@ -172,6 +172,4 @@ $(document).ready(function() {
 	<p id="center"><input type="button" id="join" value="회원가입" class="btn textcenter"></p>
 </form>
 </div>
-</body>
-</html>
-<%@ include file="../_inc/inc_foot.jsp" %>
+<%@ include file="../inc/incFoot.jsp" %>
