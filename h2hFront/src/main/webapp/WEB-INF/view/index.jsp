@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../inc/incHead.jsp" %>
+<%@ include file="inc/incHead.jsp" %>
 <%@ page import="vo.*"%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
  
@@ -136,4 +136,4 @@
 	    </div>
     </section>
 
-<%@ include file="../inc/incFoot.jsp" %>
+<%@ include file="inc/incFoot.jsp" %>
