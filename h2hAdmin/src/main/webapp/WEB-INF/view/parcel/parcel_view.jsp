@@ -4,7 +4,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="vo.*"%>
 <%
-AdminInfo loginInfo = (AdminInfo)session.getAttribute("loginInfo");
 ParcelInfo pi = (ParcelInfo)request.getAttribute("parcelInfo");
 
 String ss = pi.getOi_status();
@@ -19,7 +18,6 @@ if (ss.equals("a")) {
 	status = "주문취소";
 }
 %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function chk() {	
 	  const oi_id = $('#oi_id').val(); const mi_id = $('#mi_id').val();const oi_addr1 = $('#oi_addr1').val();
