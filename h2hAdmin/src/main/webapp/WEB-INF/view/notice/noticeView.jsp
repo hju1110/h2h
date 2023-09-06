@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공지사항</title>
 <style>
-    body {
+  /*  body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
         margin: 0;
@@ -55,7 +55,7 @@
     }
     .buttons input:hover {
         background-color: #0056b3;
-    }
+    }*/
 </style>
 <script>
 function confirmDelete(nlIdx) {
@@ -67,38 +67,36 @@ function confirmDelete(nlIdx) {
 </script>
 </head>
 <body>
-<div class="left">
-<h2>공지사항</h2>
-<table>
-    <tr>
-        <th width="10%">작성자</th>
-        <td width="15%">${nl.getNl_writer()}</td>
-        <th width="10%">조회수</th>
-        <td width="15%">${nl.getNl_read()}</td>
-        <th width="10%">작성일</th>
-        <td width="15%">${nl.getNl_date()}</td>
-        <th width="10%">파일</th>
-        <td width="15%">
-            <a href="downloadImage?filename=${nl.getNl_name()}" download>${nl.getNl_name()}</a>
-        </td>
-    </tr>
-    <tr>
-        <th>글제목</th>
-        <td colspan="7">${nl.getNl_title()}</td>
-    </tr>
-    <tr>
-        <th>글내용</th>
-        <td colspan="7" class="content">${nl.getNl_content()}</td>
-    </tr>
-    <tr>
-        <td colspan="8" class="buttons">
-            <input type="button" value="글삭제" onclick="confirmDelete(${nl.getNl_idx()});" />
-
-            <input type="button" value="글목록" onclick="location.href='noticeList';" />
-            <input type="button" value="글수정" onclick="location.href='noticeFormUp?nl_idx=${nl.getNl_idx()}';" />
-        </td>
-    </tr>
+<div class="container mt-5">
+<br />
+<table class="table table-bordered">
+	<tr>
+		<th class="col-md-1" style="text-align:center;">작성자</th>
+			<td class="col-md-1" style="text-align:center;">${nl.getNl_writer()}</td>
+		<th class="col-md-1" style="text-align:center;">조회수</th>
+			<td class="col-md-1" style="text-align:center;">${nl.getNl_read()}</td>
+		<th class="col-md-1" style="text-align:center;">작성일</th>
+			<td class="col-md-1" style="text-align:center;">${nl.getNl_date().replace("-", ".").substring(0,10)}</td>
+		<th class="col-md-1" style="text-align:center;">파일</th>
+			<td class="col-md-1" style="text-align:center;">
+			<a href="downloadImage?filename=${nl.getNl_name()}" download>${nl.getNl_name()}</a>
+		</td>
+	</tr>
+	<tr>
+		<th style="text-align:center;">글제목</th>
+		<td colspan="7">${nl.getNl_title()}</td>
+	</tr>
+	<tr>
+		<th style="text-align:center;">글내용</th>
+		<td colspan="7" class="content">${nl.getNl_content()}</td>
+	</tr>
 </table>
+	<div class="text-center">
+		<input type="button" class="btn btn-danger" value="글삭제" onclick="confirmDelete(${nl.getNl_idx()});" />
+		<input type="button" class="btn btn-secondary" value="글목록" onclick="location.href='noticeList';" />
+		<input type="button" class="btn btn-primary" value="글수정" onclick="location.href='noticeFormUp?nl_idx=${nl.getNl_idx()}';" />
+	</div>
+<br />
 </div>
 </body>
 </html>

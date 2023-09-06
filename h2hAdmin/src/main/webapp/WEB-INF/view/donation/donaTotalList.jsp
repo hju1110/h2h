@@ -104,72 +104,102 @@ function total() {
 					</div>
 				</div>
 			</form>
-<div>
-	<h3 class="sub-heading">총 후원 금액</h3>
-	<select id="mdCtgr">
-		<option value="d">전체</option>
-		<option value="a">일반후원</option>
-		<option value="b">정기후원</option>
-		<option value="c">정기후원 취소</option>
-	</select>
-	<select id="dnSponsor">
-		<option value="d">전체</option>
-		<option value="a">행복한 손길</option>
-		<option value="b">서울청소년 지원부</option>
-		<option value="c">즐거운 어린이집</option>
-	</select>
-	<select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);">
-		<option>전체</option>
-	<% for(int i = 2022 ; i <= cYear ; i++) { %>
-		<option <% if (i == cYear) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
-	<% } %>
-	</select>
-	<select name="mdate" id="m" onchange="resetday(this.form.ydate.value, this.value);">
-		<option>전체</option>
-	<% for(int i = 1 ; i <= 12 ; i++) { %>
-		<option <% if (i == cMonth) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
-	<% } %>
-	</select>
-	<input type="button" name="btn" id="btn" class="btn btn-primary" value="확인" onclick="total();"/>
-	<input type="text" name="totalPrice" id="totalPrice" value="0" />원
+<div class="container">
+<h3 class="sub-heading">총 후원 금액</h3>
+	<div class="row">
+	<div class="col-auto">
+		<select id="mdCtgr" class="form-select" aria-label="Default select example">
+			<option value="d">전체</option>
+			<option value="a">일반후원</option>
+			<option value="b">정기후원</option>
+			<option value="c">정기후원 취소</option>
+		</select>
+	</div>
+	<div class="col-auto">
+		<select id="dnSponsor" class="form-select" aria-label="Default select example">
+			<option value="d">전체</option>
+			<option value="a">행복한 손길</option>
+			<option value="b">서울청소년 지원부</option>
+			<option value="c">즐거운 어린이집</option>
+		</select>
+	</div>
+	<div class="col-auto">
+		<select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);" class="form-select" aria-label="Default select example">
+			<option>전체</option>
+		<% for(int i = 2022 ; i <= cYear ; i++) { %>
+			<option <% if (i == cYear) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
+		<% } %>
+		</select>
+	</div>
+	<div class="col-auto">
+		<select name="mdate" id="m" onchange="resetday(this.form.ydate.value, this.value);" class="form-select" aria-label="Default select example">
+			<option>전체</option>
+		<% for(int i = 1 ; i <= 12 ; i++) { %>
+			<option <% if (i == cMonth) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
+		<% } %>
+		</select>
+	</div>
+	<div class="col-auto">
+		<input type="button" name="btn" id="btn" class="btn btn-primary" value="확인" onclick="total();"/>
+	</div>
+	<div class="col-auto" style="display: inline-flex; align-items: center;">
+		<input type="text" name="totalPrice" id="totalPrice" class="form-control" value="0" style="margin-right: 5px;" />원
+	</div>
+</div>
 </div>
 <br /><br />
 <!-- --------------------------------검색 시작 부분------------------- -->
 <form name="frmSch" >
 	<fieldset>	
 	<legend>후원자 검색</legend>
-	<div>
-		<select name="dnSponsor">
+	<div class="row">
+	<div class="col-auto">
+		<select name="dnSponsor" class="form-select" aria-label="Default select example">
 			<option value="d" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("d")) { %> selected="selected"<% } %>>전체</option>
 			<option value="a" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("a")) { %> selected="selected"<% } %>>행복한 손길</option>
 			<option value="b" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("b")) { %> selected="selected"<% } %>>서울청소년 지원부</option>
 			<option value="c" <% if (pageInfo.getDnSponsor() != null && pageInfo.getDnSponsor().equals("c")) { %> selected="selected"<% } %>>즐거운 어린이집</option>
 		</select>
-		<select name="mdCtgr">
+		</div>
+		<div class="col-auto">
+		<select name="mdCtgr" class="form-select" aria-label="Default select example">
 			<option value="d" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("d")) { %> selected="selected"<% } %>>전체</option>
 			<option value="a" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("a")) { %> selected="selected"<% } %>>일반후원</option>
 			<option value="b" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("b")) { %> selected="selected"<% } %>>정기후원</option>
 			<option value="c" <% if (pageInfo.getMdCtgr() != null && pageInfo.getMdCtgr().equals("c")) { %> selected="selected"<% } %>>정기후원 취소</option>
 		</select>
-		<select name="mi">
+		</div>
+		<div class="col-auto">
+		<select name="mi" class="form-select" aria-label="Default select example">
 			<option value="md_id" <% if (pageInfo.getMi() != null && pageInfo.getMi().equals("md_id")) { %> selected="selected"<% } %>>아이디</option>
 			<option value="md_name" <% if (pageInfo.getMi() != null && pageInfo.getMi().equals("md_name")) { %> selected="selected"<% } %>>이름</option>
 		</select>
-		<select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);">
+		</div>
+		<div class="col-auto">
+		<select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);" class="form-select" aria-label="Default select example">
 			<option value="all">전체</option>
 		<% for(int i = 2022 ; i <= cYear ; i++) { %>
 			<option <% if (ydate.equals(i + "")) { %>selected="selected"<% } %> value="<%=i %>" ><%=i %></option>
 		<% } %>
 		</select>
-		<select name="mdate" id="m" onchange="resetday(this.form.ydate.value, this.value);">
+		</div>
+		<div class="col-auto">
+		<select name="mdate" id="m" onchange="resetday(this.form.ydate.value, this.value);" class="form-select" aria-label="Default select example">
 			<option value="all">전체</option>
 		<% for(int i = 1 ; i <= 12 ; i++) { %>
 			<option <% if (mdate.equals(i + "")) { %>selected="selected"<% } %> value="<%=i %>"><%=i %></option>
 		<% } %>
 		</select>
-		<input type="text" name="keyword" value="<%=pageInfo.getKeyword() %>" />
+		</div>		
+		<div class="col-auto">
+		<input type="text" name="keyword" class="form-control" value="<%=pageInfo.getKeyword() %>" />
+		</div>
+		<div class="col-auto">
 		<input type="submit" class="btn btn-primary" value="검색" />
+		</div>
+		<div class="col-auto">
 		<input type="button" class="btn btn-secondary" value="전체 후원자 보기" onclick="location.href='donaMemList'" />
+		</div>
 	</div>
 	</fieldset>
 </form>

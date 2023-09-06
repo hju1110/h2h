@@ -5,133 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-<style>
-body {
-  font-size: 12px;
-}
-
-a:link, a:visited {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: red;
-}
-
-#list {
-  width: 700px;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-#list th, #list td {
-  padding: 8px 3px;
-}
-
-#list th {
-  border-bottom: double black 3px;
-}
-
-#list td {
-  border-bottom: dotted black 1px;
-}
-
-#list th:nth-child(1) {
-  width: 10%;
-}
-
-#list th:nth-child(2) {
-  width: 50%;
-}
-
-#list th:nth-child(3),
-#list th:nth-child(4),
-#list th:nth-child(5),
-#list td:nth-child(3),
-#list td:nth-child(4),
-#list td:nth-child(5) {
-  width: 15%;
-}
-
-#list tr:nth-child(odd) {
-  background-color: #f2f2f2;
-}
-
-#list tr:hover {
-  background-color: #f9f9f9;
-}
-
-form {
-  margin-top: 20px;
-  text-align: center;
-}
-
-fieldset {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-legend {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-select, input[type="text"], input[type="submit"], input[type="button"] {
-  font-size: 12px;
-  padding: 5px;
-  margin: 5px;
-}
-
-input[type="submit"] {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-input[type="button"] {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-input[type="button"]:hover {
-  background-color: #1b6f2c;
-}
-
-#notice-form {
-  width: 700px;
-  margin: 20px auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-#content-wrapper {
-  width: 700px;
-  margin: 0 auto;
-}
-
-</style>
+<title>후기게시판 상세</title>
 </head>
 <body>
-<div class="left">
-<div id="content-wrapper">
+<div class="container mt-5">
 <h2>후기게시판</h2>
-<table id="list">
-<tr height="30">
-<th>번호</th>
-<th>제목</th>
-<th>작성자</th>
-<th>작성일</th>	
-<th>조회</th>
-</tr>
+<br />
+<table id="list" class="table table-bordered table-striped">
+<thead>
+	<tr>
+		<th scope="col">번호</th>
+		<th scope="col">제목</th>
+		<th scope="col">작성자</th>
+		<th scope="col">작성일</th>	
+		<th scope="col">조회</th>
+	</tr>
+</thead>
+<tbody>
 <c:if test="${reviewList.size() > 0}">
 	<c:forEach items="${reviewList}" var="rl" varStatus="status">
 	<tr height="30">
@@ -148,11 +38,10 @@ input[type="button"]:hover {
 	검색결과가 없습니다.
 	</td></tr>
 </c:if>
+</tbody>
 </table>
 <br />
-<table width="700" cellpadding="5">
-<tr>
-<td width="600">
+<div align="center">
 <c:if test="${reviewList.size() > 0}">
 	<c:if test="${pi.getCpage() == 1}">
 		[처음]&nbsp;&nbsp;&nbsp;[이전]&nbsp;&nbsp;
@@ -180,28 +69,34 @@ input[type="button"]:hover {
 		&nbsp;&nbsp;&nbsp;<a href="reviewList?cpage=${pi.getPcnt()}${pi.getSchargs()}">[마지막]</a>
 	</c:if>
 </c:if>
-</td>
-<td width="*">
-	<input type="button" value="글 등록" onclick="location.href='reviewFormIn';" />
-</td>
-</tr>
-<tr><td colspan="2" align="center">
-	<form name="frmSch">
-	<fieldset>
-		<legend>게시판 검색</legend>
-		<select name="schtype">
-			<option value="">검색조건</option>
-			<option value="title" <c:if test="${pi.getSchtype() == 'title'}">selected="selected"</c:if>>제목</option>
-			<option value="content"<c:if test="${pi.getSchtype() == 'content'}">selected="selected"</c:if>>내용</option>
-			<option value="writer"<c:if test="${pi.getSchtype() == 'writer'}">selected="selected"</c:if>>작성자</option>
-			<option value="tc" <c:if test="${pi.getSchtype() == 'tc'}">selected="selected"</c:if>>제목+내용</option>
-		</select>
-		<input type="text" name="keyword" value="${pi.getKeyword() }"/>
-		<input type="submit" value="검색" />
-		<input type="button" value="전체글" onclick="location.href='reviewList';" />
-	</fieldset>
-	</form>
-</table>
+</div>
+<div align="right">
+	<button class="btn btn-primary" onclick="location.href='reviewFormIn';" >글 등록</button>
+</div><br />
+<div>
+<form name="frmSch">
+	<div class="row">
+		<div class="col-md-2">
+			<select class="form-select" aria-label="Default select example" name="schtype">
+				<option value="">검색조건</option>
+				<option value="title" <c:if test="${pi.getSchtype() == 'title'}">selected="selected"</c:if>>제목</option>
+				<option value="content"<c:if test="${pi.getSchtype() == 'content'}">selected="selected"</c:if>>내용</option>
+				<option value="writer"<c:if test="${pi.getSchtype() == 'writer'}">selected="selected"</c:if>>작성자</option>
+				<option value="tc" <c:if test="${pi.getSchtype() == 'tc'}">selected="selected"</c:if>>제목+내용</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			<input type="text" class="form-control" name="keyword" value="${pi.getKeyword() }"/>
+		</div>
+		<div class="col-md-1">
+			<input type="submit" class="btn btn-primary" value="검색" />
+		</div>
+		<div class="col-md-1">
+			<input type="button" class="btn btn-secondary" value="전체글" onclick="location.href='reviewList';" />
+		</div>
+	</div>
+</form>
+</div>
 </div>
 </body>
 </html>

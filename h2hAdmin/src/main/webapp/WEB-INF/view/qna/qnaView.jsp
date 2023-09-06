@@ -5,58 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-<style>
-    /* 스타일 추가 */
-    body {
-        font-family: Arial, sans-serif;
-    }
-    h2 {
-        color: #007bff;
-    }
-    table {
-        width: 600px;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-    th, td {
-        padding: 5px;
-        border: 1px solid #ccc;
-    }
-    th {
-        background-color: #f0f0f0;
-        text-align: center;
-    }
-    .center {
-        text-align: center;
-    }
-    .comment-form {
-        margin-bottom: 20px;
-    }
-    .comment-form input[type="text"],
-    .comment-form textarea,
-    .comment-form input[type="submit"] {
-        margin: 5px;
-    }
-    .comment-list {
-        margin-top: 10px;
-    }
-    .comment-list li {
-        margin-bottom: 10px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        list-style-type: none;
-    }
-    .comment-list .writer {
-        font-weight: bold;
-    }
-    .comment-list .content {
-        margin-top: 5px;
-    }
-</style>
+<title>QnA 상세</title>
 </head>
 <body>
-<div class="left">
 <h2>Qna</h2>
 <table>
     <tr>
