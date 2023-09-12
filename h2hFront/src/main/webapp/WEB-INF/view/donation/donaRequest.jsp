@@ -31,7 +31,6 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 <meta charset="UTF-8">
 <title>DonationRequest</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 </head>
 <body>

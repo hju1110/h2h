@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../inc/incHead3.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,4 +74,3 @@
         <button type="button" class="btn btn-primary btn-lg btn-danger" onclick="location.href='/h2hFront/';">홈으로 가기</button>
     </div>
 </div>
-<%@ include file="../inc/incFoot.jsp" %>

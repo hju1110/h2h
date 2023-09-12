@@ -149,7 +149,7 @@ public class ServiceCtrl {
 		
 		int result = serviceSvc.setSvcProcIn(si);
 		
-		return "service/svcReSuccess";
+		return "service/serviceFinish";
 	}
 	
 	// 나의 참여 현황
@@ -226,23 +226,4 @@ public class ServiceCtrl {
 		
 		return result + "";
 	}
-	
-//	@PostMapping("/mySvcSch")
-//	@ResponseBody
-//	public String mySvcSch(HttpServletRequest request) throws Exception {
-//		String siSch = request.getParameter("siSch");
-//		String miid = request.getParameter("miid");
-//		String where = " AND b.mi_id = '" + miid + "' " ;
-//		if (siSch != null && !siSch.equals("")) {
-//			if (siSch.equals("g")) {	// 봉사 신청 내역
-//				where += " AND sj_status = 'g' ";
-//			} else {	// 봉사 활동 내역
-//				where += " AND sj_status = 'y' ";
-//			} 
-//		}
-//		
-//		String result = serviceSvc.getMySvcSch(where);
-//		
-//		return result;
-//	}
 }

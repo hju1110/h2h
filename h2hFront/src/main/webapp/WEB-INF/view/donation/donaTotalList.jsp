@@ -20,13 +20,9 @@ String payment = "";
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>내가 신청한 후원</title>
-    <!-- Custom fonts for this template -->
-    <link href="/h2hFront/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="/h2hFront/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>내가 신청한 후원</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -155,36 +151,50 @@ function del() {
 <h1>내가 신청한 후원</h1>
 <hr />
 <fieldset>	
-<legend>총 후원한 금액</legend>
-<select id="mdCtgr">
-	<option value="d">전체</option>
-	<option value="a">일반후원</option>
-	<option value="b">정기후원</option>
-	<option value="c">정기후원 취소</option>
-</select>
-<select id="dnSponsor">
-	<option value="d">전체</option>
-	<option value="a">행복한 손길</option>
-	<option value="b">서울청소년 지원부</option>
-	<option value="c">즐거운 어린이집</option>
-</select>
-<select name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);">
-		<option>전체</option>
-	<% for(int i = 2022 ; i <= cYear ; i++) { %>
-		<option <% if (i == cYear) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
-	<% } %>
-</select>
-<select name="mdate" id="m" onchange="resetday(this.form.ydate.value, this.value);">
-		<option>전체</option>
-	<% for(int i = 1 ; i <= 12 ; i++) { %>
-		<option <% if (i == cMonth) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
-	<% } %>
-</select>
+<legend style="margin-left:30px;">총 후원한 금액</legend>
+<div class="input-group">
+    <div class="col-auto">
+		<select class="form-select" id="mdCtgr">
+			<option value="d">전체</option>
+			<option value="a">일반후원</option>
+			<option value="b">정기후원</option>
+			<option value="c">정기후원 취소</option>
+		</select>
+	</div>
+    <div class="col-auto">
+		<select class="form-select" id="dnSponsor">
+			<option value="d">전체</option>
+			<option value="a">행복한 손길</option>
+			<option value="b">서울청소년 지원부</option>
+			<option value="c">즐거운 어린이집</option>
+		</select>
+	</div>
+    <div class="col-auto">
+		<select class="form-select" name="ydate" id="y" onchange="resetday(this.value, this.form.mdate.value);">
+				<option>전체</option>
+			<% for(int i = 2022 ; i <= cYear ; i++) { %>
+				<option <% if (i == cYear) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
+			<% } %>
+		</select>
+	</div>
+    <div class="col-auto">
+		<select class="form-select" name="mdate" id="m" onchange="resetday(this.form.ydate.value, this.value);">
+			<option>전체</option>
+		<% for(int i = 1 ; i <= 12 ; i++) { %>
+			<option <% if (i == cMonth) { %>selected="selected" <% } %> value="<%=i %>"><%=i %></option>
+		<% } %>
+		</select>
+	</div>
 <input type="hidden" name="miid" id="miid" value="<%=loginInfo.getMi_id() %>" />
-<input type="button" name="btn" id="btn" value="확인" onclick="total();"/>
-<input type="text" name="totalPrice" id="totalPrice" value="0" />원
+<div class="col-auto" style="display: inline-flex; align-items: center;">
+	<button class="btn btn-primary" name="btn" id="btn" onclick="total();">확인</button>
+</div>
+<div class="col-auto" style="display: inline-flex; align-items: center;">
+	<input type="text" class="form-control" name="totalPrice" id="totalPrice" value="0" />&nbsp;원
+</div>
+</div>
 </fieldset>
-</dnv>
+</div>
 <br /><br />
 <!-- --------------------------------검색 시작 부분------------------- -->
 
@@ -257,10 +267,10 @@ if (qs == null)	qs = "";
 
 //이전 버튼 
 if (pageInfo.getCpage() == 1) {
-	out.println("[&lt;&lt;]&nbsp;&nbsp;[&lt;]&nbsp;");
+	out.println("[처음]&nbsp;&nbsp;[이전]&nbsp;");
 } else {
-	out.println("<a href='donaMemList?cpage=1" + qs + "'>[&lt;&lt;]</a>&nbsp;&nbsp;");
-	out.println("<a href='donaMemList?cpage=" + (pageInfo.getCpage() - 1) + qs + "'>[&lt;]</a>&nbsp;&nbsp;");
+	out.println("<a href='donaMemList?cpage=1" + qs + "'>[처음]</a>&nbsp;&nbsp;");
+	out.println("<a href='donaMemList?cpage=" + (pageInfo.getCpage() - 1) + qs + "'>[이전]</a>&nbsp;&nbsp;");
 }
 
 //페이징 번호 
@@ -276,14 +286,13 @@ if (pageInfo.getCpage() == 1) {
  
 //다음 버튼 
 if (pageInfo.getCpage() == pageInfo.getPcnt()) {
-	out.println("&nbsp;[&gt;]&nbsp;&nbsp;[&gt;&gt;]");
+	out.println("&nbsp;[다음]&nbsp;&nbsp;[마지막]");
 } else {
-	out.println("&nbsp;<a href='donaMemList?cpage=" + (pageInfo.getCpage() + 1) + qs + "'>[&gt;]</a>");
-	out.println("&nbsp;&nbsp;<a href='donaMemList?cpage=" + pageInfo.getPcnt() + qs + "'>[&gt;&gt;]</a>");		
+	out.println("&nbsp;<a href='donaMemList?cpage=" + (pageInfo.getCpage() + 1) + qs + "'>[다음]</a>");
+	out.println("&nbsp;&nbsp;<a href='donaMemList?cpage=" + pageInfo.getPcnt() + qs + "'>[마지막]</a>");		
 }
 
 out.println("</p>");
 %>
 <hr align="left"/>
 <br />
-<%@ include file="../inc/incFoot.jsp" %>

@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="vo.*"%>
-<%@ include file="../inc/incHead3.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,5 +74,3 @@
         <button type="button" class="btn btn-primary btn-lg btn-danger" onclick="location.href='/h2hFront/';">홈으로 가기</button>
     </div>
 </div>
-</body>
-</html>
