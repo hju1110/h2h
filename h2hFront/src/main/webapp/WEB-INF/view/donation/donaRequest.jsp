@@ -30,19 +30,14 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 <head>
 <meta charset="UTF-8">
 <title>DonationRequest</title>
-<!-- Custom fonts for this template-->
-<link href="/h2hFront/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-<!-- Custom styles for this template-->
-<link href="/h2hFront/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.4.js"></script>
 </head>
 <body>
-<div style=" margin-top:100px;" >
+<div style="margin-top:100px; margin-left:350px;" >
 <h4><span style="color:red">01</span> 후원 분야 선택</h4>
-<hr />
+<hr style="width:1000px;" align="left" />
 <form name="frmRequest" action="donaFinish" method="post">
 <input type="hidden" name="uname" value="<%=name %>" />
 <input type="hidden" name="memType" value="<%=memType %>" />
@@ -56,7 +51,9 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 		<label for="a">일반 후원</label>
 	</th>
 	<td width="*">
-		<select style="font-size:20px;" name="money" id="price1" <% if(kind.equals("b")) { %>disabled="disabled"<% } %>>
+    <div class="input-group input-group-m">
+    <div class="col-auto">
+		<select class="form-select" style="font-size:20px;" name="money" id="price1" <% if(kind.equals("b")) { %>disabled="disabled"<% } %>>
 			<option value="">선택</option>
 			<option value="100,000">100,000</option>
 			<option value="50,000">50,000</option>
@@ -64,28 +61,39 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 			<option value="20,000">20,000</option>
 			<option value="direct">직접입력</option>
 		</select>
-		<input type="text" name="cmoney" id="price2" size="10" style="font-size:20px; text-align:right;"
-		<% if(kind.equals("b")) { %>disabled="disabled"<% } %> onkeyup="showPrice(this.value);" /> 원
+	</div>
+	<div class="col-auto" style="display: inline-flex; align-items: center;">
+		<input type="text" class="form-control form-control-sm" name="cmoney" id="price2" size="10" style="font-size:20px; text-align:right;"
+		<% if(kind.equals("b")) { %>disabled="disabled"<% } %> onkeyup="showPrice(this.value);" />&nbsp;원
+	</div>
+	</div>
 	</td>
 </tr>
 <tr class="sponsor1">
 	<th>- 피후원자 선택</th>
 	<td>
-		<select name="mdSponsor1" id="spon1" style="font-size:20px;">
+    <div class="input-group input-group-m">
+    <div class="col-auto">
+		<select class="form-select form-select-sm" name="mdSponsor1" id="spon1" style="font-size:20px;">
 			<option value="">선택</option>
 			<option value="a행복한 손길">행복한 손길</option>
 			<option value="b서울청소년 지원부">서울청소년 지원부</option>
 			<option value="c즐거운 어린이집">즐거운 어린이집</option>
 		</select>
 	<!-- <input type="text" name="sponsora" id="spon2" size="20" style="font-size:20px; text-align:right;" /> -->
+	</div>
+	</div>
 	</td>
 </tr>
 <tr>
-	<th><input type="radio" name="chkType" id="b" value="b" style="font-size:20px;" onclick='checkOnlyOne(this)'  
+	<th width="200">
+	<input type="radio" name="chkType" id="b" value="b" style="font-size:20px;" onclick='checkOnlyOne(this)'  
 	<% if(kind.equals("b")) { %>checked="checked"<% } %> />
 		<label for="b" id="month">정기 후원</label></th>
 	<td>
-		<select style="font-size:20px;" name="money" id="price3" <% if(kind.equals("a")) { %>disabled="disabled"<% } %>>
+    <div class="input-group input-group-m">
+    <div class="col-auto">
+		<select class="form-select" style="font-size:20px;" name="money" id="price3" <% if(kind.equals("a")) { %>disabled="disabled"<% } %>>
 			<option value="">선택</option>
 			<option value="100,000">100,000</option>
 			<option value="50,000">50,000</option>
@@ -93,26 +101,34 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 			<option value="20,000">20,000</option>
 			<option value="direct">직접입력</option>
 		</select>
-		<input type="text" name="cmoney" id="price4" size="10" style="font-size:20px; text-align:right;" 
-			<% if(kind.equals("a")) { %>disabled="disabled"<% } %> onkeyup="showPrice(this.value);" /> 원
+	</div>
+	<div class="col-auto" style="display: inline-flex; align-items: center;">
+		<input type="text" class="form-control form-control-sm" name="cmoney" id="price4" size="10" style="font-size:20px; text-align:right;" 
+			<% if(kind.equals("a")) { %>disabled="disabled"<% } %> onkeyup="showPrice(this.value);" />&nbsp;원
+	</div>
+	</div>
 	</td>
 </tr>
 <tr class="sponsor2">
 	<th>- 피후원자 선택</th>
 	<td>
-		<select name="mdSponsor2" id="spon3" style="font-size:20px;" >
+    <div class="input-group input-group-m">
+    <div class="col-auto">
+		<select class="form-select" name="mdSponsor2" id="spon3" style="font-size:20px;" >
 			<option value="">선택</option>
 			<option value="a행복한 손길">행복한 손길</option>
 			<option value="b서울청소년 지원부">서울청소년 지원부</option>
 			<option value="c즐거운 어린이집">즐거운 어린이집</option>
 		</select>
 <!-- 		<input type="text" name="sponsorb" id="spon4" size="20" style="font-size:20px; text-align:right;"  /> -->
+	</div>
+	</div>
 	</td>
 </tr>
 </table>
-<hr />
+<hr style="width:1000px;" align="left" />
 <h4><span style="color:red">02</span> 후원자 정보</h4>
-<hr />
+<hr style="width:1000px;" align="left" />
 <table width="500" cellpadding="10" border="0">
 <tr>
 	<td width="*" style="margin-left:10px;"><span id="mdCtgr"><%=ctgrName %></span></td>
@@ -126,7 +142,7 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 		tet"><span id="mdSponsor"></span></td>
 </tr>
 </table>
-<hr/>
+<hr style="width:1000px;" align="left" />
 <table cellpadding="10">
 <tr>
 	<th>후원자 정보</th>
@@ -156,7 +172,7 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 	</td>
 </tr>
 </table>
-<hr />
+<hr style="width:1000px;" align="left" />
 <table width="1000" cellpadding="10" border="0">
 <tr><th colspan="3">이용약관, 개인정보 수집 및 이용, Hand2Hand 활동 안내 수신에 모두 동의합니다.</th></tr>
 <tr>
@@ -187,9 +203,9 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 	<td style="padding-left:100px;"><label for="aChk3"><input type="checkbox" name="aChk" id="aChk3" /></label></td>
 </tr>
 </table>
-<hr />
+<hr style="width:1000px;" align="left" />
 <h4><span style="color:red">03</span> 결제 및 신청완료</h4>
-<hr />
+<hr style="width:1000px;" align="left" />
 <table cellpadding="10">
 <tr>
 	<td width="100" style="border:1px solid black; border-top: none; border-bottom: none; border-left: none;"
@@ -198,7 +214,7 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 		id="price5"><span></span></td>
 </tr>
 </table>
-<hr />
+<hr style="width:1000px;" align="left" />
 <table cellpadding="10">
 <tr>
     <th class="text-center">결제 정보</th>
@@ -215,12 +231,14 @@ if (kind.equals("a"))	ctgrName = "일반 후원";
 </tr>
 
 </table>
-<hr />
+<hr style="width:1000px;" align="left" />
 <h3>후원금 결제 안내</h3>
 <p>선택하신 결제 방법에 따라 결제가 진행 됩니다.</p>
-<br />
-  <input type="submit" style="font-size:30px;" value="후원하기" />
-<br />
+<div class="container mt-5" style="margin-left:400px;">
+	<div class="mb-3">
+		<input type="submit" class="btn btn-primary" style="font-size: 30px;" value="후원하기" />
+	</div>
+</div>
 </form>
 </div>
 </body>
