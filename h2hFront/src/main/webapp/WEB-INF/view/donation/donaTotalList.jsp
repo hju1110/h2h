@@ -199,7 +199,7 @@ function del() {
 <!-- --------------------------------검색 시작 부분------------------- -->
 
 <!-- --------------------------------검색 종료 부분------------------- -->
-<hr width="1400" align="left"/>
+<hr />
 <table width="1400" cellpaddnng="0" cellspacing="0" id="list">
 	<tr align="center">
 		<th width="200" style="border-top: none; border-bottom: none;">후원분야</th>
