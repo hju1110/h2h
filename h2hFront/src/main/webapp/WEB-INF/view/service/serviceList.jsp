@@ -2,15 +2,7 @@
 <%@ page import="vo.*"%>
 <%@ include file="../inc/incHead.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ServiceList</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <div class="hero-wrap" style="background-image: url('/h2hFront/resources/img/bg_6.jpg');" data-stellar-background-ratio="0.5">
@@ -50,7 +42,7 @@
 			<tr>
 				<th class="bg-primary text-white text-center align-middle">활동 일자</th>
 					<td colspan="4">
-						<input type="text" name="siAcdate" id="edusdate" value="" size="20" class="ipt hasDatepicker">
+						<input type="text" name="siAcdate" id="siAcdate" value="" size="20" />
 					</td>
          	</tr>
 			<tr>
@@ -142,6 +134,9 @@
 </div>
 </div>
 </div>
+</div>
+</section>
+<%@ include file="../inc/incFoot2.jsp" %>
 <script>
 $(function() {
 	$.datepicker.regional['ko'] = {
@@ -170,7 +165,7 @@ $(function() {
 	};
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
 
-	$( "#edusdate" ).datepicker({
+	$( "#siAcdate" ).datepicker({
 		//defaultDate: "+1w",
 		changeMonth: true,
 		//numberOfMonths: 3,
@@ -190,6 +185,4 @@ $(function() {
 	});
 });
 </script>
-</div>
-</section>
-<%@ include file="../inc/incFoot.jsp" %>
+

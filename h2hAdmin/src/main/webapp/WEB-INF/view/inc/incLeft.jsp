@@ -69,7 +69,7 @@ $(document).ready(function(){
 			<ul class="hide">
 				<li><a href="service" target="body">봉사(미승인)</a></li>
 				<li><a href="serviceChartz" target="body">봉사(승인)</a></li>
-				<li><a href="scedule" target="body">봉사 일정</a></li>
+				<li><a href="schedule" target="body">봉사 일정</a></li>
 			</ul>
 		</li>
 	</ul>

@@ -149,7 +149,7 @@ public class ServiceCtrl {
 		
 		int result = serviceSvc.setSvcProcIn(si);
 		
-		return "service/serviceFinish";
+		return "service/svcReSuccess";
 	}
 	
 	// 나의 참여 현황

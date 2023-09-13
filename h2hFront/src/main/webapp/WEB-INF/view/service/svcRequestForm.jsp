@@ -8,7 +8,7 @@
 <!-- Add Bootstrap CSS link -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <title>ServiceRequestForm</title>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
 </head>
@@ -19,7 +19,7 @@
 <table class="table table-bordered table-striped" width="800">
 <tr>
 	<th width="10%">활동일자</th>
-	<td width="25%"><input type="text" name="siAcdate" id="edussdate" value="" size="15" class="ipt form-control" /></td>
+	<td width="25%"><input type="text" name="siAcdate" id="edussdate" value="" size="15" /></td>
 </tr>
 <tr>
 	<th width="15%">봉사활동명</th>
@@ -32,8 +32,8 @@
 <tr>
 	<th width="10%">모집기간</th>
 	<td colspan="3">
-		<input type="text" name="siSdate" id="edusdate" value="" size="15" class="ipt form-control" /> ~
-		<input type="text" name="siEdate" id="eduedate" value="" size="15" class="ipt form-control" />
+		<input type="text" name="siSdate" id="edusdate" value="" size="15" /> ~
+		<input type="text" name="siEdate" id="eduedate" value="" size="15" />
 	</td>
 </tr>
 <tr>
@@ -129,4 +129,4 @@ $(function() {
 	});
 });
 </script>
-<%@ include file="../inc/incFoot.jsp" %>
+<%@ include file="../inc/incFoot2.jsp" %>

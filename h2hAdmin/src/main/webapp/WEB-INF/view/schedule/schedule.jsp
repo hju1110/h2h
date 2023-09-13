@@ -148,7 +148,7 @@ for (int i = 1, n = sWeek ; i <= eDay ; i++, n++) {
 			%>
 				<%=schDate %><span style="margin-right:240px;"></span><%=close %>
 				일시 : <%=si.getSi_time() %>&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="button" value="삭제" onclick="callDel(<%=si.getSi_idx() %>);" />
+				<!-- <input type="button" value="삭제" onclick="callDel(<%=si.getSi_idx() %>);" />  -->
 				<br /> <%=si.getSi_content().replace("\r\n", "<br />") %>
 				<br /><br />등록일 : <%=si.getSi_regdate() %><hr />
 			<%

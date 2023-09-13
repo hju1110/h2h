@@ -742,8 +742,8 @@
 				startMonth = this.o.startDate !== -Infinity ? this.o.startDate.getUTCMonth() : -Infinity,
 				endYear = this.o.endDate !== Infinity ? this.o.endDate.getUTCFullYear() : Infinity,
 				endMonth = this.o.endDate !== Infinity ? this.o.endDate.getUTCMonth() : Infinity,
-				todaytxt = dates[this.o.language].today || dates['en'].today || '',
-				cleartxt = dates[this.o.language].clear || dates['en'].clear || '',
+				todaytxt = dates[this.o.language].today || dates['ko'].today || '',
+				cleartxt = dates[this.o.language].clear || dates['ko'].clear || '',
 				tooltip;
 			this.picker.find('.datepicker-days thead th.datepicker-switch')
 						.text(dates[this.o.language].months[month]+' '+year);
@@ -1396,9 +1396,9 @@
 		daysOfWeekDisabled: [],
 		endDate: Infinity,
 		forceParse: true,
-		format: 'mm/dd/yyyy',
+		format: 'yy-mm-dd',
 		keyboardNavigation: true,
-		language: 'en',
+		language: 'ko',
 		minViewMode: 0,
 		multidate: false,
 		multidateSeparator: ',',

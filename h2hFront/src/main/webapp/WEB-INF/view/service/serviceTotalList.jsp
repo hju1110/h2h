@@ -161,13 +161,13 @@ function del() {
 			<td width="100">${si.getSi_acdate().substring(0, 11) }</td>
 			<td width="100">
 				<c:if test="${si.getSj_status() == 'g' }">대기 중</c:if>
-				<c:if test="${si.getSj_status() == 'y' }">승인</c:if>
-				<c:if test="${si.getSj_status() == 'n' }">미승인</c:if>
+				<c:if test="${si.getSj_status() == 'y' }">참여 완료</c:if>
+				<c:if test="${si.getSj_status() == 'n' }">미참여</c:if>
 			</td>
 			<td width="100">
-			<c:if test="${si.getSj_status() == 'g' && si.getSi_recruit() == 'y' }">
-			<input type="button" name="btn2" id="btn1" value="취소하기" onclick="svcDelete();"/>
-			</c:if>
+				<c:if test="${si.getSj_status() == 'g' && si.getSi_recruit() == 'y' }">
+					<input type="button" name="btn2" id="btn1" value="취소하기" onclick="svcDelete();"/>
+				</c:if>
 			</td>
 		</tr>
 	</c:forEach>
